@@ -1,0 +1,52 @@
+---
+// SymptomPicker: 出现什么情况？直接从症状进入排错
+const symptoms = [
+  { text: '国外网页打不开', url: '/start/how-to-access-overseas-websites/', icon: 'ban', tag: '基础问题' },
+  { text: '一直转圈加载中', url: '/fix/slow-speed/', icon: 'loader', tag: '延迟丢包' },
+  { text: '连接超时 / Timeout', url: '/fix/timeout/', icon: 'clock', tag: '高频故障' },
+  { text: '海外应用登录失败', url: '/use/chatgpt/', icon: 'user-x', tag: '风控拦截' },
+  { text: '有节点但无法上网', url: '/fix/no-internet/', icon: 'wifi-off', tag: '代理配置' },
+  { text: '订阅更新失败', url: '/fix/subscription-error/', icon: 'alert-circle', tag: '配置报错' },
+  { text: '图片无法显示/空白', url: '/fix/dns/', icon: 'image', tag: 'DNS污染' },
+  { text: 'YouTube 视频卡顿', url: '/use/youtube/', icon: 'play-circle', tag: '带宽瓶颈' },
+  { text: '国内网站连带变慢', url: '/airport/how-to-use/', icon: 'shuffle', tag: '分流模式' },
+  { text: '关掉软件后彻底断网', url: '/fix/no-internet/', icon: 'power', tag: '系统残留' },
+];
+---
+
+<div class="card-surface p-6 sm:p-8 space-y-6">
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+    <div>
+      <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-mint mb-1">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>Symptom Fast Path</span>
+      </div>
+      <h3 class="text-2xl font-bold text-content-primary">你现在遇到了什么情况？</h3>
+    </div>
+    <p class="text-xs text-content-secondary">无需懂专业术语，直接点击你的真实上网症状排错</p>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+    {symptoms.map((s) => (
+      <a
+        href={s.url}
+        class="card-surface-sub p-3.5 rounded-xl border border-white/5 hover:border-brand-mint/40 transition-all flex flex-col justify-between group"
+      >
+        <div class="space-y-1">
+          <span class="text-[10px] text-content-muted font-mono block">{s.tag}</span>
+          <h4 class="font-bold text-xs sm:text-sm text-content-primary group-hover:text-brand-mint transition-colors">
+            {s.text}
+          </h4>
+        </div>
+        <div class="pt-2 mt-2 border-t border-white/5 flex items-center justify-between text-[11px] text-brand-mint/70 group-hover:text-brand-mint font-medium">
+          <span>立即排查</span>
+          <span class="transform group-hover:translate-x-0.5 transition-transform">→</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</div>

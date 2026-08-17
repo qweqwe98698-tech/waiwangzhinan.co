@@ -1,0 +1,53 @@
+{
+  "slug": "u1s1",
+  "name": "U1S1",
+  "tagline": "20元档专线 / 120GB 流量 / VLESS + IEPL 黄金平衡",
+  "summary": "20 元档经典专线服务，提供 120GB 月流量，以 VLESS 协议和 IEPL 专线为主打卖点，兼顾自研客户端与全流媒体支持。",
+  "pricing": {
+    "startingPrice": 20,
+    "billingCycle": "月付",
+    "monthlyPrice": 20,
+    "traffic": "120GB / 月",
+    "currency": "CNY"
+  },
+  "protocols": [
+    "VLESS",
+    "IEPL 专线",
+    "Shadowsocks"
+  ],
+  "devices": [
+    "Windows",
+    "macOS",
+    "iOS",
+    "Android",
+    "Linux"
+  ],
+  "features": [
+    "20元/月 120GB黄金容量",
+    "IEPL专线低丢包",
+    "VLESS现代协议",
+    "自研+通用订阅导入"
+  ],
+  "recommendFor": [
+    "追求稳定月付",
+    "日常开发与影音",
+    "多设备同时在线"
+  ],
+  "aiSupport": "支持 (ChatGPT / Claude / Gemini)",
+  "streaming": "支持 (Netflix / Disney+ / YouTube)",
+  "speedtestImage": "/images/speedtests/u1s1-speedtest.png",
+  "speedtestTestedAt": "2026-08-11T22:33:29+08:00",
+  "speedtestTool": "MAI-TEST-BOT 2.0.0-dev",
+  "officialUrl": "https://guangs.vipaff.cc/#/?code=xhX5X22f",
+  "promoCode": "akaka",
+  "discount": "专属优惠码立减",
+  "estYear": 2023,
+  "paymentMethods": [
+    "支付宝",
+    "微信",
+    "USDT"
+  ],
+  "verificationStatus": "已核验 (2026-08-11实测)",
+  "lastVerified": "2026-08-11",
+  "notes": "20元档的稳定守门员，各方面表现均衡，没有明显短板。"
+}

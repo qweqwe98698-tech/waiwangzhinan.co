@@ -1,0 +1,52 @@
+{
+  "slug": "xingdaomeng",
+  "name": "星岛梦",
+  "tagline": "低价年付 / 套餐类型丰富 / 支持不限时按量计费",
+  "summary": "2020 年开业的老牌低门槛服务商，套餐类型丰富，提供常规周期套餐与不限时按量计费，适合轻度与预算敏感用户。",
+  "pricing": {
+    "startingPrice": 8,
+    "billingCycle": "月 (年付折算)",
+    "monthlyPrice": 15,
+    "traffic": "60GB / 不限时",
+    "currency": "CNY"
+  },
+  "protocols": [
+    "企业级内网专线",
+    "Shadowsocks",
+    "VLESS"
+  ],
+  "devices": [
+    "Windows",
+    "macOS",
+    "iOS",
+    "Android"
+  ],
+  "features": [
+    "支持不限时按量套餐",
+    "低至8元/月低门槛",
+    "企业级专线中转",
+    "支持微信/支付宝/USDT"
+  ],
+  "recommendFor": [
+    "小流量备用",
+    "不经常上网用户",
+    "预算有限学生党"
+  ],
+  "aiSupport": "基础支持 (常规对话可用)",
+  "streaming": "部分支持 (YouTube 4K / Spotify)",
+  "speedtestImage": "/images/speedtests/xingdaomeng-speedtest.png",
+  "speedtestTestedAt": "2026-08-11T01:48:13+08:00",
+  "speedtestTool": "MAI-TEST-BOT 2.0.0-dev",
+  "officialUrl": "https://guangs.xingdaomeng.com/#/?code=1TynBYnR",
+  "promoCode": "nmw888",
+  "discount": "新人注册 9 折",
+  "estYear": 2020,
+  "paymentMethods": [
+    "支付宝",
+    "微信",
+    "USDT"
+  ],
+  "verificationStatus": "已核验 (2026-08-11实测)",
+  "lastVerified": "2026-08-11",
+  "notes": "8元/月为年付折算价。不限时套餐适合长期备用用户。"
+}

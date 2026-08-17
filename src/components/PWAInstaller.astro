@@ -1,0 +1,30 @@
+---
+---
+
+<div
+  id="offline-banner"
+  class="hidden fixed top-0 left-0 right-0 z-50 bg-amber-500/95 text-black py-2 px-4 text-center text-xs font-bold shadow-lg backdrop-blur"
+>
+  ⚠️ 当前处于离线状态 · 已自动切换至本地应急排错离线缓存模式
+</div>
+
+<script>
+  if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+
+  function handleOnline() {
+    const banner = document.getElementById('offline-banner');
+    if (banner) banner.classList.add('hidden');
+  }
+
+  function handleOffline() {
+    const banner = document.getElementById('offline-banner');
+    if (banner) banner.classList.remove('hidden');
+  }
+
+  window.addEventListener('online', handleOnline);
+  window.addEventListener('offline', handleOffline);
+</script>

@@ -1,0 +1,153 @@
+---
+---
+
+<div
+  id="promo-toast-container"
+  class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"
+  aria-live="polite"
+>
+  <!-- Toast Template -->
+  <div
+    id="promo-toast"
+    class="hidden pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300 ease-out max-w-sm w-full p-4 rounded-2xl bg-bg-card/95 border border-brand-mint/40 shadow-2xl backdrop-blur-xl space-y-2.5"
+  >
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-brand-mint/20 text-brand-mint flex items-center justify-center font-bold text-sm shadow-inner flex-shrink-0">
+          ✓
+        </div>
+        <div>
+          <h4 id="toast-title" class="font-bold text-xs text-content-primary">
+            复制成功！
+          </h4>
+          <p id="toast-subtitle" class="text-[11px] text-content-secondary mt-0.5">
+            内容已写入系统剪贴板
+          </p>
+        </div>
+      </div>
+      <button
+        id="toast-close-btn"
+        class="text-content-muted hover:text-content-primary text-xs p-1"
+        aria-label="关闭"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div class="pt-2 border-t border-white/10 flex items-center justify-between gap-2">
+      <span id="toast-hint" class="text-[10px] text-content-muted">在客户端点击从剪贴板导入</span>
+      <a
+        id="toast-target-link"
+        href="/recommend/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary text-[11px] !py-1 !px-3 font-bold whitespace-nowrap"
+      >
+        前往开通 ↗
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  let toastTimer: any = null;
+
+  async function copyTextToClipboard(text: string): Promise<boolean> {
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {}
+    }
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-999999px';
+    textarea.style.top = '-999999px';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      textarea.remove();
+      return true;
+    } catch (err) {
+      textarea.remove();
+      return false;
+    }
+  }
+
+  function showPromoToast(code: string, brandName: string = '', url: string = '') {
+    const toast = document.getElementById('promo-toast');
+    const toastTitle = document.getElementById('toast-title');
+    const toastSubtitle = document.getElementById('toast-subtitle');
+    const toastHint = document.getElementById('toast-hint');
+    const toastLink = document.getElementById('toast-target-link') as HTMLAnchorElement;
+
+    if (!toast || !toastTitle || !toastSubtitle || !toastHint) return;
+
+    // Copy to clipboard with reliable fallback
+    copyTextToClipboard(code);
+
+    const isNodeString = code.startsWith('ss://') || code.startsWith('vless://') || code.startsWith('trojan://') || code.startsWith('vmess://') || code.startsWith('http');
+
+    if (isNodeString) {
+      toastTitle.textContent = '✅ 免费节点代码复制成功！';
+      toastSubtitle.innerHTML = `已复制 <span class="text-brand-mint font-mono">${brandName || '应急节点'}</span> 配置`;
+      toastHint.textContent = '可在客户端中选择「从剪贴板导入」';
+      if (toastLink) {
+        toastLink.href = '/recommend/';
+        toastLink.textContent = '查看优质专线 ↗';
+      }
+    } else {
+      toastTitle.textContent = '🎉 优惠码复制成功！';
+      toastSubtitle.innerHTML = `优惠代码 <strong class="text-brand-mint font-mono select-all">${code}</strong> 已写入剪贴板`;
+      toastHint.textContent = '前往官网结账时粘贴立享折扣';
+      if (toastLink) {
+        toastLink.href = url || '/recommend/';
+        toastLink.textContent = brandName ? `前往 ${brandName} ↗` : '前往官网开通 ↗';
+      }
+    }
+
+    // Show animation
+    toast.classList.remove('hidden');
+    void toast.offsetWidth;
+    toast.classList.remove('translate-y-4', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      hidePromoToast();
+    }, 4500);
+  }
+
+  function hidePromoToast() {
+    const toast = document.getElementById('promo-toast');
+    if (!toast) return;
+    toast.classList.remove('translate-y-0', 'opacity-100');
+    toast.classList.add('translate-y-4', 'opacity-0');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 300);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const closeBtn = document.getElementById('toast-close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', hidePromoToast);
+    }
+
+    // Global event delegation for any element with data-promo-code or click-to-copy
+    document.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('[data-promo-code], .copy-free-node-btn, strong.select-all') as HTMLElement;
+      if (target) {
+        const code = target.getAttribute('data-promo-code') || target.textContent?.trim() || '';
+        if (code) {
+          const brand = target.getAttribute('data-brand') || '';
+          const url = target.getAttribute('data-url') || '';
+          showPromoToast(code, brand, url);
+        }
+      }
+    });
+  });
+</script>

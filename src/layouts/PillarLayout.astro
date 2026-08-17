@@ -1,0 +1,150 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export interface ClusterItem {
+  title: string;
+  url: string;
+  description: string;
+  quickAnswer?: string;
+  order?: number;
+  level?: string;
+  tags?: string[];
+}
+
+export interface Props {
+  title: string;
+  description: string;
+  levelBadge: string;
+  leadText: string;
+  clusters: ClusterItem[];
+  nextPillar?: { name: string; url: string; desc: string };
+  faq?: Array<{ question: string; answer: string }>;
+}
+
+const {
+  title,
+  description,
+  levelBadge,
+  leadText,
+  clusters = [],
+  nextPillar,
+  faq = [],
+} = Astro.props;
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: title, url: Astro.url.pathname },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="website"
+  faq={faq}
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Pillar Hero -->
+    <header class="max-w-3xl mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-xs font-semibold text-brand-mint mb-3">
+        <span class="font-mono">{levelBadge}</span>
+        <span class="w-1 h-1 rounded-full bg-brand-mint"></span>
+        <span>知识体系中枢 Pillar</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-content-primary tracking-tight mb-4">
+        {title}
+      </h1>
+      <p class="text-base text-content-secondary leading-relaxed">
+        {leadText}
+      </p>
+    </header>
+
+    <!-- Cluster Articles Grid -->
+    <section class="mb-16">
+      <div class="flex items-center justify-between gap-4 mb-6 pb-3 border-b border-white/[0.06]">
+        <h2 class="text-lg font-bold text-content-primary flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-brand-mint"></span>
+          <span>本模块包含的核心指南 ({clusters.length})</span>
+        </h2>
+        <span class="text-xs text-content-muted">建议按序号循序渐进阅读</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {clusters.map((item, idx) => (
+          <a
+            href={item.url}
+            class="card-surface p-5 sm:p-6 flex flex-col justify-between hover:border-brand-mint/40 transition-all duration-200 group"
+          >
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs font-bold text-brand-mint bg-brand-mint/10 px-2 py-0.5 rounded border border-brand-mint/20">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+                {item.level && (
+                  <span class="text-[10px] text-content-muted font-mono bg-white/5 px-2 py-0.5 rounded">
+                    {item.level}
+                  </span>
+                )}
+              </div>
+
+              <h3 class="font-bold text-base sm:text-lg text-content-primary group-hover:text-brand-mint transition-colors mb-2">
+                {item.title}
+              </h3>
+
+              <p class="text-xs text-content-secondary leading-relaxed mb-4">
+                {item.description}
+              </p>
+
+              {item.quickAnswer && (
+                <div class="p-3 rounded-lg bg-bg-sub/80 border border-white/[0.04] text-xs text-content-muted leading-relaxed mb-4">
+                  <span class="text-brand-mint font-medium block mb-1">30s 核心结论：</span>
+                  <span>{item.quickAnswer}</span>
+                </div>
+              )}
+            </div>
+
+            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-brand-mint font-medium">
+              <span>阅读完整图文指南</span>
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Custom Slot Content -->
+    <div class="my-8">
+      <slot />
+    </div>
+
+    <!-- Next Pillar Progression Banner -->
+    {nextPillar && (
+      <div class="rounded-xl bg-gradient-to-r from-bg-card to-bg-sub border border-brand-mint/20 p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 mt-12">
+        <div class="space-y-2 max-w-xl">
+          <span class="text-xs font-semibold text-brand-mint uppercase tracking-wider block">
+            下一步进阶路线
+          </span>
+          <h3 class="text-xl font-bold text-content-primary">
+            准备好进入「{nextPillar.name}」了吗？
+          </h3>
+          <p class="text-xs text-content-secondary leading-relaxed">
+            {nextPillar.desc}
+          </p>
+        </div>
+
+        <a
+          href={nextPillar.url}
+          class="btn-primary whitespace-nowrap text-sm !py-3 !px-6"
+        >
+          <span>进入 {nextPillar.name}</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</BaseLayout>

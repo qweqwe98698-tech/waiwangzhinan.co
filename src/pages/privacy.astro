@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '隐私政策', url: '/privacy/' },
+];
+---
+
+<BaseLayout
+  title="隐私政策 - 外网指南"
+  description="外网指南网站访客数据保护与隐私承诺。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <header class="pb-6 border-b border-white/[0.08]">
+      <span class="badge-mint mb-2">隐私保护 · Privacy Policy</span>
+      <h1 class="text-3xl font-extrabold text-content-primary tracking-tight">
+        隐私政策与数据安全承诺
+      </h1>
+      <p class="text-sm text-content-secondary mt-2">
+        尊重并全力保护每一位访客的个人隐私。
+      </p>
+    </header>
+
+    <div class="prose-guide space-y-6">
+      <h2>1. 零个人身份信息收集</h2>
+      <p>
+        外网指南作为纯静态知识库网站，<strong>不设置强制注册、不要求登录、不收集手机号或身份证等任何个人敏感身份信息</strong>。你可以完全匿名、自由地浏览本站所有公开指南。
+      </p>
+
+      <h2>2. 本地化缓存与无 Cookie 追踪</h2>
+      <p>
+        本站仅在必要时使用浏览器的 `localStorage` 缓存你的组件交互状态（如 DevicePicker 当前选中的设备偏好），这些数据仅保存在你的本地浏览器中，绝不会被上传到远端服务器。
+      </p>
+
+      <h2>3. 站内搜索完全离线化</h2>
+      <p>
+        本站的快速搜索系统由 Pagefind 静态生成并在浏览器本地完成索引计算，你的搜索词不会被上传记录到任何第三方追踪服务器。
+      </p>
+
+      <h2>4. 外部链接安全提示</h2>
+      <p>
+        当你点击文章中的外部官方链接（如 GitHub、开源客户端官网）时，你将离开本站并受目标网站的独立隐私政策管辖。我们建议你在访问任何外部站点时注意保护个人信息。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,79 @@
+---
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGuides = await getCollection('guides', (entry) => entry.data.category === 'clients');
+const sortedGuides = allGuides.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const staticClusters = [
+  {
+    title: "Mac 电脑机场客户端推荐：Clash Verge Rev 与 Surge、Sing-box 深度配置对比",
+    url: "/clients/macos-guide/",
+    description: "针对苹果 macOS 用户的科学上网指南，全方位评测 Clash Verge Rev、Surge 的安装配置与 TUN 模式。",
+    quickAnswer: "苹果 Mac 首选开源免费的 Clash Verge Rev，原生支持 Apple Silicon M 系列与 Intel 芯片。",
+    level: "L3",
+    tags: ["Mac翻墙", "Clash Verge Mac", "Surge"],
+  },
+  {
+    title: "安卓 (Android) 手机怎么配置科学上网：Clash for Android 与 Surfboard、v2rayNG 实操",
+    url: "/clients/android-guide/",
+    description: "针对安卓手机全流程指引，推荐 Surfboard、Clash Meta 与 v2rayNG 工具实操与保活设置。",
+    quickAnswer: "安卓手机首选 Surfboard，类似小火箭界面，省电顺滑不杀后台。",
+    level: "L3",
+    tags: ["安卓翻墙", "Surfboard", "Clash Android"],
+  },
+  {
+    title: "什么是 TUN 模式（虚拟网卡）？解决游戏、终端和微信小程序不走代理的终极方案",
+    url: "/clients/tun-mode-guide/",
+    description: "深度解析 TUN 工作原理，在 Clash Verge 中开启 TUN 增强模式，解决顽固软件不走代理的痛点。",
+    quickAnswer: "TUN 模式通过创建虚拟网卡在网络层接管全局流量，彻底解决游戏、微信与终端代理问题。",
+    level: "L4",
+    tags: ["TUN模式", "虚拟网卡", "游戏加速"],
+  },
+  {
+    title: "全平台客户端订阅转换教程：如何把机场订阅转换成 Clash / 小火箭 / Sing-box 格式",
+    url: "/clients/subscription-convert/",
+    description: "使用 Subconverter 将节点代码、V2Ray/SS 链接安全转换为 Clash、Shadowrocket、Sing-box 配置文件。",
+    quickAnswer: "订阅转换将原始节点文本翻译成客户端标准化配置并注入最新 ACL4SSR 分流规则。",
+    level: "L4",
+    tags: ["订阅转换", "Subconverter", "小火箭转换"],
+  },
+];
+
+const clusters = [
+  ...sortedGuides.map((g) => ({
+    title: g.data.title,
+    url: `/clients/${g.id.replace(/^clients\//, '')}/`,
+    description: g.data.description,
+    quickAnswer: g.data.quickAnswer,
+    level: g.data.level,
+    tags: g.data.tags,
+  })),
+  ...staticClusters,
+];
+
+const pillarFaq = [
+  {
+    question: "客户端需要一直保持在后台运行吗？",
+    answer: "是的。客户端作为本地网络的调度分流中枢，一旦彻底退出，所有跨国代理流量将无法中转。建议在客户端设置中勾选「开机自动启动」与「最小化到托盘」。"
+  },
+  {
+    question: "不同平台的客户端可以共用同一个机场订阅链接吗？",
+    answer: "完全可以。只要将同一串订阅链接分别复制到 Windows、Mac、iPhone 和 Android 客户端中下载配置即可。"
+  }
+];
+---
+
+<PillarLayout
+  title="客户端教程：全平台工具安装与配置指南"
+  description="汇集 Windows、macOS、iOS、Android 全平台主流客户端下载安装、订阅导入与分流配置实操。"
+  levelBadge="Level 3–4"
+  leadText="客户端是你在本地控制网络流量分流的驾驶舱。选择一款稳定、开源、界面友好的客户端，能让你的外网使用体验事半功倍。"
+  clusters={clusters}
+  nextPillar={{
+    name: "高频海外场景指南",
+    url: "/use/",
+    desc: "学习 ChatGPT、Claude、YouTube、GitHub 等具体应用的高级防封与配置技巧。"
+  }}
+  faq={pillarFaq}
+/>

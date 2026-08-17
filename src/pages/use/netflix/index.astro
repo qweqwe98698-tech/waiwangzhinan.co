@@ -1,0 +1,73 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "为什么我打开 Netflix 只能看到「Netflix 自制剧」，找不到其他电影？",
+    answer: "这是因为你当前连接的节点属于「半解锁 / 版权未解锁」状态。Netflix 对自制剧（Netflix Originals）开放全球版权，但购买的第三方版权电影（如绝命毒师、哈利波特）必须检测到节点具备该地区的完整原生版权 IP 才能展示。只需在客户端切换标注「Netflix 解锁」的原生专线节点即可。"
+  },
+  {
+    question: "Netflix 提示「您似乎正在使用解除封锁工具或代理」报错怎么办？",
+    answer: "说明该节点的公网 IP 已被 Netflix 风控系统判定为机房代理。解决方法：切换到同机场的其他流媒体专属节点（如香港/新加坡/台湾专线），或者清除浏览器 Cookie 重新登录。"
+  },
+  {
+    question: "国内看 Netflix 4K HDR 视频需要多少宽带与机场速度？",
+    answer: "Netflix 官方要求 4K 超高清码率稳定在 25Mbps 以上。为了防止晚高峰丢包缓冲，建议选择测速带宽在 100Mbps 以上、支持 IEPL 专线的机场节点（如光速云、U1S1 等）。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "挑选 Netflix / Disney+ 全区解锁的专线机场",
+    url: "/choose/streaming/",
+    description: "对比 16 家已核验服务商在 4K 流媒体下的实测码率与解锁表现。"
+  },
+  {
+    title: "查看 2026 机场推荐总览与对比",
+    url: "/recommend/",
+    description: "筛选大带宽、不卡顿的 4K 影音首选品牌。"
+  }
+];
+---
+
+<ArticleLayout
+  title="Netflix (网飞) 跨区看剧指南：4K 画面要求、家庭组拼车与 IP 纯净度检测"
+  description="2026 最新 Netflix 奈飞保姆级跨区指南，详解原生 IP 解锁区别、4K 播放硬件与带宽要求、合租拼车防封及中文字幕匹配技巧。"
+  category="use"
+  level="L3"
+  quickAnswer="在国内顺畅观看 Netflix 4K 需要满足三点：1. 拥有一个 Netflix 会员账号（可通过正规拼车平台按月合租）；2. 连接支持 Netflix 原生解锁的海外专线节点（看繁体中文首选香港/台湾/新加坡，看丰富片库选美区）；3. 使用支持 4K 硬件解码的浏览器（Edge / Safari）或电视盒子即可秒开 4K HDR。"
+  pubDate="2026-08-17"
+  tags={["Netflix", "网飞解锁", "4K流媒体", "奈飞合租", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="Netflix 流媒体跨区与画质优化"
+  sourceText="waiwangzhinan.co 流媒体实验室评测"
+>
+  <h2>一、各大区 Netflix 影视库与中文字幕特点</h2>
+  <div class="space-y-3 my-6">
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-brand-mint">🇭🇰 香港 & 🇹🇼 台湾节点 · 中文首选</h3>
+      <p><strong>片库特点</strong>：拥有全网最齐全的官方中文字幕与中文配音，港台本地影视剧、华语电影更新最快，极其适合家庭华语观影。</p>
+    </div>
+
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-brand-mint">🇸🇬 新加坡节点 · 东南亚中文枢纽</h3>
+      <p><strong>片库特点</strong>：由于新加坡官方使用简体中文，新加坡区绝大部分欧美大片均标配官方<strong>简体中文字幕</strong>，且专线延迟极低。</p>
+    </div>
+
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-brand-mint">🇺🇸 美国 & 🇯🇵 日本节点 · 海量大片与日漫</h3>
+      <p><strong>片库特点</strong>：美区电影与美剧总量全球第一，日区拥有最新最全的日本动漫番剧（部分老剧可能仅提供英文字幕或日文字幕）。</p>
+    </div>
+  </div>
+
+  <h2>二、如何检测自己的节点是否支持 Netflix 完整解锁？</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-2 text-xs text-content-secondary">
+    <p>
+      在未登录账号的情况下，直接在浏览器搜索 <code>Breaking Bad (绝命毒师)</code> 或 <code>Friends (老友记)</code>。
+    </p>
+    <p>
+      如果搜索结果中能看到该剧集并显示「Play / 播放」按钮，说明该节点属于<strong>完整原生解锁</strong>；如果只能搜到不相关的自制剧，说明该节点为受限机房 IP，需在机场客户端更换流媒体专用节点。
+    </p>
+  </div>
+</ArticleLayout>

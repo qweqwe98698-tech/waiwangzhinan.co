@@ -1,0 +1,71 @@
+---
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGuides = await getCollection('guides', (entry) => entry.data.category === 'fix');
+const sortedGuides = allGuides.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const staticClusters = [
+  {
+    title: "电脑开了代理微信/QQ/网银打不开、国内网页变慢怎么解决？分流规则修复指南",
+    url: "/fix/domestic-slow-bypass/",
+    description: "彻底解决开启科学上网后国内应用卡顿、发图失败与内网阻断的规则分流全攻略。",
+    quickAnswer: "将客户端从 Global 切换为「规则模式 (Rule)」，并确保「绕过局域网 (Bypass LAN)」已开启。",
+    level: "L5",
+    tags: ["国内网页变慢", "微信打不开", "分流规则"],
+  },
+  {
+    title: "为什么开了代理还是打不开 ChatGPT？Access Denied、报错 1020 与 Cloudflare 拦截全解",
+    url: "/fix/chatgpt-blocked-solution/",
+    description: "针对访问 OpenAI ChatGPT 遇到的 Access Denied、Error 1020、无法登录与验证码拦截的终极修复方案。",
+    quickAnswer: "切勿用香港节点，切换为美/日/新/台专线，并在 Chrome 无痕窗口中打开即可秒解。",
+    level: "L5",
+    tags: ["ChatGPT打不开", "Access Denied", "Error 1020"],
+  },
+  {
+    title: "客户端提示“系统代理开启失败 / 端口被占用 1080/7890”解决办法",
+    url: "/fix/port-conflict-solution/",
+    description: "排查 Windows/macOS 客户端端口占用、WinHTTP 注册表冲突导致系统代理无法启动的修复教程。",
+    quickAnswer: "在设置中将混合端口从 7890 改为 7897 等未占用端口，或直接开启 TUN 模式从根源消除冲突。",
+    level: "L5",
+    tags: ["端口占用", "7890端口冲突", "系统代理开启失败"],
+  },
+];
+
+const clusters = [
+  ...sortedGuides.map((g) => ({
+    title: g.data.title,
+    url: `/fix/${g.id.replace(/^fix\//, '')}/`,
+    description: g.data.description,
+    quickAnswer: g.data.quickAnswer,
+    level: g.data.level,
+    tags: g.data.tags,
+  })),
+  ...staticClusters,
+];
+
+const pillarFaq = [
+  {
+    question: "所有排查步骤都试过了依然连不上外网，最后绝招是什么？",
+    answer: "按顺序执行三步：1. 在电脑设置中同步系统时间；2. 重启电脑网卡或拔插网线；3. 登录机场后台重新复制一份全新订阅导入客户端，以防旧节点域名被局部阻断。"
+  },
+  {
+    question: "平时不需要科学上网时，客户端可以直接关闭吗？",
+    answer: "可以。但在关闭客户端前，务必先点击关闭「系统代理」开关，否则可能导致系统保留代理设置而暂时无法打开普通网页。"
+  }
+];
+---
+
+<PillarLayout
+  title="故障排查：系统化问题定位与自愈手册"
+  description="遇到连不上、节点超时、订阅报错、国内软件打不开？依照标准化清单快速排查与修复。"
+  levelBadge="Level 5"
+  leadText="科学上网遇到问题 90% 源于「系统时间未同步」、「端口冲突」、「分流规则误设」或「订阅未更新」。通过标准化排错清单，小白也能在 3 分钟内自主解决问题。"
+  clusters={clusters}
+  nextPillar={{
+    name: "需求选型与服务决策",
+    url: "/choose/",
+    desc: "根据你的核心场景（查资料、AI、看视频或外贸），客观挑选最匹配的服务商。"
+  }}
+  faq={pillarFaq}
+/>

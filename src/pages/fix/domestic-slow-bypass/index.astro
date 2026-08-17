@@ -1,0 +1,77 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "为什么我一开代理，微信发图片就一直转圈、百度打不开？",
+    answer: "通常是因为客户端误开启了「全局模式 (Global)」而不是「规则模式 (Rule)」。在全局模式下，你发给国内微信服务器的数据会被强行绕道到海外（如美国/日本节点）再兜一圈发回国内，造成延迟飙升甚至触发微信的安全风控。切换回「规则模式 (Rule)」即可秒级解决。"
+  },
+  {
+    question: "已经是规则模式了，某些国内银行 App 或企业内网依然打不开怎么办？",
+    answer: "可以在客户端设置中的「绕过系统代理 (Bypass Domain / IP)」列表中添加对应内网网段（如 `192.168.*`, `10.*`）或域名（如 `*.cmbchina.com`），强制这些敏感域名永远走本地网卡直连。"
+  },
+  {
+    question: "关机重启后电脑没有开代理，为什么连国内网页也完全打不开了？",
+    answer: "这是因为电脑休眠或异常关机时，Clash 没来得及清理 Windows 注册表里的系统代理端口。解决方法：重新打开 Clash Verge，开启一次「系统代理」然后再次正常关闭，或者进入 Windows「网络和 Internet」→「代理」中，将「使用代理服务器」手动关闭即可恢复。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "学习端口冲突与系统代理开启失败排错",
+    url: "/fix/port-conflict-solution/",
+    description: "定位 7890/1080 端口占用与 WinHTTP 代理重置方法。"
+  },
+  {
+    title: "查看全场景故障排查导航",
+    url: "/fix/",
+    description: "系统化排查节点超时、DNS 泄漏与订阅错误。"
+  }
+];
+---
+
+<ArticleLayout
+  title="电脑开了代理微信/QQ/网银打不开、国内网页变慢怎么解决？分流规则修复指南"
+  description="彻底解决开启科学上网客户端后国内应用（微信、QQ、网银、钉钉、百度）卡顿、发图失败与内网阻断的规则分流全攻略。"
+  category="fix"
+  level="L5"
+  quickAnswer="出现「开了代理国内网页变慢或微信打不开」的 99% 原因都是误开了「全局模式 (Global)」！解决方法只需两步：1. 在客户端中将路由模式从 Global 切换为「规则模式 (Rule / 智能分流)」；2. 确保配置中的「绕过局域网与国内 IP (Bypass CN / LAN)」开关处于开启状态。"
+  pubDate="2026-08-17"
+  tags={["国内网页变慢", "微信打不开", "分流规则", "全局模式改规则", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="国内流量智能分流与白名单修复"
+  sourceText="waiwangzhinan.co 路由规则与网络排错手册"
+>
+  <h2>一、国内网络变慢的底层逻辑排查</h2>
+  <p>
+    一个合格的科学上网环境，必须做到**「润物细无声」**：访问 Google/ChatGPT 走海外专线，访问微信/淘宝/网银走本地光纤。
+  </p>
+  <p>
+    如果你发现国内 App 出现以下症状，说明分流规则配置出现异常：
+  </p>
+  <ul>
+    <li>微信聊天发文字正常，但发图片、视频一直转圈甚至发送失败；</li>
+    <li>打开国内各大银行网银提示「检测到异地/境外 IP 登录」；</li>
+    <li>国内网站测速只有几 Mbps，平时百兆千兆宽带完全无法发挥。</li>
+  </ul>
+
+  <h2>二、四步系统化排查与一键修复流程</h2>
+
+  <div class="space-y-4 my-6">
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1.5 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-content-primary">第 1 步：核对客户端路由模式是否为「Rule（规则）」</h3>
+      <p>打开 Clash Verge 或手机小火箭，查看当前工作模式。必须选择 <strong>Rule (规则模式)</strong>，绝不能选择 Global (全局) 或 Direct (全部直连)。</p>
+    </div>
+
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1.5 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-content-primary">第 2 步：更新分流规则库 (Rule Providers)</h3>
+      <p>部分旧版配置的 GeoIP / GeoSite 规则库过期，未正确识别某些国内新增服务器 IP。在 Clash Verge 的「订阅 (Profiles)」右键点击你的订阅，选择「更新 (Update)」以同步最新的中国大陆 IP 白名单。</p>
+    </div>
+
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1.5 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-content-primary">第 3 步：检查局域网绕过列表 (Bypass LAN)</h3>
+      <p>在客户端设置中，确保已勾选「绕过局域网 (Bypass Private / LAN Networks)」，避免打印机、路由器后台 (192.168.1.1) 无法访问。</p>
+    </div>
+  </div>
+</ArticleLayout>

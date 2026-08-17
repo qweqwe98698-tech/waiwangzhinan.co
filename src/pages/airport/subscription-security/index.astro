@@ -1,0 +1,87 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "如果我不小心把订阅链接发到微信群里了，最快如何止损？",
+    answer: "立即登录机场后台用户中心，点击「重置订阅 (Reset Token / Subscription)」按钮。重置后旧链接瞬间失效，他人无法再连接，然后你在自己的所有客户端里重新导入新生成的订阅链接即可。"
+  },
+  {
+    question: "别人拿到了我的订阅链接，能看到我上网看了什么内容吗？",
+    answer: "不能。订阅链接只是包含节点的连接密码与服务器地址，不包含你的个人浏览历史或隐私记录。但他可以使用你的账户流量，甚至可能因为在多台设备上同时滥用导致你的账号被机场防刷机制封禁。"
+  },
+  {
+    question: "机场后台能看到我访问的具体网页内容吗？",
+    answer: "正规现代网站（HTTPS）全链路端到端加密，机场服务器只能看到你连接了哪个目标域名的 IP（用于规则分流），无法解密你的密码、聊天记录或具体页面数据。使用正规老牌机场更可确保日志不留存。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "免费节点与付费机场的安全与隐私差距",
+    url: "/airport/free-vs-paid/",
+    description: "了解公共免费节点潜在的数据嗅探与木马风险。"
+  },
+  {
+    title: "全平台客户端订阅转换教程",
+    url: "/clients/subscription-convert/",
+    description: "安全地把订阅链接转换成不同客户端支持的格式。"
+  }
+];
+---
+
+<ArticleLayout
+  title="机场订阅链接泄漏了怎么办？重置订阅与安全防护指引"
+  description="详细指导机场订阅链接（Token）泄漏后的紧急补救措施、后台重置步骤、设备连接数防封及个人网络隐私防护策略。"
+  category="airport"
+  level="L3"
+  quickAnswer="订阅链接泄漏后，唯一且最有效的补救措施是：立即登录机场后台点击「重置订阅 (Reset Token)」。重置后旧链接立刻作废，窃取者将全部断连。随后在自己的手机与电脑客户端内重新复制导入新链接即可恢复正常上网。"
+  pubDate="2026-08-17"
+  tags={["订阅安全", "重置订阅", "隐私保护", "防盗刷", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="订阅安全与应急处置"
+  sourceText="waiwangzhinan.co 安全合规指南"
+>
+  <h2>一、订阅链接到底包含什么信息？</h2>
+  <p>
+    很多新手误以为订阅链接只是一张网页，随便截图或者复制到公共群里。实际上，订阅链接是你的<strong>专属提货密码券</strong>。
+  </p>
+  <p>
+    它通常长这样：<code>https://sub.domain.com/api/v1/client/subscribe?token=a1b2c3d4e5...</code>
+  </p>
+  <p>
+    只要任何人拿到了这串 URL，无需登录你的账号和密码，就可以直接在他们的 Clash 或小火箭里导入你的全部节点，并消耗你的月度流量。
+  </p>
+
+  <h2>二、订阅泄漏后的两步紧急自救指南</h2>
+
+  <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/30 bg-brand-mint/[0.02] space-y-4 my-6">
+    <h3 class="text-base font-bold text-content-primary">🚨 紧急止损步骤</h3>
+    
+    <div class="space-y-3 text-xs text-content-secondary">
+      <div>
+        <strong class="text-content-primary">第一步：进入后台重置 Token</strong>
+        <p class="mt-1">
+          用浏览器登录机场官方后台，进入「用户仪表盘 (Dashboard)」或「我的订阅 (My Subscriptions)」，找到带有刷新图标的 <strong>「重置订阅信息 / 重置 Token / Reset URL」</strong> 按钮并确认执行。
+        </p>
+      </div>
+
+      <div>
+        <strong class="text-content-primary">第二步：更新所有已绑定的客户端</strong>
+        <p class="mt-1">
+          重置后，你自己的客户端旧配置也会失效。此时只需在后台重新复制新的订阅链接，在电脑 Clash 或手机小火箭中「更新订阅」或删除旧配置重新导入即可。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <h2>三、保护订阅安全的三条黄金法则</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-3">
+    <ul class="list-disc pl-5 space-y-2 text-xs text-content-secondary">
+      <li>🔒 <strong>切勿在公共群聊/论坛发带 Token 的完整截图</strong>：如果需要求助，务必给 URL 后面的 token 参数打码。</li>
+      <li>🔒 <strong>警惕第三方不明订阅转换网站</strong>：很多免费公共订阅转换网站会在后台悄悄抓取你的订阅链接。建议直接使用机场官方后台自带的一键导入功能。</li>
+      <li>🔒 <strong>注意设备同时在线数限制</strong>：大多数机场套餐限制 2-5 台设备同时在线，一旦泄漏被他人多端并发使用，你的账号可能会被系统触发风控自动封禁。</li>
+    </ul>
+  </div>
+</ArticleLayout>

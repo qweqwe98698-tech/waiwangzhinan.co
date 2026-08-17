@@ -1,0 +1,83 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "为什么 Clash Verge 会提示「Port 7890 already in use」？",
+    answer: "通常是因为你此前安装过其他代理软件（如旧版 Clash for Windows、v2rayN、或者启动了后台运行的 Docker/安全软件），它们占用了默认的 7890 端口；或者是 Clash 崩溃后未正常释放端口。解决方法：在任务管理器中强制结束旧进程，或者在 Clash Verge 设置中将混合端口改为 `7897` 或 `17890` 等任意未占用端口。"
+  },
+  {
+    question: "Windows 提示「无法设置系统代理 / WinHTTP 权限受限」怎么办？",
+    answer: "很多国内杀毒软件（如 360 安全卫士、火绒或联想安全管家）会拦截修改系统代理注册表的行为。只需将 Clash Verge 加入安全软件的「信任区/白名单」，并以管理员身份重新运行客户端即可。"
+  },
+  {
+    question: "端口改了之后，Chrome 浏览器怎么识别新端口？",
+    answer: "Clash Verge 会在开启「系统代理」时自动将 Windows 系统的代理端口同步为修改后的端口（如 7897），Chrome 等基于系统代理的浏览器会自动同步识别，无需手动在浏览器里单独设置。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "学习开启 TUN 虚拟网卡彻底绕过端口限制",
+    url: "/clients/tun-mode-guide/",
+    description: "在网络协议底层接管流量，免受系统代理端口冲突干扰。"
+  },
+  {
+    title: "查看全场景故障排查清单",
+    url: "/fix/",
+    description: "从网络超时、DNS 异常到订阅报错的全套解决方案。"
+  }
+];
+---
+
+<ArticleLayout
+  title="客户端提示“系统代理开启失败 / 端口被占用 1080/7890”解决办法"
+  description="详细排查 Windows / macOS 代理客户端端口占用、WinHTTP 注册表冲突、杀毒软件拦截导致系统代理无法启动的完整修复教程。"
+  category="fix"
+  level="L5"
+  quickAnswer="遇到「端口 7890/1080 被占用」报错，最快的一分钟自愈方法：1. 打开 Clash Verge Rev 的「设置 (Settings)」页面；2. 找到「混合端口 (Mixed Port)」，将其从默认的 7890 改为一个不常用的数字（如 7897 或 17890）；3. 点击保存并重新打开「系统代理」开关即可顺畅恢复。"
+  pubDate="2026-08-17"
+  tags={["端口占用", "7890端口冲突", "系统代理开启失败", "Clash报错", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="系统代理端口冲突与进程管理"
+  sourceText="waiwangzhinan.co 系统排错指南"
+>
+  <h2>一、端口冲突是如何产生的？</h2>
+  <p>
+    操作系统中每个网络端口（如 <code>7890</code>、<code>1080</code>、<code>10808</code>）在同一时刻只能被一个程序独占监听。
+  </p>
+  <p>
+    常见导致端口冲突的“元凶”包括：
+  </p>
+  <ul>
+    <li>同时在后台运行了多个代理客户端（例如同时开着 Clash Verge 和 v2rayN）；</li>
+    <li>电脑突然断电或重启，旧的 Clash 核心进程残留在后台未释放；</li>
+    <li>第三方网络加速器（如 UU、迅游）或某些本地开发环境（Node.js / Python 脚本）占用了 7890 端口。</li>
+  </ul>
+
+  <h2>二、三种彻底解决端口冲突的方案</h2>
+
+  <div class="space-y-4 my-6">
+    <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/40 bg-brand-mint/[0.02] space-y-2">
+      <h3 class="text-base font-bold text-brand-mint">方案 1：直接修改客户端混合端口 (最推荐 · 30 秒搞定)</h3>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        打开 Clash Verge →「设置」→ 找到「混合端口 (Mixed Port)」→ 将数字 <code>7890</code> 修改为 <code>7897</code> 或 <code>27890</code> → 保存。重新开启「系统代理」即可完美绕过冲突！
+      </p>
+    </div>
+
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <h3 class="text-base font-bold text-content-primary">方案 2：在任务管理器中清理残留的后台进程</h3>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        按 <code>Ctrl + Shift + Esc</code> 打开 Windows 任务管理器 → 查看「详细信息」→ 找到名为 <code>clash-meta.exe</code>、<code>mihomo.exe</code>、<code>v2ray.exe</code> 或 <code>clash.exe</code> 的进程 → 选中后点击「结束任务」即可释放端口。
+      </p>
+    </div>
+
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <h3 class="text-base font-bold text-content-primary">方案 3：开启 TUN 模式（彻底告别系统代理端口）</h3>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        直接开启 Clash Verge 的「TUN 模式」，利用底层虚拟网卡直接接管流量，不再依赖任何本地 HTTP 代理端口，彻底从根源消除端口冲突的烦恼。
+      </p>
+    </div>
+  </div>
+</ArticleLayout>

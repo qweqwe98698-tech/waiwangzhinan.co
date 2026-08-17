@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '关于本站', url: '/about/' },
+];
+---
+
+<BaseLayout
+  title="关于本站 - 外网指南"
+  description="外网指南 (waiwangzhinan.co) 的创立初衷、定位使命与编辑理念。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <header class="pb-6 border-b border-white/[0.08]">
+      <span class="badge-mint mb-2">关于我们 · About Us</span>
+      <h1 class="text-3xl font-extrabold text-content-primary tracking-tight">
+        为什么创立「外网指南」？
+      </h1>
+      <p class="text-sm text-content-secondary mt-2">
+        第一次访问海外网络，从这里开始。
+      </p>
+    </header>
+
+    <div class="prose-guide space-y-6">
+      <p>
+        在当今时代，越来越多国内学生、工程师、科研工作者和创作者产生了解海外科技资讯、使用 ChatGPT/Claude 等前沿 AI 工具、检索 Google 学术论文的真实需求。
+      </p>
+      
+      <p>
+        然而，中文互联网充斥着两种极端信息：
+        一类是<strong>晦涩难懂的网络协议技术论文</strong>，充斥着命令行和底层代码，让没有任何技术背景的小白望而却步；
+        另一类是<strong>铺天盖地的营销推广和虚假测速博客</strong>，充斥着“全网第一”、“永久免费”、“超低价年付”等陷阱，导致大量新手买完即跑路。
+      </p>
+
+      <h2>我们的核心定位</h2>
+      <p>
+        <strong>外网指南（waiwangzhinan.co）不是传统的机场返利博客，而是一个专门为国内新手打造的交互式知识导航系统。</strong>
+      </p>
+      <p>
+        我们致力于：
+      </p>
+      <ul>
+        <li><strong>通俗化科普</strong>：用大白话和生活化比喻，让完全不懂网络的小白也能在 5 分钟内搞清底层原理。</li>
+        <li><strong>问题导向</strong>：每一篇文章直接对应一个真实的搜索意图，开头即给 30 秒直接结论。</li>
+        <li><strong>客观中立</strong>：严禁虚假数据，按需月付，杜绝年付圈钱陷阱。</li>
+        <li><strong>全流程闭环</strong>：从零认知 → 客户端下载 → 节点导入 → 场景使用 → 排错自救 → 理性选型。</li>
+      </ul>
+
+      <h2>联系与反馈</h2>
+      <p>
+        如果你在阅读过程中发现任何技术疏漏或数据更新，欢迎随时通过 <a href="/contact/">联系与纠错页面</a> 向我们反馈。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

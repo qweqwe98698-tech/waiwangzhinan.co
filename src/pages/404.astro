@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '404 页面未找到', url: '/404/' },
+];
+---
+
+<BaseLayout
+  title="好像走错了 - 外网指南"
+  description="页面未找到，没关系，可以从你现在的问题重新开始探索。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-2xl mx-auto px-4 py-20 text-center space-y-8">
+    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-mint/10 border border-brand-mint/20 text-brand-mint text-2xl font-mono font-bold">
+      404
+    </div>
+
+    <div class="space-y-3">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-content-primary tracking-tight">
+        好像走错了。
+      </h1>
+      <p class="text-sm text-content-secondary max-w-md mx-auto leading-relaxed">
+        没关系，可能是页面链接已调整，或者输入的地址有误。你可以从你现在最关心的问题重新开始：
+      </p>
+    </div>
+
+    <!-- 404 Navigation Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-lg mx-auto">
+      <a
+        href="/start/"
+        class="card-surface p-4 flex items-center justify-between hover:border-brand-mint/40 transition-colors group"
+      >
+        <div>
+          <span class="font-bold text-sm text-content-primary group-hover:text-brand-mint">从零开始 (L0)</span>
+          <span class="block text-xs text-content-muted mt-0.5">第一次访问海外网络</span>
+        </div>
+        <span class="text-brand-mint">→</span>
+      </a>
+
+      <a
+        href="/airport/what-is-airport/"
+        class="card-surface p-4 flex items-center justify-between hover:border-brand-mint/40 transition-colors group"
+      >
+        <div>
+          <span class="font-bold text-sm text-content-primary group-hover:text-brand-mint">机场是什么？</span>
+          <span class="block text-xs text-content-muted mt-0.5">30 秒弄懂核心概念</span>
+        </div>
+        <span class="text-brand-mint">→</span>
+      </a>
+
+      <a
+        href="/clients/"
+        class="card-surface p-4 flex items-center justify-between hover:border-brand-mint/40 transition-colors group"
+      >
+        <div>
+          <span class="font-bold text-sm text-content-primary group-hover:text-brand-mint">选择我的设备</span>
+          <span class="block text-xs text-content-muted mt-0.5">Win / Mac / iOS / 安卓</span>
+        </div>
+        <span class="text-brand-mint">→</span>
+      </a>
+
+      <a
+        href="/fix/"
+        class="card-surface p-4 flex items-center justify-between hover:border-brand-mint/40 transition-colors group"
+      >
+        <div>
+          <span class="font-bold text-sm text-content-primary group-hover:text-brand-mint">故障排查自救</span>
+          <span class="block text-xs text-content-muted mt-0.5">连不上与超时解决</span>
+        </div>
+        <span class="text-brand-mint">→</span>
+      </a>
+    </div>
+
+    <div class="pt-4">
+      <a href="/" class="btn-primary text-xs !py-2.5 !px-6">
+        <span>返回网站首页</span>
+      </a>
+    </div>
+  </div>
+</BaseLayout>

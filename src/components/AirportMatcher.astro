@@ -1,0 +1,135 @@
+---
+// Airport Matcher Component - Filters recommendations based on user selections
+---
+
+<div class="card-surface p-6 sm:p-8" id="airport-matcher">
+  <div class="mb-6">
+    <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-mint mb-1">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+      <span>Interactive Matcher</span>
+    </div>
+    <h3 class="text-2xl font-bold text-content-primary">新手需求客观匹配器</h3>
+    <p class="text-xs text-content-secondary mt-1">
+      回答 4 个问题，系统将按实际核验的技术指标（非竞价排名）推荐合适的方向与选型要点。
+    </p>
+  </div>
+
+  <!-- Form Filters -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <!-- Filter 1: Budget -->
+    <div class="space-y-1.5">
+      <label for="matcher-budget" class="text-xs font-semibold text-content-muted">1. 预算偏好</label>
+      <select id="matcher-budget" class="w-full bg-bg-sub border border-white/10 rounded-lg px-3 py-2 text-xs text-content-primary focus:border-brand-mint focus:outline-none">
+        <option value="all">不限预算</option>
+        <option value="budget">入门经济型 (10-20元/月)</option>
+        <option value="standard">主流均衡型 (20-40元/月)</option>
+        <option value="premium">高品质专线 (40元+/月)</option>
+      </select>
+    </div>
+
+    <!-- Filter 2: Purpose -->
+    <div class="space-y-1.5">
+      <label for="matcher-purpose" class="text-xs font-semibold text-content-muted">2. 主要用途</label>
+      <select id="matcher-purpose" class="w-full bg-bg-sub border border-white/10 rounded-lg px-3 py-2 text-xs text-content-primary focus:border-brand-mint focus:outline-none">
+        <option value="ai">AI 深度使用 (ChatGPT/Claude)</option>
+        <option value="general">日常搜索与学术查资料</option>
+        <option value="streaming">海外流媒体 (YouTube/Netflix)</option>
+        <option value="multi">多设备团队/家庭共用</option>
+      </select>
+    </div>
+
+    <!-- Filter 3: Device -->
+    <div class="space-y-1.5">
+      <label for="matcher-device" class="text-xs font-semibold text-content-muted">3. 主力设备</label>
+      <select id="matcher-device" class="w-full bg-bg-sub border border-white/10 rounded-lg px-3 py-2 text-xs text-content-primary focus:border-brand-mint focus:outline-none">
+        <option value="all">全平台多端</option>
+        <option value="windows">Windows PC</option>
+        <option value="iphone">iPhone / iPad (iOS)</option>
+        <option value="macos">Mac (macOS)</option>
+        <option value="android">Android 手机</option>
+      </select>
+    </div>
+
+    <!-- Filter 4: Experience -->
+    <div class="space-y-1.5">
+      <label for="matcher-exp" class="text-xs font-semibold text-content-muted">4. 使用经验</label>
+      <select id="matcher-exp" class="w-full bg-bg-sub border border-white/10 rounded-lg px-3 py-2 text-xs text-content-primary focus:border-brand-mint focus:outline-none">
+        <option value="beginner">零基础小白 (需要一键导入教程)</option>
+        <option value="intermediate">有一点经验 (了解客户端设置)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Dynamic Matching Result Card -->
+  <div id="matcher-result" class="p-5 rounded-xl bg-bg-sub border border-white/10 space-y-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-brand-mint animate-pulse"></span>
+        <span class="text-xs font-bold text-brand-mint uppercase tracking-wider">智能匹配结果</span>
+      </div>
+      <span class="text-[11px] text-content-muted font-mono" id="matcher-status-tag">核验状态：数据已校准</span>
+    </div>
+
+    <div id="matcher-advice" class="space-y-2">
+      <h4 class="font-bold text-sm text-content-primary" id="matcher-title">推荐选型方案：原生住宅/高质量中转线路</h4>
+      <p class="text-xs text-content-secondary leading-relaxed" id="matcher-desc">
+        针对 AI (ChatGPT/Claude) 场景，务必避开廉价机房 IP。首选支持美国家庭宽带原生 IP、延迟稳定在 150-200ms 左右、节点池干净的中转服务。
+      </p>
+    </div>
+
+    <div class="pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-2 text-xs text-content-muted" id="matcher-key-points">
+        <span class="px-2 py-0.5 rounded bg-white/5 text-content-secondary font-mono text-[10px]">建议月付体验</span>
+        <span class="px-2 py-0.5 rounded bg-white/5 text-content-secondary font-mono text-[10px]">必备 Clash/小火箭 订阅</span>
+      </div>
+      <a href="/choose/" id="matcher-cta-link" class="btn-primary text-xs !py-1.5 !px-3">
+        <span>查看该场景详细选型指南</span>
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const budgetSelect = document.getElementById('matcher-budget') as HTMLSelectElement | null;
+  const purposeSelect = document.getElementById('matcher-purpose') as HTMLSelectElement | null;
+  const matcherTitle = document.getElementById('matcher-title');
+  const matcherDesc = document.getElementById('matcher-desc');
+  const matcherCta = document.getElementById('matcher-cta-link') as HTMLAnchorElement | null;
+
+  function updateMatch() {
+    const purpose = purposeSelect?.value || 'ai';
+    const budget = budgetSelect?.value || 'all';
+
+    if (purpose === 'ai') {
+      if (matcherTitle) matcherTitle.textContent = '推荐选型方案：原生纯净 IP / 专线中转服务';
+      if (matcherDesc) matcherDesc.textContent = 'ChatGPT 和 Claude 对 IP 质量极其敏感。建议选择提供原生住宅或高纯净度机房节点、且不频繁变动出口 IP 的服务，切忌选择低质万人同用的节点。';
+      if (matcherCta) matcherCta.href = '/choose/ai/';
+    } else if (purpose === 'streaming') {
+      if (matcherTitle) matcherTitle.textContent = '推荐选型方案：大带宽专线 (IEPL/IPLC) / 全流媒体解锁';
+      if (matcherDesc) matcherDesc.textContent = '针对 YouTube 4K/8K 与 Netflix/Disney+ 观影需求，重点考量峰值带宽与流媒体解锁持续维护能力，建议选择支持 BGP 专线入口的服务。';
+      if (matcherCta) matcherCta.href = '/choose/streaming/';
+    } else if (purpose === 'multi') {
+      if (matcherTitle) matcherTitle.textContent = '推荐选型方案：多端并发无限制 / 大流量组网方案';
+      if (matcherDesc) matcherDesc.textContent = '针对家庭或小团队多设备，需重点确认“同时在线连接数”与“月度流量包大小”，避免单人看视频占满全部连接数。';
+      if (matcherCta) matcherCta.href = '/choose/multi-device/';
+    } else {
+      if (budget === 'budget') {
+        if (matcherTitle) matcherTitle.textContent = '推荐选型方案：高性价比入门型服务';
+        if (matcherDesc) matcherDesc.textContent = '日常学术查资料与普通网页浏览无需高昂专线，常规优质直连/中转月付 10-20 元套餐即可满足稳定需求。';
+        if (matcherCta) matcherCta.href = '/choose/budget/';
+      } else {
+        if (matcherTitle) matcherTitle.textContent = '推荐选型方案：新手友好 · 教程完善型服务';
+        if (matcherDesc) matcherDesc.textContent = '第一次使用推荐选择有一键导入、完备图文教程和稳定在线客服的服务，先按月度订阅熟悉基本操作。';
+        if (matcherCta) matcherCta.href = '/choose/beginner/';
+      }
+    }
+  }
+
+  budgetSelect?.addEventListener('change', updateMatch);
+  purposeSelect?.addEventListener('change', updateMatch);
+</script>

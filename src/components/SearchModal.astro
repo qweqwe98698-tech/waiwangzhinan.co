@@ -1,0 +1,161 @@
+---
+// Search Modal Component
+---
+
+<div id="search-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-start justify-center pt-20 px-4">
+  <div class="w-full max-w-2xl bg-bg-card border border-white/10 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+    <!-- Search Input Bar -->
+    <div class="p-4 border-b border-white/[0.08] flex items-center gap-3 bg-bg-sub/50">
+      <svg class="w-5 h-5 text-content-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input
+        id="search-input"
+        type="text"
+        placeholder="搜索你的问题，例如「ChatGPT 打不开怎么办」..."
+        class="w-full bg-transparent border-none text-content-primary placeholder:text-content-muted focus:outline-none text-sm"
+        autocomplete="off"
+      />
+      <button
+        id="search-close-btn"
+        class="px-2 py-1 text-xs text-content-muted hover:text-content-primary rounded bg-white/5 border border-white/10"
+      >
+        ESC
+      </button>
+    </div>
+
+    <!-- Quick Suggested Tags -->
+    <div class="px-4 py-2.5 bg-bg-main/50 border-b border-white/[0.04] flex items-center gap-2 overflow-x-auto text-xs text-content-muted">
+      <span class="whitespace-nowrap">高频搜索：</span>
+      <button class="search-tag whitespace-nowrap px-2 py-0.5 rounded bg-bg-sub hover:bg-white/10 text-content-secondary transition-colors" data-q="ChatGPT 打不开">ChatGPT 打不开</button>
+      <button class="search-tag whitespace-nowrap px-2 py-0.5 rounded bg-bg-sub hover:bg-white/10 text-content-secondary transition-colors" data-q="Google">Google 怎么访问</button>
+      <button class="search-tag whitespace-nowrap px-2 py-0.5 rounded bg-bg-sub hover:bg-white/10 text-content-secondary transition-colors" data-q="YouTube">YouTube 一直转圈</button>
+      <button class="search-tag whitespace-nowrap px-2 py-0.5 rounded bg-bg-sub hover:bg-white/10 text-content-secondary transition-colors" data-q="GitHub">GitHub 下载慢</button>
+      <button class="search-tag whitespace-nowrap px-2 py-0.5 rounded bg-bg-sub hover:bg-white/10 text-content-secondary transition-colors" data-q="机场是什么">机场是什么</button>
+      <button class="search-tag whitespace-nowrap px-2 py-0.5 rounded bg-bg-sub hover:bg-white/10 text-content-secondary transition-colors" data-q="Clash">Clash 怎么用</button>
+      <button class="search-tag whitespace-nowrap px-2 py-0.5 rounded bg-bg-sub hover:bg-white/10 text-content-secondary transition-colors" data-q="iPhone">iPhone 怎么打开 Google</button>
+    </div>
+
+    <!-- Search Results Container -->
+    <div id="search-results" class="p-4 overflow-y-auto space-y-3 flex-1">
+      <div class="text-center py-8 text-xs text-content-muted">
+        输入关键词以搜索 35+ 篇核心科普、客户端与排错指南
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const searchModal = document.getElementById('search-modal');
+  const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+  const searchCloseBtn = document.getElementById('search-close-btn');
+  const searchOpenBtn = document.getElementById('search-open-btn');
+  const searchResults = document.getElementById('search-results');
+  const searchTags = document.querySelectorAll('.search-tag');
+
+  // Pre-cached search index for instant zero-lag response
+  const searchIndex = [
+    { title: '第一次访问海外网站指南', url: '/start/how-to-access-overseas-websites/', category: '从零开始', answer: '海外网站无法直连主要由于网络边界与解析受限，需通过加密代理或节点中转建立安全访问隧道。' },
+    { title: '代理是什么？', url: '/start/what-is-proxy/', category: '基础认知', answer: '代理服务器充当客户端与目标网络之间的中转站，帮助请求转发并隐藏本地真实源地址。' },
+    { title: 'VPN 是什么？与代理有什么区别？', url: '/start/what-is-vpn/', category: '基础认知', answer: 'VPN 是全局网络虚拟专用通道，而现代代理主要针对特定应用流量进行分流与定向加速。' },
+    { title: 'VPN 和代理有什么区别？', url: '/start/proxy-vs-vpn/', category: '对比解析', answer: '从工作层级、分流能力、日常访问效率多维度对比，代理工具更适合日常海外应用分流。' },
+    { title: '机场到底是什么？', url: '/airport/what-is-airport/', category: '机场入门', answer: '机场指提供多地区优质中转节点与一键订阅管理的专业网络服务平台。' },
+    { title: '节点是什么？', url: '/airport/what-is-node/', category: '机场入门', answer: '节点是分布在香港、日本、美国等各地的中转服务器入口与出口。' },
+    { title: '机场订阅是什么？怎么导入？', url: '/airport/what-is-subscription/', category: '机场入门', answer: '订阅是一串包含所有节点连接配置的链接，导入客户端后可自动同步所有可用节点。' },
+    { title: '机场怎么使用？完整图文步骤', url: '/airport/how-to-use/', category: '使用指南', answer: '三步法：获取订阅地址 → 导入对应设备客户端 → 开启系统代理即可畅游。' },
+    { title: '机场怎么购买与避坑？', url: '/airport/how-to-buy/', category: '购买指南', answer: '按需按月订购、避免长周期贪便宜、选择支持常见协议与原生住宅/机房 IP 的服务。' },
+    { title: '机场怎么选择？', url: '/airport/how-to-choose/', category: '选型指南', answer: '根据预算、使用场景（AI/影音/办公）和设备类型进行客观匹配，不盲信“全网第一”。' },
+    { title: 'Windows 怎么使用机场？', url: '/clients/windows/', category: '客户端', answer: 'Windows 平台首选 Clash Verge Rev 或 v2rayN，支持智能分流与一键开启系统代理。' },
+    { title: 'macOS 怎么使用机场？', url: '/clients/macos/', category: '客户端', answer: 'macOS 平台推荐使用 Clash Verge Rev 或 Surge，原生适配 Apple Silicon 芯片。' },
+    { title: 'iPhone (iOS) 怎么使用小火箭？', url: '/clients/iphone/', category: '客户端', answer: 'Shadowrocket（小火箭）是 iOS 首选，需海外 Apple ID 下载，扫码或粘贴即可导入订阅。' },
+    { title: 'Android 手机怎么使用机场？', url: '/clients/android/', category: '客户端', answer: 'Android 推荐 Clash Meta for Android 或 v2rayNG，安装 APK 后直接导入订阅。' },
+    { title: 'Clash Verge 是什么？怎么安装与导入？', url: '/clients/clash-verge/', category: '客户端', answer: '开源现代化 Clash 桌面客户端，支持内核切换、脚本扩展与精致暗色界面。' },
+    { title: 'Shadowrocket (小火箭) 是什么与配置？', url: '/clients/shadowrocket/', category: '客户端', answer: 'iOS 经典的代理工具，支持丰富分流规则与全协议接入。' },
+    { title: 'v2rayN 是什么？怎么使用？', url: '/clients/v2rayn/', category: '客户端', answer: 'Windows 经典老牌客户端，支持 Xray/V2Ray/Sing-box 核心，稳定轻量。' },
+    { title: 'ChatGPT 国内怎么使用？打不开怎么办？', url: '/use/chatgpt/', category: '使用场景', answer: '需要纯净的海外节点（美/日/新等），开启全局或应用分流，避开高风险黑名单数据中心。' },
+    { title: 'Claude 国内怎么使用？', url: '/use/claude/', category: '使用场景', answer: 'Claude 对 IP 纯净度要求极高，建议使用高质量住宅/原生节点并固定节点地区。' },
+    { title: 'Gemini 国内怎么使用？', url: '/use/gemini/', category: '使用场景', answer: '登录 Google 账号并连接支持 Gemini 地区的节点即可流畅使用。' },
+    { title: 'Google 国内怎么访问？', url: '/use/google/', category: '使用场景', answer: '导入订阅后开启规则分流，即可直接在任意浏览器打开 google.com。' },
+    { title: 'YouTube 国内怎么访问与高清流畅观看？', url: '/use/youtube/', category: '使用场景', answer: '需要充足带宽的专线/中转节点，开启分流后享受 4K 秒开体验。' },
+    { title: 'GitHub 打不开或克隆慢怎么办？', url: '/use/github/', category: '使用场景', answer: '配置终端 Git 代理或在客户端中开启 Tun 虚拟网卡模式接管系统命令行流量。' },
+    { title: '机场连不上怎么办？全流程排查', url: '/fix/cannot-connect/', category: '故障排查', answer: '依次检查：订阅是否过期、节点是否测速超时、系统代理开关是否打开、本地系统时间是否同步。' },
+    { title: '节点全部超时怎么办？', url: '/fix/timeout/', category: '故障排查', answer: '多为订阅链接未更新、本地 DNS 污染或运营商临时阻断，尝试更新订阅或切换节点协议。' },
+    { title: '机场订阅更新失败怎么办？', url: '/fix/subscription-error/', category: '故障排查', answer: '排查订阅链接拼写、检查是否被本地杀软拦截、尝试开启代理后更新订阅。' },
+    { title: 'Clash 有节点但无法上网怎么办？', url: '/fix/no-internet/', category: '故障排查', answer: '检查“系统代理”开关是否生效、端口是否冲突、TUN 虚拟网卡驱动是否安装正确。' },
+    { title: '节点速度慢/延迟高怎么办？', url: '/fix/slow-speed/', category: '故障排查', answer: '选择离地理位置近的低延迟节点（如香港/日本/新加坡），避开高峰期拥堵线路。' },
+    { title: '新手友好型机场选型', url: '/choose/beginner/', category: '选型指南', answer: '注重客服响应、一键导入教程完善度与免繁琐配置的服务商。' },
+    { title: '高性价比机场怎么选？', url: '/choose/budget/', category: '选型指南', answer: '在稳定性和价格之间取得平衡，适合日常网页浏览与轻度查资料。' },
+    { title: 'AI (ChatGPT/Claude) 专用机场选择', url: '/choose/ai/', category: '选型指南', answer: '优先选择具备原生家庭宽带/住宅 IP、非黑名单机房且解锁良好的节点服务。' },
+    { title: '海外流媒体 (Netflix/Disney+) 机场选择', url: '/choose/streaming/', category: '选型指南', answer: '选择支持全流媒体解锁、大带宽专线保障的优质线路。' },
+    { title: '多设备共享机场选择', url: '/choose/multi-device/', category: '选型指南', answer: '支持 5 台以上设备同时在线、不限连接 IP 的大容量套餐方案。' },
+  ];
+
+  function renderResults(query: string) {
+    if (!searchResults) return;
+    const q = query.trim().toLowerCase();
+    if (!q) {
+      searchResults.innerHTML = '<div class="text-center py-8 text-xs text-content-muted">输入关键词以搜索 35+ 篇核心科普、客户端与排错指南</div>';
+      return;
+    }
+
+    const filtered = searchIndex.filter(item =>
+      item.title.toLowerCase().includes(q) ||
+      item.answer.toLowerCase().includes(q) ||
+      item.category.toLowerCase().includes(q)
+    );
+
+    if (filtered.length === 0) {
+      searchResults.innerHTML = '<div class="text-center py-8 text-xs text-content-muted">未找到相关内容，请尝试换一个关键词</div>';
+      return;
+    }
+
+    searchResults.innerHTML = filtered.map(item => `
+      <a href="${item.url}" class="block p-3 rounded-lg bg-bg-main hover:bg-bg-sub border border-white/5 hover:border-brand-mint/30 transition-all group">
+        <div class="flex items-center justify-between gap-2 mb-1">
+          <span class="font-semibold text-sm text-content-primary group-hover:text-brand-mint transition-colors">${item.title}</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-content-muted">${item.category}</span>
+        </div>
+        <p class="text-xs text-content-secondary line-clamp-2 leading-relaxed">${item.answer}</p>
+      </a>
+    `).join('');
+  }
+
+  function openSearch() {
+    searchModal?.classList.remove('hidden');
+    searchInput?.focus();
+  }
+
+  function closeSearch() {
+    searchModal?.classList.add('hidden');
+    if (searchInput) searchInput.value = '';
+  }
+
+  searchOpenBtn?.addEventListener('click', openSearch);
+  searchCloseBtn?.addEventListener('click', closeSearch);
+
+  searchModal?.addEventListener('click', (e) => {
+    if (e.target === searchModal) closeSearch();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !searchModal?.classList.contains('hidden')) {
+      closeSearch();
+    }
+  });
+
+  searchInput?.addEventListener('input', (e) => {
+    const val = (e.target as HTMLInputElement).value;
+    renderResults(val);
+  });
+
+  searchTags.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.getAttribute('data-q') || '';
+      if (searchInput) {
+        searchInput.value = q;
+        renderResults(q);
+      }
+    });
+  });
+</script>

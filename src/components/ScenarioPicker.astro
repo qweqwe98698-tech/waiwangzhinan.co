@@ -1,0 +1,131 @@
+---
+// Super Scenario Picker with 8 verticals
+const scenarioCategories = [
+  {
+    category: 'AI 智能工具',
+    tag: '大模型 / 对话',
+    items: [
+      { name: 'ChatGPT / OpenAI', url: '/use/chatgpt/', note: '需美国/日本纯净原生节点' },
+      { name: 'Claude (Anthropic)', url: '/use/claude/', note: '高风控，需固定住宅 IP' },
+      { name: 'Gemini (Google)', url: '/use/gemini/', note: '需除香港外的支持大区' },
+      { name: 'Midjourney / AI作画', url: '/use/chatgpt/', note: 'Discord 高频交互' },
+    ],
+  },
+  {
+    category: '搜索与 Google 生态',
+    tag: '文献 / 工具',
+    items: [
+      { name: 'Google 搜索', url: '/use/google/', note: '低延迟香港/日本节点秒开' },
+      { name: 'Gmail 邮箱', url: '/use/google/', note: '日常收发与跨国通信' },
+      { name: 'Google Scholar (学术)', url: '/use/google/', note: '论文检索与文献下载' },
+      { name: 'Google Drive 云盘', url: '/use/google/', note: '海外大文件同步传输' },
+    ],
+  },
+  {
+    category: '高清流媒体影音',
+    tag: '4K / 追剧',
+    items: [
+      { name: 'YouTube 4K', url: '/use/youtube/', note: '大带宽专线保障 0 缓冲' },
+      { name: 'Netflix (奈飞)', url: '/choose/streaming/', note: '全流媒体非自制剧解锁' },
+      { name: 'Disney+ / HBO Max', url: '/choose/streaming/', note: '欧美原生版权库支持' },
+      { name: 'Spotify 音乐', url: '/choose/streaming/', note: '跨区账号登录与曲库' },
+    ],
+  },
+  {
+    category: '海外社交平台',
+    tag: '社媒 / 社区',
+    items: [
+      { name: 'X (Twitter)', url: '/use/twitter/', note: '图文资讯与即时推送' },
+      { name: 'Instagram', url: '/use/twitter/', note: '高清图片与短视频流' },
+      { name: 'Telegram (电报)', url: '/use/telegram/', note: '内置 SOCKS5 代理设置' },
+      { name: 'Reddit / Discord', url: '/use/telegram/', note: '海外技术讨论与社群' },
+    ],
+  },
+  {
+    category: '程序员与设计师',
+    tag: '开发 / 协作',
+    items: [
+      { name: 'GitHub 仓库加速', url: '/use/github/', note: 'git clone / push 终端加速' },
+      { name: 'Docker Hub / 镜像', url: '/use/github/', note: '容器拉取与构建' },
+      { name: 'npm / PyPI 依赖', url: '/use/github/', note: '包管理器极速下载' },
+      { name: 'Figma / Vercel', url: '/use/github/', note: '前端部署与设计协作' },
+    ],
+  },
+  {
+    category: '学习、留学与论文',
+    tag: '学术 / 网课',
+    items: [
+      { name: '海外高校数据库', url: '/use/google/', note: 'IEEE / Nature 授权访问' },
+      { name: 'Coursera / edX', url: '/use/youtube/', note: '名校公开课视频播放' },
+      { name: '国外电子书与文献', url: '/use/google/', note: '学术查重与文献管理' },
+      { name: '留学生日常网络', url: '/start/', note: '跨国申请与教务系统' },
+    ],
+  },
+  {
+    category: '跨境电商与外贸',
+    tag: '店铺 / 支付',
+    items: [
+      { name: 'Amazon 卖家后台', url: '/choose/stable/', note: '注重 IP 纯净与登录环境' },
+      { name: 'Shopify 独立站', url: '/choose/stable/', note: '店铺管理与商品上架' },
+      { name: 'Google / Meta Ads', url: '/choose/stable/', note: '海外投放与广告后台' },
+      { name: 'PayPal / Stripe 支付', url: '/choose/stable/', note: '跨境收付款与结算' },
+    ],
+  },
+  {
+    category: '游戏与国际服',
+    tag: '国际服 / 联机',
+    items: [
+      { name: 'Steam 社区与商店', url: '/use/github/', note: '解决商店打不开与错误代码' },
+      { name: 'PSN / Xbox 联机', url: '/clients/', note: '路由器代理与主机加速' },
+      { name: '暴雪 / 拳头国际服', url: '/choose/stable/', note: '账号注册与战网登录' },
+      { name: '游戏加速器区别', url: '/start/proxy-vs-vpn/', note: '代理与专业加速器解析' },
+    ],
+  },
+];
+---
+
+<div class="card-surface p-6 sm:p-8 space-y-6">
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+    <div>
+      <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-mint mb-1">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span>Scenario Navigator</span>
+      </div>
+      <h3 class="text-2xl font-bold text-content-primary">你想访问什么服务？</h3>
+    </div>
+    <p class="text-xs text-content-secondary">涵盖 8 大主流场景，一键直达专属网络配置与环境要求</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    {scenarioCategories.map((cat) => (
+      <div class="card-surface-sub p-4 rounded-xl border border-white/5 flex flex-col justify-between space-y-3">
+        <div>
+          <div class="flex items-center justify-between pb-2 border-b border-white/5 mb-3">
+            <h4 class="font-bold text-sm text-content-primary">{cat.category}</h4>
+            <span class="text-[10px] text-content-muted font-mono bg-white/5 px-2 py-0.5 rounded">{cat.tag}</span>
+          </div>
+          <div class="space-y-2">
+            {cat.items.map((item) => (
+              <a
+                href={item.url}
+                class="p-2 rounded-lg bg-bg-main hover:bg-bg-hover border border-white/[0.03] hover:border-brand-mint/30 flex items-center justify-between group transition-all"
+              >
+                <div>
+                  <span class="font-medium text-xs text-content-primary group-hover:text-brand-mint transition-colors block">
+                    {item.name}
+                  </span>
+                  <span class="text-[10px] text-content-muted block">{item.note}</span>
+                </div>
+                <span class="text-brand-mint text-xs opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

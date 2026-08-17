@@ -1,0 +1,121 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  category?: string;
+}
+
+const {
+  title = '2026 编辑部实测首推 · 优质机场快速开通',
+  subtitle = '按需选择适合你的网络方案，所有服务商均支持月付，拒绝年付圈钱陷阱。',
+  category,
+} = Astro.props;
+
+const allProviders = await getCollection('providers');
+
+// Primary 4 promoted brands in strict priority order: 光速云 (No.1), 星岛梦, 飞猫云, U1S1
+const prioritySlugs = ['guangsu', 'xingdaomeng', 'feimao', 'u1s1'];
+const priorityProviders = prioritySlugs
+  .map((slug) => allProviders.find((p) => p.data.slug === slug))
+  .filter(Boolean);
+---
+
+<div class="my-8 card-surface p-6 rounded-2xl border border-brand-mint/30 bg-gradient-to-b from-brand-mint/[0.06] to-transparent shadow-2xl space-y-5">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+    <div class="space-y-1">
+      <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-[11px] font-semibold text-brand-mint">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-mint animate-pulse"></span>
+        <span>2026 核心实测推荐</span>
+      </div>
+      <h3 class="text-base sm:text-lg font-bold text-content-primary">
+        {title}
+      </h3>
+      <p class="text-xs text-content-secondary">
+        {subtitle}
+      </p>
+    </div>
+
+    <a
+      href="/recommend/"
+      class="text-xs text-brand-mint hover:underline whitespace-nowrap font-semibold flex items-center gap-1"
+    >
+      <span>查看全部 16 家测速榜单</span>
+      <span>→</span>
+    </a>
+  </div>
+
+  <!-- 4 Primary Promoted Brand Cards Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+    {priorityProviders.map((p, idx) => {
+      const isTop1 = p.data.slug === 'guangsu';
+      return (
+        <div class={`card-surface-sub p-4 rounded-xl border transition-all flex flex-col justify-between space-y-3 relative ${
+          isTop1 
+            ? 'border-brand-mint/50 bg-brand-mint/[0.04] ring-1 ring-brand-mint/20 shadow-lg shadow-brand-mint/10' 
+            : 'border-white/10 hover:border-brand-mint/30 bg-bg-card/90'
+        }`}>
+          {isTop1 && (
+            <div class="absolute -top-2.5 right-3 px-2 py-0.5 rounded bg-brand-mint text-bg-main text-[9px] font-black uppercase tracking-wider shadow-sm">
+              👑 综合第一主推
+            </div>
+          )}
+
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-bold text-sm text-content-primary flex items-center gap-1">
+                  <a href={`/brands/${p.data.slug}/`} class="hover:text-brand-mint transition-colors">
+                    {p.data.name}
+                  </a>
+                </h4>
+                <span class="text-[10px] text-content-muted block">{p.data.recommendFor[0]}</span>
+              </div>
+              <div class="text-right">
+                <span class="font-mono text-xs font-bold text-brand-mint">
+                  ¥{p.data.pricing.startingPrice}<span class="text-[10px] text-content-muted font-normal">/{p.data.pricing.billingCycle.includes('月') ? '月' : '起'}</span>
+                </span>
+                {p.data.pricing.traffic && (
+                  <span class="text-[9px] text-content-muted block font-mono">{p.data.pricing.traffic}</span>
+                )}
+              </div>
+            </div>
+
+            <p class="text-[11px] text-content-secondary line-clamp-2 leading-relaxed">
+              {p.data.tagline}
+            </p>
+
+            {p.data.promoCode && (
+              <div class="inline-block px-2 py-0.5 rounded bg-brand-mint/10 border border-brand-mint/20 text-[10px] font-mono text-brand-mint">
+                优惠码: <strong class="select-all font-bold">{p.data.promoCode}</strong>
+                {p.data.discount && <span class="text-[9px] text-content-muted ml-1 font-normal">({p.data.discount})</span>}
+              </div>
+            )}
+          </div>
+
+          <div class="pt-2.5 border-t border-white/5 flex items-center justify-between gap-2">
+            <a
+              href={`/brands/${p.data.slug}/`}
+              class="text-[11px] text-content-muted hover:text-content-primary transition-colors"
+            >
+              测速报告
+            </a>
+            {p.data.officialUrl && (
+              <a
+                href={p.data.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`btn-primary text-[11px] !py-1.5 !px-3.5 font-bold shadow-md ${
+                  isTop1 ? '!bg-brand-mint shadow-brand-mint/30' : ''
+                }`}
+              >
+                官网开通 ↗
+              </a>
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>

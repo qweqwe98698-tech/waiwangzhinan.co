@@ -1,0 +1,192 @@
+---
+const deviceData = [
+  {
+    id: 'windows',
+    name: 'Windows',
+    icon: 'win',
+    badge: 'PC 桌面端',
+    clients: [
+      { name: 'Clash Verge Rev', tag: '首推 · 界面现代化', url: '/clients/clash-verge/' },
+      { name: 'v2rayN', tag: '轻量 · 经典老牌', url: '/clients/v2rayn/' },
+    ],
+    tutorials: [
+      { title: 'Windows 怎么使用机场新手完整指南', url: '/clients/windows/' },
+      { title: 'Clash Verge Rev 安装与订阅导入教程', url: '/clients/clash-verge/' },
+      { title: 'v2rayN 客户端配置与排错', url: '/clients/v2rayn/' },
+      { title: 'Windows 常见代理开启但无法上网问题', url: '/fix/no-internet/' },
+    ],
+  },
+  {
+    id: 'macos',
+    name: 'macOS',
+    icon: 'mac',
+    badge: 'Apple 电脑',
+    clients: [
+      { name: 'Clash Verge Rev', tag: '原生适配 M 系列芯片', url: '/clients/clash-verge/' },
+      { name: 'Surge Mac / Sing-box', tag: '专业进阶工具', url: '/clients/macos/' },
+    ],
+    tutorials: [
+      { title: 'macOS 怎么使用机场与配置系统代理', url: '/clients/macos/' },
+      { title: 'Mac 版 Clash Verge 快捷配置教程', url: '/clients/clash-verge/' },
+      { title: 'macOS 权限与 DNS 污染排查', url: '/fix/cannot-connect/' },
+    ],
+  },
+  {
+    id: 'iphone',
+    name: 'iPhone / iPad',
+    icon: 'ios',
+    badge: 'iOS 移动端',
+    clients: [
+      { name: 'Shadowrocket (小火箭)', tag: '简单好用 · 规则丰富', url: '/clients/shadowrocket/' },
+      { name: 'Quantumult X / Loon', tag: '高阶规则引擎', url: '/clients/iphone/' },
+    ],
+    tutorials: [
+      { title: 'iPhone (iOS) 怎么下载并使用小火箭', url: '/clients/iphone/' },
+      { title: 'Shadowrocket 订阅导入与节点切换', url: '/clients/shadowrocket/' },
+      { title: '小火箭连不上与证书信任排查', url: '/fix/cannot-connect/' },
+    ],
+  },
+  {
+    id: 'android',
+    name: 'Android',
+    icon: 'android',
+    badge: '安卓手机/平板',
+    clients: [
+      { name: 'Clash Meta for Android', tag: '开源全能 · 功能完善', url: '/clients/android/' },
+      { name: 'v2rayNG', tag: '极简原生 · 资源占用低', url: '/clients/android/' },
+    ],
+    tutorials: [
+      { title: 'Android 怎么使用机场与安装 APK', url: '/clients/android/' },
+      { title: '安卓客户端后台保活与分流配置', url: '/clients/android/' },
+      { title: '安卓节点超时与更新失败解决', url: '/fix/subscription-error/' },
+    ],
+  },
+  {
+    id: 'linux',
+    name: 'Linux',
+    icon: 'linux',
+    badge: '服务器/开发者',
+    clients: [
+      { name: 'Clash Verge / Mihomo', tag: 'GUI / CLI 核心', url: '/clients/' },
+      { name: 'Sing-box CLI', tag: '轻量通用通用核心', url: '/clients/' },
+    ],
+    tutorials: [
+      { title: 'Linux 终端环境变量与代理配置', url: '/use/github/' },
+      { title: 'Git / Docker / Curl 代理加速技巧', url: '/use/github/' },
+      { title: '服务器网络与连接排查', url: '/fix/' },
+    ],
+  },
+];
+---
+
+<div class="card-surface p-6 sm:p-8" id="device-picker">
+  <div class="mb-6">
+    <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-mint mb-1">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>
+      <span>Device Picker</span>
+    </div>
+    <h3 class="text-2xl font-bold text-content-primary">你正在使用什么设备？</h3>
+    <p class="text-xs text-content-secondary mt-1">先选设备，系统会直接告诉你该装什么客户端、怎么导入与配置。</p>
+  </div>
+
+  <!-- Device Selection Tabs -->
+  <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-6">
+    {deviceData.map((d, index) => (
+      <button
+        type="button"
+        class={`device-tab-btn px-4 py-3 rounded-lg border text-left flex flex-col justify-between transition-all ${
+          index === 0
+            ? 'bg-bg-sub border-brand-mint/40 text-brand-mint'
+            : 'bg-bg-main border-white/5 text-content-secondary hover:border-white/20 hover:text-content-primary'
+        }`}
+        data-device={d.id}
+      >
+        <span class="font-bold text-sm text-content-primary">{d.name}</span>
+        <span class="text-[10px] text-content-muted mt-1">{d.badge}</span>
+      </button>
+    ))}
+  </div>
+
+  <!-- Device Content Panels -->
+  {deviceData.map((d, index) => (
+    <div
+      id={`device-panel-${d.id}`}
+      class={`device-panel space-y-5 ${index === 0 ? 'block' : 'hidden'}`}
+    >
+      <!-- Recommended Clients -->
+      <div>
+        <h4 class="text-xs font-semibold text-content-muted uppercase tracking-wider mb-2.5">
+          {d.name} 推荐客户端
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {d.clients.map((c) => (
+            <a
+              href={c.url}
+              class="flex items-center justify-between p-3.5 rounded-lg bg-bg-sub border border-white/5 hover:border-brand-mint/30 transition-all group"
+            >
+              <div>
+                <span class="font-semibold text-sm text-content-primary group-hover:text-brand-mint transition-colors">
+                  {c.name}
+                </span>
+                <span class="block text-[11px] text-brand-mint/80 mt-0.5">{c.tag}</span>
+              </div>
+              <svg class="w-4 h-4 text-content-muted group-hover:text-brand-mint transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Tutorials List -->
+      <div>
+        <h4 class="text-xs font-semibold text-content-muted uppercase tracking-wider mb-2.5">
+          {d.name} 新手推荐阅读与排错
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {d.tutorials.map((t) => (
+            <a
+              href={t.url}
+              class="p-2.5 rounded-lg bg-bg-main hover:bg-bg-sub border border-white/5 hover:border-white/15 text-xs text-content-secondary hover:text-content-primary flex items-center justify-between transition-colors group"
+            >
+              <span class="truncate pr-2">{t.title}</span>
+              <span class="text-brand-mint text-[11px] opacity-0 group-hover:opacity-100 transition-opacity">阅读 →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  const tabBtns = document.querySelectorAll('.device-tab-btn');
+  const panels = document.querySelectorAll('.device-panel');
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetDevice = btn.getAttribute('data-device');
+
+      // Update Tabs styling
+      tabBtns.forEach((b) => {
+        b.classList.remove('bg-bg-sub', 'border-brand-mint/40', 'text-brand-mint');
+        b.classList.add('bg-bg-main', 'border-white/5', 'text-content-secondary');
+      });
+      btn.classList.add('bg-bg-sub', 'border-brand-mint/40', 'text-brand-mint');
+      btn.classList.remove('bg-bg-main', 'border-white/5', 'text-content-secondary');
+
+      // Update Panels
+      panels.forEach((p) => {
+        p.classList.add('hidden');
+      });
+      const activePanel = document.getElementById(`device-panel-${targetDevice}`);
+      if (activePanel) {
+        activePanel.classList.remove('hidden');
+      }
+    });
+  });
+</script>

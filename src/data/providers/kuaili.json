@@ -1,0 +1,51 @@
+{
+  "slug": "kuaili",
+  "name": "快狸",
+  "tagline": "综合全能型 / 25元档 150GB / VLESS + IEPL 影音与 AI",
+  "summary": "2023 年开业，采用 VLESS 协议与 IEPL 专线，25 元档提供 150GB 月流量，流媒体及 AI 服务访问场景全面覆盖。",
+  "pricing": {
+    "startingPrice": 25,
+    "billingCycle": "月付",
+    "monthlyPrice": 25,
+    "traffic": "150GB / 月",
+    "currency": "CNY"
+  },
+  "protocols": [
+    "VLESS",
+    "IEPL 专线"
+  ],
+  "devices": [
+    "Windows",
+    "macOS",
+    "iOS",
+    "Android"
+  ],
+  "features": [
+    "全能型综合表现",
+    "25元 150GB充裕流量",
+    "VLESS高抗干扰",
+    "自研客户端免配置"
+  ],
+  "recommendFor": [
+    "视频影音与AI综合使用",
+    "多端设备协同",
+    "追求省心稳定"
+  ],
+  "aiSupport": "支持 (ChatGPT / Claude / Gemini)",
+  "streaming": "支持 (Netflix / Disney+ / YouTube 4K)",
+  "speedtestImage": "/images/speedtests/kuaili-speedtest.png",
+  "speedtestTestedAt": "2026-08-11T19:52:22+08:00",
+  "speedtestTool": "main 4.3.3 (696) / miaosu 4.7.0 (A11-32)",
+  "officialUrl": "https://guangs.kuailicloud.cc/#/register?code=AiqyM8oG",
+  "promoCode": "kkk2222",
+  "discount": "专属优惠码立减",
+  "estYear": 2023,
+  "paymentMethods": [
+    "支付宝",
+    "微信",
+    "USDT"
+  ],
+  "verificationStatus": "已核验 (2026-08-11实测)",
+  "lastVerified": "2026-08-11",
+  "notes": "2026年实测晚高峰表现稳定，自研客户端对小白用户较为友好。"
+}

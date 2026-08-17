@@ -1,0 +1,859 @@
+{
+  "/start/how-to-access-overseas-websites/": {
+    "primaryKeywords": [
+      "国外网站打不开怎么办",
+      "国内怎么访问国外网站",
+      "手机怎么浏览国外网站",
+      "电脑怎么浏览国外网站",
+      "国内访问海外网站的方法",
+      "看国外网站需要什么软件",
+      "海外网站加载慢怎么办",
+      "国外网站拒绝访问怎么办",
+      "怎么提高国外网站访问速度",
+      "Poe国内怎么用",
+      "Midjourney国内怎么用",
+      "Copilot国内怎么用",
+      "Hugging Face打不开",
+      "Twitch打不开怎么办",
+      "Vimeo视频打不开",
+      "国外视频平台怎么看",
+      "Reddit国内怎么用",
+      "Reddit打不开怎么办",
+      "TikTok国内怎么用",
+      "TikTok显示无网络",
+      "TikTok视频加载不了",
+      "Facebook国内怎么用",
+      "Facebook打不开怎么办",
+      "Discord国内怎么用",
+      "Discord连接失败",
+      "WhatsApp国内怎么使用",
+      "WhatsApp连接不上",
+      "LinkedIn打不开怎么办",
+      "Pinterest国内怎么用",
+      "Quora打不开怎么办",
+      "Stack Overflow打不开",
+      "PyPI下载失败",
+      "Vercel打不开怎么办",
+      "Netlify打不开",
+      "Cloudflare官网打不开",
+      "国外API连接失败",
+      "国外开发文档打不开",
+      "国外代码网站怎么访问",
+      "Figma打不开怎么办",
+      "海外设计素材网站打不开",
+      "国外字体网站打不开",
+      "怎么查国外资料",
+      "国外论文网站打不开",
+      "Coursera打不开怎么办",
+      "Udemy打不开怎么办",
+      "国外教学视频怎么看",
+      "跨境电商怎么访问国外网站",
+      "亚马逊卖家后台打不开",
+      "Amazon后台登录不了",
+      "Shopify后台打不开",
+      "Etsy国内怎么登录",
+      "eBay后台打不开",
+      "Meta广告后台打不开",
+      "TikTok Shop后台打不开",
+      "跨境电商网络怎么解决",
+      "跨境办公需要什么网络",
+      "国外客户网站打不开",
+      "海外邮箱登录不了怎么办",
+      "PayPal官网打不开",
+      "Stripe官网打不开",
+      "多账号运营网络怎么解决",
+      "海外游戏服务器连接不上",
+      "Steam社区打不开",
+      "PSN连接不上怎么办",
+      "Nintendo商店打不开",
+      "Epic商店打不开",
+      "战网国际服连接失败",
+      "拳头国际服登录不了",
+      "国外游戏官网打不开",
+      "海外游戏注册不了怎么办",
+      "玩外服需要什么加速工具",
+      "苹果手机怎么访问国外网站",
+      "iPhone国外网站打不开",
+      "安卓手机怎么访问国外网站",
+      "小米手机国外网站打不开",
+      "Windows怎么访问国外网站",
+      "Mac怎么访问国外网站",
+      "平板怎么访问国外网站",
+      "电视怎么访问国外视频",
+      "路由器怎么访问海外网站",
+      "换手机后国外网站打不开",
+      "WiFi访问不了国外网站",
+      "移动网络打不开海外网站",
+      "网页显示连接已重置怎么办",
+      "网络正常但国外网站打不开",
+      "Chrome打不开国外网站",
+      "Edge打不开国外网站",
+      "Safari打不开国外网站",
+      "国外网页图片显示不出来",
+      "海外应用登录失败",
+      "手机能上网但国外软件不能用",
+      "WiFi能用但海外网站打不开",
+      "海外网站访问不稳定怎么办",
+      "访问国外网站用什么工具",
+      "打开国外网站的软件",
+      "手机访问国外网站的软件",
+      "电脑访问国外网站的软件",
+      "科学上网是什么意思",
+      "科学上网怎么弄",
+      "免费VPN安全吗",
+      "代理服务器是什么意思",
+      "梯子是什么",
+      "机场订阅链接是什么",
+      "机场是 VPN 吗",
+      "代理软件是什么",
+      "好用的机场",
+      "新手机场",
+      "国内能用的机场",
+      "不跑路机场",
+      "免费机场",
+      "机场试用",
+      "低价机场",
+      "月付机场",
+      "按量付费机场",
+      "机场套餐",
+      "机场多少钱",
+      "机场优惠",
+      "机场退款",
+      "iOS 代理软件",
+      "电脑节点怎么用",
+      "订阅链接怎么导入",
+      "订阅怎么更新",
+      "机场节点怎么选",
+      "香港节点",
+      "日本节点",
+      "新加坡节点",
+      "美国节点",
+      "低延迟节点",
+      "高速节点",
+      "月流量是什么意思",
+      "带宽限制是什么意思",
+      "到期重置是什么意思",
+      "游戏低延迟节点",
+      "订阅链接打不开",
+      "能连接但上不了网",
+      "节点延迟很高",
+      "机场突然不能用",
+      "机场安全吗",
+      "机场会泄露隐私吗",
+      "机场会不会跑路",
+      "怎么判断机场靠谱",
+      "机场钓鱼网站",
+      "机场审计规则",
+      "无日志机场",
+      "机场测评",
+      "机场跑路",
+      "机场黑名单",
+      "机场速度测试"
+    ],
+    "secondaryKeywords": [
+      "海外网站无法访问怎么办",
+      "为什么国外网站打不开",
+      "国外网页一直转圈",
+      "国外网站显示网络错误",
+      "海外网站无法访问怎么办",
+      "国外网站打不开怎么办",
+      "怎么打开国外网页",
+      "外国网站怎么上",
+      "外网怎么打开",
+      "怎么浏览国外网站",
+      "怎么打开国外网页",
+      "国内怎么访问国外网站",
+      "为什么国外网站打不开",
+      "外国网站怎么上",
+      "外网怎么打开",
+      "怎么浏览国外网站",
+      "无；可从搜索联想和站内搜索补充",
+      "国外网站在国内能打开吗",
+      "访问海外网站用什么软件",
+      "访问海外网站用什么软件",
+      "看国外网站需要什么软件",
+      "国外网页一直转圈",
+      "国外网站显示网络错误",
+      "国外网站在国内能打开吗",
+      "国内访问海外网站的方法",
+      "国外插件市场打不开",
+      "国外插件市场打不开",
+      "国外字体网站打不开",
+      "怎么搜索国外文献",
+      "国外学术网站怎么访问",
+      "大学生怎么查英文资料",
+      "研究生怎么查国外论文",
+      "国外公开课怎么看",
+      "国外医学资料怎么查",
+      "海外教育网站怎么访问",
+      "怎么搜索国外文献",
+      "怎么查国外资料",
+      "海外课程网站打不开",
+      "国外电子书网站打不开",
+      "国外数据库访问不了怎么办",
+      "国外学术网站怎么访问",
+      "研究生怎么查国外论文",
+      "海外课程网站打不开",
+      "国外论文网站打不开",
+      "国外公开课怎么看",
+      "国外电子书网站打不开",
+      "国外数据库访问不了怎么办",
+      "英文资料搜索工具",
+      "留学生常用国外网站",
+      "国外医学资料怎么查",
+      "海外教育网站怎么访问",
+      "海外广告平台怎么访问",
+      "外贸人怎么访问国外网站",
+      "Facebook广告后台进不去",
+      "Facebook广告后台进不去",
+      "Meta广告后台打不开",
+      "海外广告平台怎么访问",
+      "跨境电商怎么访问国外网站",
+      "跨境直播网络怎么解决",
+      "外贸工作常用网络工具",
+      "海外社媒运营需要什么网络",
+      "国外支付网站打不开",
+      "国外支付网站打不开",
+      "国外客户网站打不开",
+      "海外社媒运营需要什么网络",
+      "跨境办公需要什么网络",
+      "跨境直播网络怎么解决",
+      "跨境电商网络怎么解决",
+      "外贸工作常用网络工具",
+      "外贸人怎么访问国外网站",
+      "游戏更新服务器连接失败",
+      "外服游戏怎么降低延迟",
+      "国际服游戏延迟高怎么办",
+      "国际服游戏网络不稳定",
+      "外服游戏一直掉线",
+      "Steam商店打不开",
+      "Steam商店打不开",
+      "Steam社区打不开",
+      "游戏更新服务器连接失败",
+      "海外游戏服务器连接不上",
+      "外服游戏一直掉线",
+      "游戏加速器能打开国外网站吗",
+      "游戏加速器能打开国外网站吗",
+      "玩外服需要什么加速工具",
+      "华为手机怎么访问国外网站",
+      "华为手机怎么访问国外网站",
+      "安卓手机怎么访问国外网站",
+      "全家设备怎么访问国外网站",
+      "全家设备怎么访问国外网站",
+      "路由器怎么访问海外网站",
+      "国外软件无法连接服务器",
+      "浏览器无法访问国外网站",
+      "同一个网站别人能打开我打不开",
+      "切换网络还是打不开国外网站",
+      "浏览器无法访问国外网站",
+      "网络正常但国外网站打不开",
+      "国外网站视频播放不了",
+      "国外网站视频播放不了",
+      "国外网页图片显示不出来",
+      "海外应用显示无网络",
+      "网站显示连接超时怎么办",
+      "网站拒绝连接怎么解决",
+      "国外网站DNS解析失败",
+      "同一个网站别人能打开我打不开",
+      "切换网络还是打不开国外网站",
+      "国外网站加速器",
+      "访问国外网站的网络方案",
+      "海外网站加速工具",
+      "国外AI工具访问方法",
+      "海外网站加速工具",
+      "打开国外网站的软件",
+      "国外网站加速器",
+      "访问国外网站用什么工具",
+      "网络代理怎么使用",
+      "访问国外网站的网络方案",
+      "稳定机场",
+      "性价比机场",
+      "机场推荐",
+      "长期稳定机场",
+      "小众机场",
+      "小众机场",
+      "好用的机场",
+      "节点测速",
+      "节点测速",
+      "低延迟节点",
+      "机场能看到浏览记录吗",
+      "机场能看到浏览记录吗",
+      "机场会泄露隐私吗",
+      "机场评测",
+      "机场避坑",
+      "机场用户评价",
+      "机场评测",
+      "机场测评",
+      "机场避坑",
+      "机场用户评价"
+    ],
+    "totalMapped": 197,
+    "stage": "TOFU（问题发现）",
+    "topic": "泛访问需求"
+  },
+  "/fix/timeout/": {
+    "primaryKeywords": [
+      "国外网站连接超时",
+      "网站显示连接超时怎么办",
+      "节点全部超时"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "网站拒绝连接怎么解决",
+      "国外网站DNS解析失败",
+      "海外应用显示无网络"
+    ],
+    "totalMapped": 3,
+    "stage": "TOFU（问题发现）",
+    "topic": "泛访问需求"
+  },
+  "/use/chatgpt/": {
+    "primaryKeywords": [
+      "国内怎么用ChatGPT",
+      "ChatGPT打不开怎么办",
+      "ChatGPT登录不了怎么办",
+      "ChatGPT注册不了怎么办",
+      "ChatGPT连接失败",
+      "ChatGPT提示地区不可用",
+      "ChatGPT无法加载对话",
+      "OpenAI官网打不开",
+      "OpenAI登录失败怎么办",
+      "使用ChatGPT需要什么网络",
+      "ChatGPT 可用节点"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "ChatGPT官网进不去",
+      "ChatGPT一直转圈",
+      "ChatGPT网络错误怎么办",
+      "ChatGPT官网进不去",
+      "ChatGPT打不开怎么办",
+      "ChatGPT一直转圈",
+      "ChatGPT网络错误怎么办"
+    ],
+    "totalMapped": 14,
+    "stage": "TOFU（问题发现）",
+    "topic": "ChatGPT 与海外 AI"
+  },
+  "/use/claude/": {
+    "primaryKeywords": [
+      "国内怎么用Claude",
+      "Claude官网打不开",
+      "Claude登录不了",
+      "Claude 可用节点"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 4,
+    "stage": "TOFU（问题发现）",
+    "topic": "ChatGPT 与海外 AI"
+  },
+  "/use/gemini/": {
+    "primaryKeywords": [
+      "国内怎么用Gemini",
+      "Gemini打不开怎么办"
+    ],
+    "secondaryKeywords": [
+      "Google AI国内怎么用",
+      "无；可从搜索联想和站内搜索补充",
+      "Google AI国内怎么用",
+      "国内怎么用Gemini"
+    ],
+    "totalMapped": 3,
+    "stage": "TOFU（问题发现）",
+    "topic": "ChatGPT 与海外 AI"
+  },
+  "/use/twitter/": {
+    "primaryKeywords": [
+      "Perplexity国内怎么用",
+      "Max国内怎么看",
+      "Instagram国内怎么用",
+      "Instagram打不开怎么办",
+      "Instagram注册不了",
+      "Instagram图片加载不出来",
+      "Twitter国内怎么用",
+      "X官网打不开怎么办",
+      "Xbox服务器连接不上",
+      "sing-box 怎么用"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "Twitter一直加载",
+      "Twitter一直加载",
+      "X官网打不开怎么办"
+    ],
+    "totalMapped": 11,
+    "stage": "TOFU（问题发现）",
+    "topic": "ChatGPT 与海外 AI"
+  },
+  "/choose/ai/": {
+    "primaryKeywords": [
+      "国外AI工具怎么使用",
+      "海外AI网站访问不了怎么办"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "国外AI工具访问方法",
+      "打开国外网站的软件",
+      "海外网站加速工具"
+    ],
+    "totalMapped": 3,
+    "stage": "TOFU（问题发现）",
+    "topic": "ChatGPT 与海外 AI"
+  },
+  "/use/google/": {
+    "primaryKeywords": [
+      "国内怎么用Google",
+      "Google打不开怎么办",
+      "Google连接超时怎么办",
+      "Google账号登录不了",
+      "Gmail打不开怎么办",
+      "Gmail国内怎么使用",
+      "Google Drive打不开",
+      "Google文档打不开",
+      "Google Maps国内怎么用",
+      "Google Scholar打不开",
+      "谷歌学术怎么访问",
+      "Google Colab打不开",
+      "Google Play打不开怎么办",
+      "Chrome无法访问Google",
+      "手机怎么使用Google搜索",
+      "Google Colab连接不上",
+      "谷歌学术怎么用",
+      "Google Ads打不开",
+      "电脑Google打不开怎么办",
+      "访问Google用什么软件",
+      "Google 访问节点"
+    ],
+    "secondaryKeywords": [
+      "Google搜索怎么打开",
+      "Google官网进不去",
+      "Google搜索一直转圈",
+      "Google搜索怎么打开",
+      "国内怎么用Google",
+      "Google官网进不去",
+      "Google打不开怎么办",
+      "Google搜索一直转圈",
+      "谷歌服务连接失败怎么办",
+      "无；可从搜索联想和站内搜索补充",
+      "谷歌服务连接失败怎么办",
+      "Google连接超时怎么办",
+      "Google Scholar怎么打开",
+      "Google Scholar怎么打开",
+      "谷歌学术怎么用"
+    ],
+    "totalMapped": 26,
+    "stage": "TOFU（问题发现）",
+    "topic": "Google 生态"
+  },
+  "/clients/windows/": {
+    "primaryKeywords": [
+      "电脑怎么使用Google搜索",
+      "电脑怎么看YouTube",
+      "手机和电脑怎么同时使用"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 3,
+    "stage": "TOFU（问题发现）",
+    "topic": "Google 生态"
+  },
+  "/use/youtube/": {
+    "primaryKeywords": [
+      "国内怎么看YouTube",
+      "YouTube打不开怎么办",
+      "YouTube视频加载不了",
+      "YouTube播放卡顿怎么办",
+      "YouTube评论加载不出来",
+      "YouTube登录不了怎么办",
+      "手机怎么看YouTube",
+      "电视怎么看YouTube",
+      "YouTube学习视频怎么看",
+      "iPad怎么打开YouTube",
+      "看YouTube用什么工具",
+      "看 YouTube 用什么节点"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "YouTube官网进不去",
+      "YouTube一直转圈",
+      "YouTube官网进不去",
+      "YouTube打不开怎么办",
+      "YouTube一直转圈"
+    ],
+    "totalMapped": 14,
+    "stage": "TOFU（问题发现）",
+    "topic": "YouTube 与流媒体"
+  },
+  "/choose/streaming/": {
+    "primaryKeywords": [
+      "国内怎么看Netflix",
+      "Netflix打不开怎么办",
+      "Netflix提示地区不可用",
+      "Disney Plus国内怎么看",
+      "Disney Plus打不开",
+      "Spotify国内怎么用",
+      "Spotify登录不了",
+      "Spotify地区限制怎么办",
+      "海外流媒体怎么访问",
+      "流媒体节点",
+      "Netflix 解锁节点",
+      "流媒体解锁机场"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "Netflix一直加载",
+      "Netflix一直加载",
+      "Netflix打不开怎么办"
+    ],
+    "totalMapped": 13,
+    "stage": "TOFU（问题发现）",
+    "topic": "YouTube 与流媒体"
+  },
+  "/fix/cannot-connect/": {
+    "primaryKeywords": [
+      "TikTok无法连接网络",
+      "机场连不上"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "网站拒绝连接怎么解决",
+      "网站显示连接超时怎么办",
+      "国外网站DNS解析失败",
+      "海外应用显示无网络",
+      "国外软件无法连接服务器",
+      "网页显示连接已重置怎么办"
+    ],
+    "totalMapped": 4,
+    "stage": "TOFU（问题发现）",
+    "topic": "海外社交平台"
+  },
+  "/use/telegram/": {
+    "primaryKeywords": [
+      "Telegram国内怎么用",
+      "Telegram连接不上",
+      "Telegram一直转圈"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 3,
+    "stage": "TOFU（问题发现）",
+    "topic": "海外社交平台"
+  },
+  "/use/github/": {
+    "primaryKeywords": [
+      "GitHub打不开怎么办",
+      "GitHub访问速度慢",
+      "GitHub下载速度慢",
+      "GitHub图片加载不出来",
+      "GitHub连接超时",
+      "Docker Hub拉取失败",
+      "npm下载速度慢",
+      "npm连接超时"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "Docker镜像下载失败",
+      "Docker镜像下载失败",
+      "Docker Hub拉取失败"
+    ],
+    "totalMapped": 9,
+    "stage": "TOFU（问题发现）",
+    "topic": "程序员与设计师需求"
+  },
+  "/fix/slow-speed/": {
+    "primaryKeywords": [
+      "Hugging Face下载慢",
+      "海外服务器连接慢",
+      "Figma加载慢",
+      "Shopify访问速度慢",
+      "海外独立站访问慢",
+      "国际服游戏延迟高怎么办",
+      "Steam下载慢怎么办",
+      "海外游戏下载速度慢",
+      "海外网站加载特别慢"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "外服游戏怎么降低延迟",
+      "国际服游戏网络不稳定",
+      "外服游戏一直掉线"
+    ],
+    "totalMapped": 9,
+    "stage": "TOFU（问题发现）",
+    "topic": "程序员与设计师需求"
+  },
+  "/choose/budget/": {
+    "primaryKeywords": [
+      "留学生常用国外网站",
+      "便宜机场"
+    ],
+    "secondaryKeywords": [
+      "大学生怎么查英文资料",
+      "怎么查国外资料",
+      "怎么搜索国外文献",
+      "国外学术网站怎么访问",
+      "研究生怎么查国外论文",
+      "国外公开课怎么看",
+      "国外医学资料怎么查",
+      "海外教育网站怎么访问",
+      "英文资料搜索工具",
+      "无；可从搜索联想和站内搜索补充",
+      "性价比机场",
+      "好用的机场",
+      "稳定机场",
+      "机场推荐",
+      "长期稳定机场",
+      "小众机场"
+    ],
+    "totalMapped": 4,
+    "stage": "TOFU（问题发现）",
+    "topic": "学习、留学与论文资料"
+  },
+  "/choose/stable/": {
+    "primaryKeywords": [
+      "VPN哪个稳定",
+      "专线节点",
+      "专线是什么意思",
+      "机场稳定性测试"
+    ],
+    "secondaryKeywords": [
+      "国际服游戏网络不稳定",
+      "国际服游戏延迟高怎么办",
+      "外服游戏怎么降低延迟",
+      "外服游戏一直掉线",
+      "无；可从搜索联想和站内搜索补充",
+      "稳定机场",
+      "好用的机场",
+      "性价比机场",
+      "机场推荐",
+      "长期稳定机场",
+      "小众机场",
+      "长期稳定机场"
+    ],
+    "totalMapped": 7,
+    "stage": "TOFU（问题发现）",
+    "topic": "游戏与国际服"
+  },
+  "/clients/iphone/": {
+    "primaryKeywords": [
+      "iPhone怎么打开Google",
+      "Shadowrocket 怎么用"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "小火箭怎么添加订阅",
+      "小火箭怎么添加订阅",
+      "Shadowrocket 怎么用"
+    ],
+    "totalMapped": 3,
+    "stage": "TOFU（问题发现）",
+    "topic": "手机、电脑与家庭设备"
+  },
+  "/clients/android/": {
+    "primaryKeywords": [
+      "安卓Google打不开怎么办",
+      "安卓代理客户端"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 2,
+    "stage": "TOFU（问题发现）",
+    "topic": "手机、电脑与家庭设备"
+  },
+  "/clients/macos/": {
+    "primaryKeywords": [
+      "Mac国外网站连接失败"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 1,
+    "stage": "TOFU（问题发现）",
+    "topic": "手机、电脑与家庭设备"
+  },
+  "/fix/dns/": {
+    "primaryKeywords": [],
+    "secondaryKeywords": [
+      "国外网站DNS解析失败",
+      "网站显示连接超时怎么办",
+      "网站拒绝连接怎么解决",
+      "海外应用显示无网络"
+    ],
+    "totalMapped": 1,
+    "stage": "TOFU（问题发现）",
+    "topic": "网络故障型搜索"
+  },
+  "/recommend/": {
+    "primaryKeywords": [
+      "外网加速器哪个好",
+      "机场和自建节点哪个好",
+      "机场推荐靠谱吗"
+    ],
+    "secondaryKeywords": [
+      "海外网络加速器推荐",
+      "科学上网工具哪个好",
+      "海外网络解决方案哪个好",
+      "海外网络加速器推荐",
+      "外网加速器哪个好",
+      "科学上网工具哪个好",
+      "海外网络解决方案哪个好",
+      "无；可从搜索联想和站内搜索补充",
+      "机场推荐",
+      "好用的机场",
+      "稳定机场",
+      "性价比机场",
+      "长期稳定机场",
+      "小众机场"
+    ],
+    "totalMapped": 7,
+    "stage": "TOFU（问题发现）",
+    "topic": "开始寻找解决方案"
+  },
+  "/start/what-is-vpn/": {
+    "primaryKeywords": [
+      "VPN是什么"
+    ],
+    "secondaryKeywords": [
+      "VPN有什么用",
+      "VPN有什么用",
+      "VPN是什么"
+    ],
+    "totalMapped": 2,
+    "stage": "MOFU（方案认知）",
+    "topic": "开始寻找解决方案"
+  },
+  "/start/proxy-vs-vpn/": {
+    "primaryKeywords": [
+      "VPN和加速器的区别"
+    ],
+    "secondaryKeywords": [
+      "代理和VPN有什么区别",
+      "代理和VPN有什么区别",
+      "VPN和加速器的区别"
+    ],
+    "totalMapped": 2,
+    "stage": "MOFU（方案认知）",
+    "topic": "开始寻找解决方案"
+  },
+  "/start/what-is-proxy/": {
+    "primaryKeywords": [],
+    "secondaryKeywords": [
+      "网络代理怎么使用",
+      "科学上网怎么弄"
+    ],
+    "totalMapped": 1,
+    "stage": "TOFU（问题发现）",
+    "topic": "开始寻找解决方案"
+  },
+  "/airport/what-is-airport/": {
+    "primaryKeywords": [
+      "机场是什么"
+    ],
+    "secondaryKeywords": [
+      "网络机场是什么",
+      "网络机场是什么",
+      "机场是什么"
+    ],
+    "totalMapped": 2,
+    "stage": "MOFU（方案认知）",
+    "topic": "了解概念"
+  },
+  "/airport/what-is-node/": {
+    "primaryKeywords": [
+      "节点是什么",
+      "机场倍率是什么意思"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充",
+      "流量倍率是什么意思",
+      "流量倍率是什么意思",
+      "机场倍率是什么意思"
+    ],
+    "totalMapped": 3,
+    "stage": "MOFU（方案认知）",
+    "topic": "了解概念"
+  },
+  "/airport/what-is-subscription/": {
+    "primaryKeywords": [
+      "机场订阅是什么"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 1,
+    "stage": "MOFU（方案认知）",
+    "topic": "了解概念"
+  },
+  "/airport/how-to-use/": {
+    "primaryKeywords": [
+      "机场怎么用",
+      "苹果手机机场怎么用",
+      "安卓机场怎么用",
+      "Windows 机场怎么用",
+      "Mac 机场怎么用"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 5,
+    "stage": "MOFU（方案认知）",
+    "topic": "了解概念"
+  },
+  "/compare/": {
+    "primaryKeywords": [
+      "机场和 VPN 的区别",
+      "机场和梯子的区别",
+      "机场和加速器的区别",
+      "直连和中转区别"
+    ],
+    "secondaryKeywords": [
+      "VPN 和代理的区别",
+      "无；可从搜索联想和站内搜索补充",
+      "VPN 和代理的区别",
+      "机场和 VPN 的区别"
+    ],
+    "totalMapped": 5,
+    "stage": "MOFU（方案认知）",
+    "topic": "区分产品"
+  },
+  "/airport/how-to-buy/": {
+    "primaryKeywords": [
+      "机场怎么买"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 1,
+    "stage": "BOFU（购买决策）",
+    "topic": "试用与购买"
+  },
+  "/clients/clash-verge/": {
+    "primaryKeywords": [
+      "Clash 怎么用",
+      "Clash 订阅怎么导入"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 2,
+    "stage": "MOFU（方案认知）",
+    "topic": "软件与导入"
+  },
+  "/fix/subscription-error/": {
+    "primaryKeywords": [
+      "订阅更新失败",
+      "导入订阅失败"
+    ],
+    "secondaryKeywords": [
+      "无；可从搜索联想和站内搜索补充"
+    ],
+    "totalMapped": 2,
+    "stage": "MOFU（方案认知）",
+    "topic": "故障排查"
+  }
+}

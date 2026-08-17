@@ -1,0 +1,53 @@
+{
+  "slug": "sujie",
+  "name": "速界",
+  "tagline": "AI 场景专精 / 25元档 150GB / ChatGPT & Claude 深度优化",
+  "summary": "2024 年开业，以 VLESS 和 IEPL 专线为核心，重点强化 ChatGPT、Claude、Gemini 等海外 AI 工具的纯净访问与抗封表现。",
+  "pricing": {
+    "startingPrice": 25,
+    "billingCycle": "月付",
+    "monthlyPrice": 25,
+    "traffic": "150GB / 月",
+    "currency": "CNY"
+  },
+  "protocols": [
+    "VLESS",
+    "IEPL 专线",
+    "Shadowsocks"
+  ],
+  "devices": [
+    "Windows",
+    "macOS",
+    "iOS",
+    "Android",
+    "Linux"
+  ],
+  "features": [
+    "AI专属纯净节点优化",
+    "ChatGPT/Claude高通过率",
+    "25元 150GB大容量",
+    "自研+第三方客户端"
+  ],
+  "recommendFor": [
+    "AI创作者与工程师",
+    "Claude重度使用者",
+    "需要稳定API调用的开发者"
+  ],
+  "aiSupport": "强力支持 (ChatGPT / Claude 原生免降级 / Gemini)",
+  "streaming": "支持 (YouTube 4K / Netflix)",
+  "speedtestImage": "/images/speedtests/sujie-speedtest.png",
+  "speedtestTestedAt": "2026-08-11T15:39:36+08:00",
+  "speedtestTool": "MAI-TEST-BOT 2.0.0-dev",
+  "officialUrl": "https://guangs.speedworldaff.cc/#/register?code=xgXzEfZB",
+  "promoCode": "sss1111",
+  "discount": "专属优惠码立减",
+  "estYear": 2024,
+  "paymentMethods": [
+    "支付宝",
+    "微信",
+    "USDT"
+  ],
+  "verificationStatus": "已核验 (2026-08-11实测)",
+  "lastVerified": "2026-08-11",
+  "notes": "在 AI 节点调度和 IP 纯净度上有针对性优化，适合 AI 依赖度高的用户。"
+}

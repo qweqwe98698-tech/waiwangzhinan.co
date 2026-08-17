@@ -1,0 +1,42 @@
+---
+export interface Props {
+  answer: string;
+  sourceText?: string;
+  readTimeSeconds?: number;
+}
+
+const { answer, sourceText, readTimeSeconds = 30 } = Astro.props;
+---
+
+<div class="relative my-6 rounded-xl bg-gradient-to-r from-brand-mint/[0.08] to-brand-blue/[0.04] border border-brand-mint/30 p-5 sm:p-6 shadow-glow-mint/5">
+  <div class="flex items-center justify-between gap-3 mb-2.5">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded-md bg-brand-mint/20 flex items-center justify-center text-brand-mint">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+      </div>
+      <span class="font-bold text-xs uppercase tracking-wider text-brand-mint">
+        30 秒极速解答 · Quick Answer
+      </span>
+    </div>
+    <span class="text-[11px] font-mono text-content-muted">
+      预计用时 ~{readTimeSeconds}s
+    </span>
+  </div>
+
+  <p class="text-sm sm:text-base text-content-primary leading-relaxed font-medium">
+    {answer}
+  </p>
+
+  {sourceText && (
+    <div class="mt-3 pt-2.5 border-t border-brand-mint/15 text-[11px] text-content-muted flex items-center gap-1.5">
+      <svg class="w-3 h-3 text-brand-mint/80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="16" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+      </svg>
+      <span>{sourceText}</span>
+    </div>
+  )}
+</div>

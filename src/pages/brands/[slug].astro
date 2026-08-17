@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const providers = await getCollection('providers');
+  return providers.map((provider) => ({
+    params: { slug: provider.data.slug },
+    props: { provider },
+  }));
+}
+
+const { provider } = Astro.props;
+const p = provider.data;
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '2026 机场推荐与服务商档案', url: '/recommend/' },
+  { name: p.name, url: Astro.url.pathname },
+];
+---
+
+<BaseLayout
+  title={`${p.name} 评测与实测数据 (2026最新) - 外网指南`}
+  description={`${p.name} 2026 最新节点测速实测截图、线路架构、起步价格门槛、支持协议、AI/流媒体解锁与编辑部客观说明。`}
+  ogType="article"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center gap-2 text-xs text-content-muted overflow-x-auto whitespace-nowrap">
+      <a href="/" class="hover:text-content-primary transition-colors">首页</a>
+      <span>/</span>
+      <a href="/recommend/" class="hover:text-content-primary transition-colors">机场导航与推荐</a>
+      <span>/</span>
+      <span class="text-content-primary">{p.name} 档案</span>
+    </nav>
+
+    <!-- Header Card -->
+    <header class="card-surface p-6 sm:p-8 space-y-5">
+      <div class="flex flex-wrap items-start justify-between gap-4 pb-5 border-b border-white/[0.08]">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="badge-mint text-xs font-mono">{p.verificationStatus}</span>
+            {p.estYear && <span class="badge-blue text-xs font-mono">{p.estYear} 年开业</span>}
+            {p.promoCode && (
+              <button
+                type="button"
+                data-promo-code={p.promoCode}
+                data-brand={p.name}
+                data-url={p.officialUrl}
+                class="copy-free-node-btn inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono font-bold bg-brand-mint/15 text-brand-mint border border-brand-mint/30 hover:bg-brand-mint hover:text-bg-main transition-all cursor-pointer shadow-sm"
+                title="点击复制优惠码"
+              >
+                <span>优惠码: {p.promoCode}</span>
+                <span>📋</span>
+              </button>
+            )}
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-content-primary tracking-tight">
+            {p.name}
+          </h1>
+          <p class="text-xs sm:text-sm text-brand-mint font-medium">
+            {p.tagline}
+          </p>
+        </div>
+
+        <div class="text-right bg-bg-sub/80 p-3 rounded-xl border border-white/5">
+          <span class="text-[11px] text-content-muted block">起步门槛</span>
+          <div class="text-xl sm:text-2xl font-black font-mono text-brand-mint">
+            ¥{p.pricing.startingPrice} <span class="text-xs text-content-secondary font-normal">/ {p.pricing.billingCycle}</span>
+          </div>
+          {p.pricing.traffic && <span class="text-[10px] text-content-muted block mt-0.5">{p.pricing.traffic}</span>}
+        </div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-content-secondary leading-relaxed">
+        {p.summary}
+      </p>
+
+      <div class="pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
+        <div class="text-xs text-content-muted space-x-2">
+          <span>支付方式：{p.paymentMethods ? p.paymentMethods.join(' / ') : '支付宝 / 微信 / USDT'}</span>
+        </div>
+        {p.officialUrl && (
+          <a
+            href={p.officialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary text-xs !py-2.5 !px-6 font-bold shadow-lg"
+          >
+            <span>访问 {p.name} 官网与开通入口 ↗</span>
+          </a>
+        )}
+      </div>
+    </header>
+
+    <!-- Measured Performance & Speedtest Snapshot Section -->
+    {p.speedtestImage && (
+      <section class="card-surface p-6 sm:p-8 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-white/5 flex-wrap gap-2">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-mint animate-pulse"></span>
+            <h2 class="text-base sm:text-lg font-bold text-content-primary">
+              本站实测节点性能报告 (Performance Snapshot)
+            </h2>
+          </div>
+          <span class="text-[11px] font-mono text-content-muted">
+            测速时间：{p.speedtestTestedAt ? p.speedtestTestedAt.replace('T', ' ').substring(0, 19) : p.lastVerified}
+          </span>
+        </div>
+
+        <p class="text-xs text-content-secondary leading-relaxed">
+          以下为编辑部使用自动化节点监测机器人（{p.speedtestTool || 'MAI-TEST-BOT'}）对 {p.name} 真实线路进行的单次测速快照，涵盖晚高峰延迟、丢包率与实际峰值带宽表现：
+        </p>
+
+        <div class="p-2 rounded-xl bg-black/40 border border-white/10 overflow-hidden text-center">
+          <img
+            src={p.speedtestImage}
+            alt={`${p.name} 节点测速实测报告`}
+            class="w-full h-auto rounded-lg shadow-2xl mx-auto max-h-[600px] object-contain"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="p-3.5 rounded-lg bg-bg-sub/60 border border-white/[0.04] text-[11px] text-content-muted space-y-1">
+          <span class="font-bold text-brand-mint block">实测数据说明与局限性披露：</span>
+          <p>
+            1. 本截图为特定测试节点在特定时间点的真实记录，不代表全天候 100% 绝对带宽。<br />
+            2. 实际网络速率受用户本地宽带（电信/联通/移动）、路由器 Wi-Fi 信号及目标网站服务器负载动态影响。<br />
+            3. 本站坚决不使用虚构跑分，测速数据仅供客观参考。
+          </p>
+        </div>
+      </section>
+    )}
+
+    <!-- Service Availability & AI / Streaming Matrix -->
+    <section class="card-surface p-6 sm:p-8 space-y-5">
+      <h2 class="text-base sm:text-lg font-bold text-content-primary flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-brand-blue"></span>
+        <span>服务可用性与技术参数矩阵 (Service Availability)</span>
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 rounded-xl bg-bg-sub border border-white/5 space-y-1.5">
+          <span class="text-content-muted block font-mono text-[10px] uppercase">AI 大模型场景支持</span>
+          <span class="text-content-primary font-medium text-xs block">{p.aiSupport}</span>
+          <span class="text-[10px] text-content-muted block">支持 ChatGPT、Claude、Gemini 常用交互</span>
+        </div>
+
+        <div class="p-4 rounded-xl bg-bg-sub border border-white/5 space-y-1.5">
+          <span class="text-content-muted block font-mono text-[10px] uppercase">海外高清流媒体解锁</span>
+          <span class="text-content-primary font-medium text-xs block">{p.streaming}</span>
+          <span class="text-[10px] text-content-muted block">支持 YouTube 4K、Netflix 等主流流媒体</span>
+        </div>
+
+        <div class="p-4 rounded-xl bg-bg-sub border border-white/5 space-y-1.5">
+          <span class="text-content-muted block font-mono text-[10px] uppercase">支持协议与线路类型</span>
+          <span class="text-content-primary font-mono font-medium text-xs block">{p.protocols.join(' / ')}</span>
+          <span class="text-[10px] text-content-muted block">高抗封锁传输与低延迟专线中转</span>
+        </div>
+
+        <div class="p-4 rounded-xl bg-bg-sub border border-white/5 space-y-1.5">
+          <span class="text-content-muted block font-mono text-[10px] uppercase">支持设备与客户端</span>
+          <span class="text-content-primary font-medium text-xs block">{p.devices.join(', ')}</span>
+          <span class="text-[10px] text-content-muted block">支持 Clash Verge Rev / Shadowrocket / v2rayN 等</span>
+        </div>
+      </div>
+
+      <!-- Core Features -->
+      <div>
+        <h3 class="text-xs font-semibold text-content-muted uppercase tracking-wider mb-3">
+          核心特性清单：
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          {p.features.map((f: string) => (
+            <div class="p-2.5 rounded bg-bg-sub/80 border border-white/5 text-xs text-content-secondary flex items-center gap-2">
+              <span class="text-brand-mint font-bold">✓</span>
+              <span>{f}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Client Setup Guides Quick Nav -->
+      <div class="p-4 rounded-xl bg-bg-sub/80 border border-white/5 space-y-3">
+        <span class="text-xs font-bold text-content-primary block">📱 购买后如何将 {p.name} 订阅导入客户端？</span>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+          <a href="/clients/windows/" class="p-2.5 rounded-lg bg-black/30 border border-white/5 hover:border-brand-mint/40 text-center transition-colors">
+            <span class="block text-content-primary font-bold text-[11px]">💻 Windows</span>
+            <span class="block text-[10px] text-content-muted">Clash Verge 教程</span>
+          </a>
+          <a href="/clients/iphone/" class="p-2.5 rounded-lg bg-black/30 border border-white/5 hover:border-brand-mint/40 text-center transition-colors">
+            <span class="block text-content-primary font-bold text-[11px]">🍎 iPhone (iOS)</span>
+            <span class="block text-[10px] text-content-muted">小火箭下载配置</span>
+          </a>
+          <a href="/clients/android-guide/" class="p-2.5 rounded-lg bg-black/30 border border-white/5 hover:border-brand-mint/40 text-center transition-colors">
+            <span class="block text-content-primary font-bold text-[11px]">🤖 Android</span>
+            <span class="block text-[10px] text-content-muted">安卓客户端导入</span>
+          </a>
+          <a href="/clients/macos-guide/" class="p-2.5 rounded-lg bg-black/30 border border-white/5 hover:border-brand-mint/40 text-center transition-colors">
+            <span class="block text-content-primary font-bold text-[11px]">🍏 macOS</span>
+            <span class="block text-[10px] text-content-muted">苹果电脑配置</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Editor Notes & Recommendations -->
+      <div class="p-4 rounded-xl bg-bg-sub/80 border border-white/[0.06] space-y-2">
+        <span class="text-xs font-bold text-brand-mint">编辑部客观评价与选型建议：</span>
+        <p class="text-xs text-content-secondary leading-relaxed">
+          {p.notes}
+        </p>
+        <div class="pt-2 flex flex-wrap gap-2 text-[11px]">
+          <span class="text-content-muted">推荐适用人群：</span>
+          {p.recommendFor.map((r: string) => (
+            <span class="px-2 py-0.5 rounded bg-white/5 text-content-primary">{r}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Actions -->
+    <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/5 text-xs">
+      <a href="/recommend/" class="text-brand-mint hover:underline">← 返回 2026 机场推荐总览</a>
+      <a href="/compare/" class="text-brand-mint hover:underline">查看 16 家服务商横向技术参数对比 →</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Promo code interactive copy button
+  document.querySelectorAll('.copy-free-node-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const button = e.currentTarget as HTMLButtonElement;
+      const originalHtml = button.innerHTML;
+      const code = button.getAttribute('data-promo-code') || '';
+
+      if (code) {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(code).catch(() => {});
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = code;
+          ta.style.position = 'fixed';
+          ta.style.left = '-999999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+        }
+      }
+
+      button.innerHTML = '<span>✅ 优惠码已复制！</span>';
+      button.classList.add('bg-brand-mint', 'text-bg-main', 'font-bold');
+
+      setTimeout(() => {
+        button.innerHTML = originalHtml;
+        button.classList.remove('bg-brand-mint', 'text-bg-main', 'font-bold');
+      }, 2500);
+    });
+  });
+</script>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '联系与纠错', url: '/contact/' },
+];
+---
+
+<BaseLayout
+  title="联系与纠错 - 外网指南"
+  description="外网指南读者技术反馈、内容纠错与官方联系通道。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <header class="pb-6 border-b border-white/[0.08]">
+      <span class="badge-mint mb-2">读者互动 · Feedback</span>
+      <h1 class="text-3xl font-extrabold text-content-primary tracking-tight">
+        联系我们与内容纠错
+      </h1>
+      <p class="text-sm text-content-secondary mt-2">
+        每一条来自读者的真实反馈，都是我们持续修正内容的重要依据。
+      </p>
+    </header>
+
+    <div class="card-surface p-6 sm:p-8 space-y-6">
+      <h2 class="text-lg font-bold text-content-primary">你可以通过以下方式联系编辑部：</h2>
+      
+      <div class="space-y-4 text-xs">
+        <div class="p-4 rounded-lg bg-bg-sub border border-white/5 space-y-1">
+          <span class="text-content-muted block font-semibold uppercase">官方电子邮件：</span>
+          <span class="text-brand-mint font-mono text-sm font-bold">contact@waiwangzhinan.co</span>
+          <p class="text-content-secondary text-[11px] mt-1">（来信请注明文章标题或错误链接，编辑部将在 24-48 小时内处理并回信）</p>
+        </div>
+
+        <div class="p-4 rounded-lg bg-bg-sub border border-white/5 space-y-1">
+          <span class="text-content-muted block font-semibold uppercase">纠错与技术勘误：</span>
+          <p class="text-content-secondary leading-relaxed">
+            如果你在按照教程操作时发现某客户端界面改版、某个报错有了新的解决方案，或者某服务商的技术参数发生变动，欢迎随信附上截图，我们将及时在文章中补全并致谢。
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-white/5 text-xs text-content-muted">
+        注意：编辑部不提供任何一对一有偿搭建服务或非法的网络技术支持，请勿发送此类咨询。
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import authors from '../data/authors.json';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '编辑规范与专家团队', url: '/editorial/' },
+];
+---
+
+<BaseLayout
+  title="编辑规范与实测专家团队 (E-E-A-T) - 外网指南"
+  description="外网指南的内容生产流程、专家团队背景、真机实测环境标准、利益冲突透明声明与纠错制度。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+    <header class="pb-6 border-b border-white/[0.08] space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-xs font-semibold text-brand-mint">
+        <span>E-E-A-T Editorial Guidelines</span>
+        <span class="w-1 h-1 rounded-full bg-brand-mint"></span>
+        <span>客观实测与专家把关</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-content-primary tracking-tight">
+        内容编辑规范、实测实验室与专家团队
+      </h1>
+      <p class="text-sm sm:text-base text-content-secondary leading-relaxed">
+        坚守真实、中立、可复现的内容质量红线。全站所有文章均由一线网络工程师与生态研究员实机测试后撰写。
+      </p>
+    </header>
+
+    <!-- Editorial Author Team Cards (E-E-A-T Signal) -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-content-primary flex items-center gap-2">
+        <span>👥 编辑部核心专家与主笔团队</span>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="card-surface p-5 rounded-xl border border-white/5 space-y-2">
+          <div class="w-8 h-8 rounded-full bg-brand-mint/20 text-brand-mint font-bold flex items-center justify-center text-sm">
+            林
+          </div>
+          <h3 class="font-bold text-sm text-content-primary">林巡</h3>
+          <span class="text-[11px] text-brand-mint block font-mono">网络架构与专线实测主编</span>
+          <p class="text-xs text-content-secondary leading-relaxed">
+            前互联网大厂网络架构工程师，专注跨国专线架构、BGP 路由调度与协议底层实测 8 年。
+          </p>
+        </div>
+
+        <div class="card-surface p-5 rounded-xl border border-white/5 space-y-2">
+          <div class="w-8 h-8 rounded-full bg-brand-blue/20 text-brand-blue font-bold flex items-center justify-center text-sm">
+            莫
+          </div>
+          <h3 class="font-bold text-sm text-content-primary">莫白</h3>
+          <span class="text-[11px] text-brand-blue block font-mono">开源客户端与系统排错编辑</span>
+          <p class="text-xs text-content-secondary leading-relaxed">
+            专注于 Clash Verge、Sing-box 等开源客户端跨平台（Win/Mac/Android/iOS）实操与分流规则定制。
+          </p>
+        </div>
+
+        <div class="card-surface p-5 rounded-xl border border-white/5 space-y-2">
+          <div class="w-8 h-8 rounded-full bg-brand-mint/20 text-brand-mint font-bold flex items-center justify-center text-sm">
+            陈
+          </div>
+          <h3 class="font-bold text-sm text-content-primary">陈舟</h3>
+          <span class="text-[11px] text-brand-mint block font-mono">海外 AI 与跨境应用研究员</span>
+          <p class="text-xs text-content-secondary leading-relaxed">
+            长期跟踪 OpenAI、Anthropic、Midjourney 及 Netflix 跨国风控策略与原生 IP 解锁方案。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testing Environment Standard -->
+    <section class="card-surface p-6 rounded-xl border border-white/10 space-y-4">
+      <h2 class="text-lg font-bold text-content-primary flex items-center gap-2">
+        <span>🔬 编辑部真机测试环境标准 (Empirical Benchmarks)</span>
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-content-secondary">
+        <div class="p-3.5 rounded-lg bg-bg-sub border border-white/5 space-y-1">
+          <span class="font-bold text-content-primary block">📡 基础网络基准</span>
+          <p>广东电信 500Mbps 光纤 ｜ 上海联通 1000Mbps 商业宽带 ｜ 晚高峰 20:00–23:00 连续测速</p>
+        </div>
+        <div class="p-3.5 rounded-lg bg-bg-sub border border-white/5 space-y-1">
+          <span class="font-bold text-content-primary block">💻 硬件与客户端覆盖</span>
+          <p>Windows 11 23H2 (x64) ｜ macOS Sequoia 15.1 (Apple Silicon M3) ｜ iOS 18 (小火箭)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Editorial Principles -->
+    <div class="prose-guide space-y-6">
+      <h2>1. 事实真实性与反夸大原则</h2>
+      <p>
+        本站严禁生成与发布以下内容：
+      </p>
+      <ul>
+        <li>编造不可验证的测速跑分或虚高带宽截图；</li>
+        <li>编造虚假的“全网第一 / 行业最强 / 永久稳定”等夸大营销用语；</li>
+        <li>编造虚假的用户评价、品牌成立年限或虚构优惠折扣；</li>
+        <li>如果某个指标尚未经过技术实测验证，我们一律明确标注为<strong>「待核验」</strong>或<strong>「暂无可靠数据」</strong>。</li>
+      </ul>
+
+      <h2>2. 意图导向与 30 秒直接回答</h2>
+      <p>
+        每篇指南均以解决读者的具体痛点为核心目标：
+      </p>
+      <ul>
+        <li>正文第一段拒绝毫无意义的长篇背景铺垫，强制配置 <strong>30 秒 QuickAnswer</strong>；</li>
+        <li>文章末尾强制提供基于学习进度的 <strong>NextStep 下一步指引</strong>，帮助读者建立完整认知链路。</li>
+      </ul>
+
+      <h2>3. 商业中立与利益冲突透明</h2>
+      <p>
+        当文章中包含服务商外部链接时，我们始终遵循<strong>「内容价值优先于商业转化」</strong>：
+      </p>
+      <ul>
+        <li>任何品牌不得通过付费赞助来篡改其技术参数与客观优缺点分析；</li>
+        <li>所有客观档案均由编辑部独立维护与实测更新。</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

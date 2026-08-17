@@ -1,0 +1,53 @@
+{
+  "slug": "quanqiuyun",
+  "name": "全球云",
+  "tagline": "2026 新锐综合型 / 20元档 120GB / VLESS + IEPL 专线",
+  "summary": "2026 年新上线，20 元入门套餐包含 120GB 流量，以 VLESS 与 IEPL 专线作为主要卖点，覆盖网页、视频流媒体及 AI 工具。",
+  "pricing": {
+    "startingPrice": 20,
+    "billingCycle": "月付",
+    "monthlyPrice": 20,
+    "traffic": "120GB / 月",
+    "currency": "CNY"
+  },
+  "protocols": [
+    "VLESS",
+    "IEPL 专线",
+    "Shadowsocks"
+  ],
+  "devices": [
+    "Windows",
+    "macOS",
+    "iOS",
+    "Android",
+    "Linux"
+  ],
+  "features": [
+    "2026新锐低负载",
+    "20元 120GB均衡容量",
+    "VLESS协议保障",
+    "全场景覆盖"
+  ],
+  "recommendFor": [
+    "预算20元档用户",
+    "2026新专线尝鲜",
+    "日常综合代理需求"
+  ],
+  "aiSupport": "支持 (ChatGPT / Gemini)",
+  "streaming": "支持 (YouTube 4K / Netflix)",
+  "speedtestImage": "/images/speedtests/quanqiuyun-speedtest.png",
+  "speedtestTestedAt": "2026-08-11T15:50:43+08:00",
+  "speedtestTool": "MAI-TEST-BOT 2.0.0-dev",
+  "officialUrl": "https://guangs.gcvipaff.com/#/?code=Ov2nvU9C",
+  "promoCode": "qqy7777",
+  "discount": "专属优惠码立减",
+  "estYear": 2026,
+  "paymentMethods": [
+    "支付宝",
+    "微信",
+    "USDT"
+  ],
+  "verificationStatus": "已核验 (2026-08-11实测)",
+  "lastVerified": "2026-08-11",
+  "notes": "2026年新上线品牌，节点带宽富余，晚高峰无拥堵现象。"
+}

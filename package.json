@@ -1,0 +1,30 @@
+{
+  "name": "waiwangzhinan.co",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "面向国内第一次产生海外网络访问需求的新手交互式知识导航系统",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist && node scripts/seo-health-check.mjs",
+    "seo:check": "node scripts/seo-health-check.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^7.2.2",
+    "pagefind": "^1.5.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "autoprefixer": "^10.4.20",
+    "tailwindcss": "^3.4.17"
+  }
+}

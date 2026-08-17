@@ -1,0 +1,92 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "Mac 上提示「无法打开 Clash Verge，因为无法验证开发者」怎么办？",
+    answer: "这是 macOS 的安全机制 Gatekeeper 拦截。解决方法：打开 Mac 的「系统设置」→「隐私与安全性」，滑到最下方，找到「仍要打开 Clash Verge」并点击确认；或者在终端中运行 `sudo spctl --master-disable` 即可正常启动。"
+  },
+  {
+    question: "Surge 和 Clash Verge 相比哪个更好用？",
+    answer: "Clash Verge Rev 完全免费开源，界面美观，支持一键导入订阅与 TUN 模式，适合 95% 的普通与进阶用户；Surge 是 Mac 上的顶级专业级网络调试神器（买断价格数百元），适合有深度抓包、多设备代理中继和高级路由定制需求的资深工程师。"
+  },
+  {
+    question: "Mac 电脑上怎么让终端 (Terminal / iTerm2) 走代理？",
+    answer: "开启 Clash Verge 的「增强模式 / TUN 模式」，或者在终端配置文件（~/.zshrc）中添加别名命令 `export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897` 即可让 git clone 和 curl 畅快加速。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "了解 TUN 模式（增强模式）的配置方法",
+    url: "/clients/tun-mode-guide/",
+    description: "全面接管 Mac 全局流量，解决微信小程序与终端不走代理的问题。"
+  },
+  {
+    title: "挑选支持 macOS 一键导入的优质机场",
+    url: "/recommend/",
+    description: "查看 16 家已核验服务商在 Mac 客户端上的导入体验。"
+  }
+];
+---
+
+<ArticleLayout
+  title="Mac 电脑机场客户端推荐：Clash Verge Rev 与 Surge、Sing-box 深度配置对比"
+  description="针对苹果 macOS 系统用户的科学上网终极指南，全方位评测 Clash Verge Rev、Surge、Sing-box、Clash Nyanpasu 的安装配置、权限授予与 TUN 模式实操。"
+  category="clients"
+  level="L3"
+  quickAnswer="苹果 Mac 电脑推荐首选开源免费的「Clash Verge Rev (macOS 版)」。它完美原生支持 Apple Silicon (M1/M2/M3/M4) 芯片与 Intel 芯片，自带中文界面与一键订阅导入功能，开启「系统代理」或「TUN 模式」即可轻松访问 Google 与海外 AI 工具。"
+  pubDate="2026-08-17"
+  tags={["Mac翻墙", "Clash Verge Mac", "Surge", "macOS客户端", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="macOS 客户端生态与配置"
+  sourceText="waiwangzhinan.co 客户端实测矩阵"
+>
+  <h2>一、Mac 主流代理客户端横向对比选型</h2>
+
+  <div class="space-y-4 my-6">
+    <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/40 bg-brand-mint/[0.02] space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-brand-mint">🥇 强烈推荐：Clash Verge Rev (macOS)</h3>
+        <span class="badge-mint text-[10px]">开源免费 · 全功能标杆</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>核心亮点</strong>：基于 Mihomo (Clash.Meta) 内核开发，原生支持 M 系列 ARM64 与 Intel 架构；UI 极其现代化；支持一键开启 TUN 虚拟网卡；内存占用仅 80MB 左右。<br />
+        <strong>适用人群</strong>：绝大多数 Mac 用户、日常查资料、看视频、搞科研与 AI 开发。
+      </p>
+    </div>
+
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">🥈 专业之选：Surge for Mac</h3>
+        <span class="badge-blue text-[10px]">商业旗舰 · 极客神器</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>核心亮点</strong>：macOS 平台最强大的网络抓包与调试工具，拥有顶级的网络协议栈与极其平滑的无缝分流体验。<br />
+        <strong>门槛说明</strong>：商业付费软件（单设备授权约 49.99 美元起），适合对网络细节有极高要求的专业开发者。
+      </p>
+    </div>
+
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">🥉 轻量极简：Sing-box / Hiddify</h3>
+        <span class="badge-muted text-[10px]">新一代通用核心</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>核心亮点</strong>：原生支持所有最新协议（包括 VLESS-Reality、Hysteria2），性能极高。<br />
+        <strong>不足</strong>：新手配置门槛稍高，规则管理不如 Clash 直观。
+      </p>
+    </div>
+  </div>
+
+  <h2>二、Mac 安装 Clash Verge Rev 四步实操指引</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-3">
+    <ol class="list-decimal pl-5 space-y-2.5 text-xs text-content-secondary">
+      <li><strong>下载对应芯片版本</strong>：M1/M2/M3/M4 用户下载 <code>Clash.Verge_xxxx_aarch64.dmg</code>；Intel 芯片用户下载 <code>Clash.Verge_xxxx_x64.dmg</code>。</li>
+      <li><strong>拖入应用程序并授权</strong>：双击打开 DMG 文件，将 Clash Verge 图标拖入 Applications。初次打开若提示未受信任，前往「系统设置」→「隐私与安全性」点击「仍要打开」。</li>
+      <li><strong>导入订阅配置</strong>：点击左侧「订阅 (Profiles)」，将机场提供的 Clash 订阅链接粘贴进去并点击「导入 (Import)」，选中该配置使其生效。</li>
+      <li><strong>开启系统代理</strong>：点击左侧「设置 (Settings)」，打开「系统代理 (System Proxy)」，并在「代理 (Proxies)」页面选择延迟低的节点（如香港或日本），即可畅游外网！</li>
+    </ol>
+  </div>
+</ArticleLayout>

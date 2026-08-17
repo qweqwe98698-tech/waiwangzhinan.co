@@ -1,0 +1,70 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "用机场专线打外服游戏，能做到多少 ping 的延迟？",
+    answer: "通常在沿海城市（如广东、上海、浙江）：连接香港 IEPL 专线打港服游戏（如 APEX/英雄联盟外服）延迟仅需 15-30ms；连接日本东京专线打日服延迟 35-50ms；连接新加坡专线延迟 45-60ms，几乎与国内本地服务器体验一致。"
+  },
+  {
+    question: "下载几百 GB 的 Steam 游戏时怎么选节点最划算？",
+    answer: "游戏下载不需要极低的联机延迟，但对带宽吞吐和流量消耗要求极高。建议在下载游戏时切换到机场的「0.2x 低倍率节点」或「大带宽下载专用节点」，这样 100GB 套餐可以下载 500GB 游戏，既跑满千兆宽带又省流量。"
+  },
+  {
+    question: "打主机游戏（PS5 / Switch / Xbox）怎么通过电脑代理加速？",
+    answer: "可以在电脑 Clash Verge 中开启「允许局域网连接 (Allow LAN)」，并在主机网络设置中手动将代理服务器 IP 设为电脑的局域网内网 IP（如 `192.168.1.100:7897`）；或者通过刷了 OpenWrt 路由器的软路由全屋透明代理。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "学习开启 TUN 模式以无损转发游戏 UDP 数据",
+    url: "/clients/tun-mode-guide/",
+    description: "让 APEX / CS2 等大型联机游戏流量无死角走代理。"
+  },
+  {
+    title: "查看 2026 游戏与专线优质机场推荐",
+    url: "/recommend/",
+    description: "对比 16 家具备低延迟、UDP 满速支持的优质专线品牌。"
+  }
+];
+---
+
+<ArticleLayout
+  title="2026 年玩外服游戏用什么机场？低延迟、UDP 支持与满速下载选型"
+  description="针对 Steam、Epic、暴雪战网与外服电竞联机玩家的机场选型指南，详解 UDP 转发、专线抖动测试、游戏降延迟与大文件满速下载策略。"
+  category="choose"
+  level="L4"
+  quickAnswer="游戏玩家选择机场必须认准三大指标：1. 必须是真 IEPL / IPLC 专线（保证晚高峰 0 丢包与 <50ms 超低延迟）；2. 必须支持完整 UDP 协议转发（满足语音和联机握手）；3. 节点库需配备 0.2x 低倍率节点（满足几十上百 GB 的 Steam/战网大游戏满速更新）。"
+  pubDate="2026-08-17"
+  tags={["游戏机场", "Steam加速", "低延迟专线", "UDP转发", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="外服游戏网络选型与优化"
+  sourceText="waiwangzhinan.co 游戏网络性能实验室"
+>
+  <h2>一、游戏玩家对科学上网的三大严苛要求</h2>
+  <p>
+    普通用户看网页或看视频对延迟并不敏感（延迟 200ms 只要带宽够也能看 4K），但<strong>外服竞技游戏对网络有极其苛刻的物理要求</strong>：
+  </p>
+  <ul>
+    <li><strong>晚高峰 0 丢包率</strong>：丢包率哪怕只有 2%，游戏就会出现人物瞬间瞬移、子弹打中不算等严重卡顿。</li>
+    <li><strong>超低且恒定的 Jitter (抖动)</strong>：Ping 值波动必须在 ±3ms 以内，不能时而 30ms 时而 200ms。</li>
+    <li><strong>原生支持 Full Cone NAT 与 UDP</strong>：确保游戏语音通话（Discord/游戏内置语音）清晰不破音。</li>
+  </ul>
+
+  <h2>二、游戏玩家专属机场选型清单</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-4 my-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-content-secondary">
+      <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1.5">
+        <h3 class="font-bold text-sm text-brand-mint">🏆 综合电竞首选：光速云 / U1S1</h3>
+        <p>全线配备广州/上海 BGP 入口的高速 IEPL 专线，亚服游戏实测延迟 15-35ms，UDP 转发完整开启，完美替代商业加速器。</p>
+      </div>
+
+      <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1.5">
+        <h3 class="font-bold text-sm text-brand-blue">🎮 巨量更新首选：星岛梦 / 飞猫云</h3>
+        <p>支持按量计费与低倍率大流量节点，几百 GB 的 Steam 游戏库更新下载毫无流量焦虑。</p>
+      </div>
+    </div>
+  </div>
+</ArticleLayout>

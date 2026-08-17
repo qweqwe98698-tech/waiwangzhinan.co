@@ -1,0 +1,63 @@
+---
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGuides = await getCollection('guides', (entry) => entry.data.category === 'choose');
+const sortedGuides = allGuides.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const staticClusters = [
+  {
+    title: "2026 年玩外服游戏用什么机场？低延迟、UDP 支持与满速下载选型",
+    url: "/choose/gaming/",
+    description: "针对 Steam、Epic、暴雪战网与外服竞技联机玩家的选型指南，详解 UDP 转发与低延迟专线。",
+    quickAnswer: "游戏玩家认准 IEPL 专线、完整 UDP 转发与低倍率下载节点，体验媲美商业加速器。",
+    level: "L4",
+    tags: ["游戏机场", "Steam加速", "低延迟专线"],
+  },
+  {
+    title: "2026 外网访问新手避坑全书：不买长周期年付、辨别虚假跑分与正规售后保障",
+    url: "/choose/avoid-scams/",
+    description: "曝光五年年付陷阱、虚假测速跑分、偷跑流量套路，建立科学的月付试错与保障机制。",
+    quickAnswer: "坚决按月付费、拒绝无工单小作坊、看晚高峰抗丢包表现、选择运营多年的老牌大厂。",
+    level: "L4",
+    tags: ["机场避坑", "防跑路", "年付陷阱"],
+  },
+];
+
+const clusters = [
+  ...sortedGuides.map((g) => ({
+    title: g.data.title,
+    url: `/choose/${g.id.replace(/^choose\//, '')}/`,
+    description: g.data.description,
+    quickAnswer: g.data.quickAnswer,
+    level: g.data.level,
+    tags: g.data.tags,
+  })),
+  ...staticClusters,
+];
+
+const pillarFaq = [
+  {
+    question: "第一次选择机场，最稳妥的决策策略是什么？",
+    answer: "先明确核心需求（查资料选 15 元档高性价比，看 4K/用 AI 选专线），无论哪家均先购买 1 个月进行晚高峰实测，体验满意后再按需续订。"
+  },
+  {
+    question: "为什么外网指南不进行「单一第一名」赞助推荐？",
+    answer: "每个用户的宽带运营商、地理位置与使用场景差异巨大。我们坚持提供基于真实自动化测速数据的客观对比，由用户根据自身真实预算与需求自主做决策。"
+  }
+];
+---
+
+<PillarLayout
+  title="选型指南：场景匹配与客观决策模型"
+  description="按预算、场景（AI、影音、多设备、稳定性）建立多维评估模型，拒绝年付陷阱与虚假跑分。"
+  levelBadge="Level 5–6"
+  leadText="没有所谓「最好」的机场，只有「最适合你当前需求」的服务。通过理性的场景分级与透明数据，避免花冤枉钱买到不合适的服务。"
+  clusters={clusters}
+  nextPillar={{
+    name: "2026 机场推荐与测速总览",
+    url: "/recommend/",
+    desc: "查看全部 16 家已核验服务商的客观评测档案与月付门槛指标。"
+  }}
+  faq={pillarFaq}
+/>

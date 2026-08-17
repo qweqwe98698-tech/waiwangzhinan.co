@@ -1,0 +1,16 @@
+{
+  "clusters": [
+    { "id": "overseas-web", "name": "泛访问需求", "url": "/use/overseas-web/", "description": "国内访问国外网站、打不开、加载慢、需要什么软件等基础问题" },
+    { "id": "ai", "name": "ChatGPT 与海外 AI", "url": "/use/ai/", "description": "ChatGPT、Claude、Gemini、Perplexity、Midjourney 等 AI 工具访问与防封" },
+    { "id": "google", "name": "Google 生态", "url": "/use/google/", "description": "Google 搜索、Gmail、Google Scholar、Drive、Docs 等全家桶服务" },
+    { "id": "streaming", "name": "YouTube 与流媒体", "url": "/use/streaming/", "description": "YouTube 4K、Netflix、Disney+、Spotify、Twitch 等视频与音频流媒体" },
+    { "id": "social", "name": "海外社交平台", "url": "/use/social/", "description": "Instagram、X (Twitter)、Reddit、TikTok、Telegram、Discord 等社交应用" },
+    { "id": "developer", "name": "程序员与设计师需求", "url": "/use/developer/", "description": "GitHub、Docker Hub、npm、PyPI、Vercel、Figma 等技术工具与资源加速" },
+    { "id": "study", "name": "学习、留学与论文资料", "url": "/use/study/", "description": "海外学术文献、Google 学术、Coursera、公开课与英文资料检索" },
+    { "id": "cross-border", "name": "跨境电商与海外办公", "url": "/use/cross-border/", "description": "Amazon、Shopify、Etsy、Google Ads、PayPal、Stripe 外贸多账号环境" },
+    { "id": "gaming", "name": "游戏与国际服", "url": "/use/gaming/", "description": "Steam 社区/商店、PSN、Xbox、Nintendo、暴雪国际服与游戏加速器区别" },
+    { "id": "devices", "name": "手机、电脑与家庭设备", "url": "/devices/", "description": "iPhone、安卓、华为、小米、Windows、Mac、iPad、电视 TV 与路由器配置" },
+    { "id": "troubleshooting", "name": "网络故障型搜索", "url": "/fix/", "description": "连接已重置、连接超时、拒绝连接、图片不加载、视频播不了等深度排查" },
+    { "id": "solutions", "name": "开始寻找解决方案", "url": "/solutions/", "description": "访问国外网站用什么工具、VPN/代理/加速器区别、机场与节点选型" }
+  ]
+}

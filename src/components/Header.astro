@@ -1,0 +1,146 @@
+---
+const navLinks = [
+  { name: '从零开始', href: '/start/' },
+  { name: '机场入门', href: '/airport/' },
+  { name: '客户端', href: '/clients/' },
+  { name: '使用场景', href: '/use/' },
+  { name: '故障排查', href: '/fix/' },
+  { name: '选型指南', href: '/choose/' },
+  { name: '客观对比', href: '/compare/' },
+  { name: '工具箱', href: '/tools/' },
+  { name: '状态雷达', href: '/status/' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-white/[0.06] bg-[#080A0C]/90 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+    <!-- Brand Logo -->
+    <a href="/" class="flex items-center gap-2 group whitespace-nowrap flex-shrink-0">
+      <div class="w-8 h-8 rounded-lg bg-bg-card border border-white/10 flex items-center justify-center group-hover:border-brand-mint/40 transition-colors">
+        <svg class="w-4 h-4 text-brand-mint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+        </svg>
+      </div>
+      <div class="flex flex-col">
+        <span class="font-bold text-sm sm:text-base text-content-primary tracking-tight leading-tight group-hover:text-white transition-colors">外网指南</span>
+        <span class="text-[9px] sm:text-[10px] text-content-muted tracking-wide font-mono">waiwangzhinan.co</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation (Compact, Never Wraps) -->
+    <nav class="hidden lg:flex items-center gap-0.5 xl:gap-1 text-xs xl:text-sm font-medium whitespace-nowrap flex-shrink min-w-0">
+      {navLinks.map((link) => {
+        const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+        return (
+          <a
+            href={link.href}
+            class={`px-2 xl:px-2.5 py-1.5 rounded-lg whitespace-nowrap transition-all duration-150 ${
+              isActive
+                ? 'text-brand-mint bg-brand-mint/10 border border-brand-mint/20 font-semibold'
+                : 'text-content-secondary hover:text-content-primary hover:bg-white/[0.03]'
+            }`}
+          >
+            {link.name}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Search & Action CTA -->
+    <div class="flex items-center gap-2 xl:gap-3 whitespace-nowrap flex-shrink-0">
+      <!-- Search Button -->
+      <button
+        id="search-open-btn"
+        type="button"
+        class="flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-lg bg-bg-card border border-white/10 text-content-secondary hover:text-content-primary hover:border-white/20 text-xs transition-colors whitespace-nowrap"
+        aria-label="打开搜索"
+      >
+        <svg class="w-3.5 h-3.5 text-content-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="hidden sm:inline">搜索...</span>
+        <kbd class="hidden xl:inline-block px-1.5 py-0.5 text-[10px] bg-bg-sub text-content-muted rounded border border-white/5 font-mono">⌘K</kbd>
+      </button>
+
+      <!-- Primary CTA: Direct Link to Recommended Providers -->
+      <a
+        href="/recommend/"
+        class="inline-flex items-center gap-1.5 px-3 xl:px-3.5 py-1.5 rounded-lg bg-brand-mint text-bg-main text-xs font-bold hover:bg-brand-mint-hover shadow-md shadow-brand-mint/20 hover:scale-105 transition-all whitespace-nowrap flex-shrink-0"
+      >
+        <span>🔥 2026 精选机场</span>
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="lg:hidden p-2 rounded-lg bg-bg-card border border-white/10 text-content-secondary hover:text-content-primary"
+        aria-label="切换菜单"
+      >
+        <svg id="hamburger-icon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-white/[0.06] bg-bg-card/95 backdrop-blur-xl px-4 py-4 space-y-1">
+    {navLinks.map((link) => {
+      const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+      return (
+        <a
+          href={link.href}
+          class={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+            isActive
+              ? 'text-brand-mint bg-brand-mint/10 border border-brand-mint/20'
+              : 'text-content-secondary hover:text-content-primary hover:bg-white/[0.03]'
+          }`}
+        >
+          {link.name}
+        </a>
+      );
+    })}
+    <div class="pt-3 border-t border-white/10">
+      <a
+        href="/recommend/"
+        class="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-brand-mint text-bg-main text-sm font-bold hover:bg-brand-mint-hover"
+      >
+        <span>🔥 2026 最新机场推荐与测速榜单</span>
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile Menu Toggle
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (toggleBtn && mobileMenu) {
+    toggleBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  // Keyboard shortcut for search
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      const searchBtn = document.getElementById('search-open-btn');
+      if (searchBtn) searchBtn.click();
+    }
+  });
+</script>

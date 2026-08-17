@@ -1,0 +1,114 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "普通小白用户需要纠结机场用的是什么协议吗？",
+    answer: "如果你使用的是正规专线机场（如 IEPL / IPLC），协议对速度的影响差异较小，因为专线在内网物理传输不经过公网审查。但如果节点经常被封或你需要晚高峰在弱网环境下打游戏/看4K，优先选择 VLESS-Reality 或 Hysteria2 协议的节点。"
+  },
+  {
+    question: "为什么说 Shadowsocks (SS) 协议现在容易被封？",
+    answer: "Shadowsocks 采用对称加密，流量没有真实网站的 TLS 握手特征。防火墙通过机器学习识别其高熵密文流量，容易被主动探测并列入阻断名单。现代机场通常在专线内网使用 SS，或在公网改用 VLESS / Trojan 等具备伪装特征的协议。"
+  },
+  {
+    question: "Hysteria2 和 TUIC 为什么能在恶劣网络下跑满带宽？",
+    answer: "它们基于 UDP 协议开发（利用 HTTP/3 QUIC 底层），摒弃了传统 TCP 协议在丢包时的频繁重传与拥塞控制机制，在移动网络、校园网或弱网环境下具备极强的抗丢包与暴力提速能力。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "了解 IPLC 与 IEPL 专线的物理优势",
+    url: "/start/iplc-vs-iepl-transit/",
+    description: "搞清为什么内网专线比公网中转更加抗波动与低延迟。"
+  },
+  {
+    title: "查看支持全协议的 2026 优质机场",
+    url: "/recommend/",
+    description: "客观对比 16 家已核验服务商的协议支持与实测延迟。"
+  }
+];
+---
+
+<ArticleLayout
+  title="什么是 Shadowsocks、V2Ray、Trojan、VLESS、Hysteria2？全协议通俗深度对比"
+  description="用最通俗易懂的语言深度拆解 2026 年主流代理协议：SS、VMess、Trojan、VLESS-Reality、Hysteria2 与 TUIC 的原理、优缺点及选型建议。"
+  category="start"
+  level="L1"
+  quickAnswer="代理协议就是客户端与海外服务器之间加密通话的「暗号规则」。Shadowsocks 是经典加密协议；Trojan 和 VLESS-Reality 是将流量伪装成正常访问大牌网站（如微软/苹果）的伪装协议；Hysteria2 和 TUIC 是基于 UDP 的暴力抗丢包加速协议。2026 年主流机场标配 VLESS + IEPL 专线，抗封锁与抗抖动能力最强。"
+  pubDate="2026-08-17"
+  tags={["协议对比", "VLESS", "Hysteria2", "Trojan", "Shadowsocks", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="代理协议底层演进认知"
+  sourceText="waiwangzhinan.co 协议架构研究"
+>
+  <h2>一、为什么会有这么多五花八门的协议？</h2>
+  <p>
+    如果你查看客户端里的节点详情，常会看到 <code>ss://</code>、<code>vmess://</code>、<code>trojan://</code>、<code>vless://</code> 或 <code>hy2://</code> 等前缀。之所以诞生这么多协议，本质上是一场**「识别与反识别、封锁与反封锁」**的技术演进史。
+  </p>
+
+  <h2>二、2026 主流协议核心原理与优缺点横向盘点</h2>
+
+  <div class="space-y-4 my-6">
+    <!-- 1. Shadowsocks -->
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">1. Shadowsocks (SS / SSR) · 经典轻量元老</h3>
+        <span class="badge-muted font-mono text-[10px]">TCP 基础加密</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>工作原理</strong>：对每个数据包进行对称加密，去掉所有明文头部信息。<br />
+        <strong>优点</strong>：协议极轻量、CPU 占用极低、连接握手快、全平台客户端兼容度 100%。<br />
+        <strong>缺点</strong>：没有伪装层，容易被识别出流量特征。在直连公网中极易被封锁，但在 <strong>IEPL / IPLC 专线内网</strong> 中仍是最高效的传输协议。
+      </p>
+    </div>
+
+    <!-- 2. Trojan -->
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">2. Trojan · 特洛伊木马式伪装</h3>
+        <span class="badge-mint font-mono text-[10px]">TLS 伪装标杆</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>工作原理</strong>：完全模拟正常 HTTPS 网站的访问流程，并申请真实域名的 SSL 证书。外部防火墙只能看到你正在和一个正规网站进行加密通信。<br />
+        <strong>优点</strong>：伪装极难被识别、穿透防火墙能力极强。<br />
+        <strong>缺点</strong>：需要握手证书与解密，对服务器性能有一定开销。
+      </p>
+    </div>
+
+    <!-- 3. VLESS & Reality -->
+    <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/30 bg-brand-mint/[0.02] space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">3. VLESS + Reality · 2026 最强防封控架构</h3>
+        <span class="badge-mint font-mono text-[10px]">现代首选标准</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>工作原理</strong>：V2Ray 团队打造的无状态轻量协议，去除了 VMess 繁冗的加密开销，配合最新的 <strong>Reality 借壳伪装技术</strong>，直接借用微软、苹果或 Cloudflare 等境外真实大厂域名的证书特征。<br />
+        <strong>优点</strong>：零特征、免自建域名证书、握手延迟极低、对 ChatGPT / Claude 等防爬虫验证极其友好。
+      </p>
+    </div>
+
+    <!-- 4. Hysteria 2 -->
+    <div class="card-surface-sub p-5 rounded-xl border border-blue-500/20 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">4. Hysteria 2 (歇斯底里) · UDP 暴力抗丢包之王</h3>
+        <span class="badge-blue font-mono text-[10px]">UDP / QUIC 底层</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>工作原理</strong>：基于自研的 Brutal 拥塞控制算法，利用 UDP 协议进行并发吞吐，彻底不受传统 TCP 丢包重传减速的限制。<br />
+        <strong>优点</strong>：在移动弱网、晚高峰公网丢包高达 30% 时依然能跑满带宽，4K 视频秒开。<br />
+        <strong>缺点</strong>：部分省份运营商的 QoS 策略可能会限制 UDP 流量。
+      </p>
+    </div>
+  </div>
+
+  <h2>三、总结：新手如何根据需求选协议？</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-3">
+    <ul class="space-y-2 text-xs text-content-secondary">
+      <li>🎯 <strong>如果你追求极致稳定与通用兼容</strong>：选择 <strong>VLESS 或 Shadowsocks（专线架构）</strong>，如光速云、U1S1 提供的专线节点。</li>
+      <li>🎯 <strong>如果你的网络环境恶劣（如晚高峰校园网、移动宽带）</strong>：优先选择支持 <strong>Hysteria2</strong> 的高速节点。</li>
+      <li>🎯 <strong>如果你需要登录严格防关联的海外账号（如 OpenAI / 亚马逊）</strong>：选择伪装度最高的 <strong>VLESS-Reality 原生住宅节点</strong>。</li>
+    </ul>
+  </div>
+</ArticleLayout>

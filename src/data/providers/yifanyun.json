@@ -1,0 +1,53 @@
+{
+  "slug": "yifanyun",
+  "name": "一翻云",
+  "tagline": "20元档流量王者 / 150GB 巨量 / VLESS + IEPL 专线",
+  "summary": "2024 年开业，20 元档提供 150GB 流量，同价位中流量规格极其突出，兼顾 VLESS 协议、IEPL 专线与流媒体 AI 使用。",
+  "pricing": {
+    "startingPrice": 20,
+    "billingCycle": "月付",
+    "monthlyPrice": 20,
+    "traffic": "150GB / 月",
+    "currency": "CNY"
+  },
+  "protocols": [
+    "VLESS",
+    "IEPL 专线",
+    "Shadowsocks"
+  ],
+  "devices": [
+    "Windows",
+    "macOS",
+    "iOS",
+    "Android",
+    "Linux"
+  ],
+  "features": [
+    "20元/月 150GB超大流量",
+    "IEPL内网专线保障",
+    "VLESS协议支持",
+    "流媒体与AI兼备"
+  ],
+  "recommendFor": [
+    "20元月付大流量追求者",
+    "4K视频追剧党",
+    "多台设备共享流量"
+  ],
+  "aiSupport": "支持 (ChatGPT / Claude / Gemini)",
+  "streaming": "支持 (YouTube 4K / Netflix / HBO Max)",
+  "speedtestImage": "/images/speedtests/yifanyun-speedtest.png",
+  "speedtestTestedAt": "2026-08-11T00:21:30+08:00",
+  "speedtestTool": "MAI-TEST-BOT 2.0.0-dev",
+  "officialUrl": "https://guangs.1flyunaff.cc/#/register?code=Yr7FhB7r",
+  "promoCode": "yfy6666",
+  "discount": "专属优惠码立减",
+  "estYear": 2024,
+  "paymentMethods": [
+    "支付宝",
+    "微信",
+    "USDT"
+  ],
+  "verificationStatus": "已核验 (2026-08-11实测)",
+  "lastVerified": "2026-08-11",
+  "notes": "20元档的流量天花板，单G流量成本极低，适合流量消耗较大的用户。"
+}

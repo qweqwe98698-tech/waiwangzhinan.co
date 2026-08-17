@@ -1,0 +1,20 @@
+{
+  "linxun": {
+    "name": "林巡",
+    "role": "网络架构与专线实测主编",
+    "bio": "前互联网大厂网络工程师，专注跨国专线架构、BGP 路由与网络安全协议实测 8 年。",
+    "avatar": "/images/avatars/linxun.svg"
+  },
+  "mobai": {
+    "name": "莫白",
+    "role": "开源客户端与系统排错专栏编辑",
+    "bio": "专注于 Clash Verge、Sing-box 等开源客户端跨平台适配与本地分流规则定制。",
+    "avatar": "/images/avatars/mobai.svg"
+  },
+  "chenzhou": {
+    "name": "陈舟",
+    "role": "海外 AI 与跨境应用实测研究员",
+    "bio": "长期跟踪 OpenAI、Anthropic 及海外流媒体风控策略与原生 IP 解锁方案。",
+    "avatar": "/images/avatars/chenzhou.svg"
+  }
+}

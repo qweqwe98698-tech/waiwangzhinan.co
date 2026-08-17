@@ -1,0 +1,71 @@
+---
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGuides = await getCollection('guides', (entry) => entry.data.category === 'start');
+const sortedGuides = allGuides.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const staticClusters = [
+  {
+    title: "2026 最新如何翻墙与科学上网完整新手入门手册",
+    url: "/start/scientific-surfing-guide/",
+    description: "面向国内第一次产生访问海外网络需求的小白，全流程拆解科学上网底层逻辑、软硬件准备、客户端下载与订阅导入。",
+    quickAnswer: "科学上网三步法：选月付机场、下载对应客户端、导入订阅并开启规则分流。",
+    level: "L0",
+    tags: ["科学上网入门", "翻墙指南", "2026最新"],
+  },
+  {
+    title: "什么是 Shadowsocks、V2Ray、Trojan、VLESS、Hysteria2？全协议通俗深度对比",
+    url: "/start/protocols-explained/",
+    description: "通俗拆解 2026 主流代理协议优缺点：SS 轻量、Trojan/VLESS 伪装强、Hysteria2 暴力抗丢包加速。",
+    quickAnswer: "主流机场标配 VLESS + IEPL 专线，抗封锁与抗抖动能力最强。",
+    level: "L1",
+    tags: ["协议对比", "VLESS", "Hysteria2", "Trojan"],
+  },
+  {
+    title: "直连、中转与 IPLC/IEPL 专线有什么区别？为什么专线晚高峰不卡顿？",
+    url: "/start/iplc-vs-iepl-transit/",
+    description: "揭秘机场线路三层架构：直连、隧道中转与 IPLC/IEPL 国际专线的物理链路差异及晚高峰抗抖动机制。",
+    quickAnswer: "IPLC/IEPL 走企业内网海底光缆直连，完全不过公网防火墙，晚高峰 0 丢包。",
+    level: "L2",
+    tags: ["IPLC专线", "IEPL专线", "中转节点"],
+  },
+];
+
+const clusters = [
+  ...sortedGuides.map((g) => ({
+    title: g.data.title,
+    url: `/start/${g.id.replace(/^start\//, '')}/`,
+    description: g.data.description,
+    quickAnswer: g.data.quickAnswer,
+    level: g.data.level,
+    tags: g.data.tags,
+  })),
+  ...staticClusters,
+];
+
+const pillarFaq = [
+  {
+    question: "我只是想偶尔查一次英文文献，有必要把这些概念全搞懂吗？",
+    answer: "没必要全部精通。阅读完本栏目的前两篇基础文章，你就已经掌握了海外网络受限的根本原因与解决办法，随后直接下载一个客户端即可轻松上网。"
+  },
+  {
+    question: "使用代理工具会导致我的本地真实 IP 暴露吗？",
+    answer: "不会。代理服务器会作为中间人替你向目标网站请求数据，目标网站只能获取到海外代理节点的 IP 地址，你的本地真实网络位置将被有效隐藏。"
+  }
+];
+---
+
+<PillarLayout
+  title="从零开始：第一次访问海外网络认知体系"
+  description="面向完全零基础新手，用大白话讲透海外网站受限原因、代理机制、VPN 与中转原理，建立清晰第一认知。"
+  levelBadge="Level 0–1"
+  leadText="当你第一次想打开 Google 查资料、使用 ChatGPT 写代码时，往往会被一堆陌生的网络名词绕晕。本知识中枢用最通俗易懂的生活化比喻，帮你彻底理清基本逻辑。"
+  clusters={clusters}
+  nextPillar={{
+    name: "机场入门与节点中枢",
+    url: "/airport/",
+    desc: "进一步了解什么是机场服务商、节点线路分布与订阅一键导入机制。"
+  }}
+  faq={pillarFaq}
+/>

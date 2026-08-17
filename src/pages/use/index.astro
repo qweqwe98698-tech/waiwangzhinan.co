@@ -1,0 +1,87 @@
+---
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGuides = await getCollection('guides', (entry) => entry.data.category === 'use');
+const sortedGuides = allGuides.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const staticClusters = [
+  {
+    title: "Midjourney 国内使用与 Discord 账号注册/绑卡完整避坑指南",
+    url: "/use/midjourney/",
+    description: "面向国内 AI 创作者的 Midjourney 教程，涵盖 Discord 防封环境、Stripe 海外绑卡与私密绘图技巧。",
+    quickAnswer: "开启稳定海外节点，注册 Discord 账号，邀请 Midjourney Bot 到个人服务器即可私密绘图。",
+    level: "L3",
+    tags: ["Midjourney", "Discord注册", "AI绘画"],
+  },
+  {
+    title: "TikTok 国际版国内免拔卡安装与养号网络节点环境配置",
+    url: "/use/tiktok/",
+    description: "国内免拔卡刷 TikTok 与跨境带货养号全攻略，涵盖伪装环境搭建、原生住宅 IP 挑选与破 0 播放。",
+    quickAnswer: "通过伪装设备时区/语言并连接原生海外纯净专线，让 whoer.net 伪装度达到 100%。",
+    level: "L3",
+    tags: ["TikTok国内免拔卡", "国际版抖音", "跨境电商"],
+  },
+  {
+    title: "Netflix (网飞) 跨区看剧指南：4K 画面要求、家庭组拼车与 IP 纯净度检测",
+    url: "/use/netflix/",
+    description: "最新 Netflix 奈飞保姆级跨区指南，详解原生 IP 解锁区别、4K 码率要求与中文字幕匹配。",
+    quickAnswer: "连接支持 Netflix 原生解锁的港/台/新专线节点，使用 Edge/Safari 即可秒开 4K HDR 官方中字。",
+    level: "L3",
+    tags: ["Netflix", "网飞解锁", "4K流媒体"],
+  },
+  {
+    title: "Steam 外服跨区、Epic 领游戏与外服联机加速网络设置",
+    url: "/use/steam-gaming/",
+    description: "针对游戏玩家的加速指南，解决 Steam 错误代码 -118、Epic 领免费游戏失败与联机高延迟排查。",
+    quickAnswer: "开启 TUN 虚拟网卡并连接支持 UDP 的 IEPL 专线，以 30-50ms 超低延迟畅玩外服联机。",
+    level: "L3",
+    tags: ["Steam加速", "Epic领游戏", "外服联机"],
+  },
+  {
+    title: "外贸人与跨境电商专属：亚马逊/Shopee/独立站防关联网络与静态原生 IP 配置",
+    url: "/use/cross-border-ecommerce/",
+    description: "面向外贸业务员与跨境电商卖家的网络方案，详解防关联底层逻辑、多店铺隔离与稳定专线配置。",
+    quickAnswer: "日常搜客用 IEPL 专线机场，多店铺后台登录必须使用防关联指纹浏览器+独享静态 IP。",
+    level: "L4",
+    tags: ["外贸翻墙", "跨境电商", "亚马逊防关联"],
+  },
+];
+
+const clusters = [
+  ...sortedGuides.map((g) => ({
+    title: g.data.title,
+    url: `/use/${g.id.replace(/^use\//, '')}/`,
+    description: g.data.description,
+    quickAnswer: g.data.quickAnswer,
+    level: g.data.level,
+    tags: g.data.tags,
+  })),
+  ...staticClusters,
+];
+
+const pillarFaq = [
+  {
+    question: "为什么很多海外网站对 IP 纯净度有严格要求？",
+    answer: "OpenAI、Netflix、Stripe 等平台为了防范恶意爬虫刷号与黑灰产，会对公开机房的公网 IP 实施严格的风控拦截。选择具备原生住宅 IP 或高质量专线的节点可以有效避免被拦截。"
+  },
+  {
+    question: "国内看 4K 视频需要多少速度？",
+    answer: "YouTube / Netflix 播放 4K 视频需要稳定持续 25-50Mbps 的码率。选择具备 BGP 专线入口的机场服务商可确保晚高峰不卡顿。"
+  }
+];
+---
+
+<PillarLayout
+  title="使用场景：海外主流应用与生产力实战"
+  description="针对 ChatGPT、Claude、YouTube、GitHub、Midjourney、TikTok 等热门工具的防封实操与环境优化。"
+  levelBadge="Level 3–4"
+  leadText="成功连上外网只是第一步。不同海外平台对网络节点、IP 属性与浏览器环境有着差异化要求。本专题带你各个击破常见场景痛点。"
+  clusters={clusters}
+  nextPillar={{
+    name: "常见故障与系统排错",
+    url: "/fix/",
+    desc: "遇到节点全红、超时、打不开网页等异常情况，参考系统化排错手册逐步修复。"
+  }}
+  faq={pillarFaq}
+/>

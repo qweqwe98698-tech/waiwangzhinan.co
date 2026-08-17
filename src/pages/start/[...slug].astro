@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides', (entry) => entry.data.category === 'start');
+  return guides.map((guide) => {
+    const cleanSlug = guide.id.replace(/^start\//, '').replace(/\.(md|mdx)$/, '');
+    return {
+      params: { slug: cleanSlug },
+      props: { guide },
+    };
+  });
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+---
+
+<ArticleLayout
+  title={guide.data.title}
+  description={guide.data.description}
+  category={guide.data.category}
+  level={guide.data.level}
+  quickAnswer={guide.data.quickAnswer}
+  pubDate={guide.data.pubDate}
+  updatedDate={guide.data.updatedDate}
+  author={guide.data.author}
+  tags={guide.data.tags}
+  faq={guide.data.faq}
+  nextSteps={guide.data.nextSteps}
+  completedConcept={guide.data.completedConcept}
+>
+  <Content />
+</ArticleLayout>

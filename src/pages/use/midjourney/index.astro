@@ -1,0 +1,84 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "国内手机号可以直接注册 Discord 登录 Midjourney 吗？",
+    answer: "可以。注册 Discord 时可以使用国内 +86 手机号或 Gmail/Outlook 邮箱接收验证码。但务必在注册前开启海外代理（推荐美国、日本或台湾节点），并且保持浏览器无痕模式，否则可能因为 IP 频繁变动触发机器人图形验证死循环。"
+  },
+  {
+    question: "Midjourney 怎么国内充值订阅付款？国内银联信用卡行吗？",
+    answer: "Midjourney 官方通过 Stripe 进行结算，国内发行的普通银联单标信用卡无法直接刷卡。可以使用国内银行发行的 Visa / MasterCard 双币/全币种信用卡、虚拟海外信用卡（如 WildCard）或者开通海外 PayPal 进行按月绑卡支付。"
+  },
+  {
+    question: "使用 Midjourney 需要消耗大量机场流量吗？",
+    answer: "不需要。Midjourney 主要通过文字 Prompt 在 Discord 中与官方 Bot 交互，生成的图片也只是普通 JPEG 格式，每月仅需几 GB 的轻度流量即可满足日常 AI 绘图需求，但对节点连接稳定性有较高要求。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "查看 ChatGPT 国内使用与原生防封指南",
+    url: "/use/chatgpt/",
+    description: "全面掌握 OpenAI 账号注册、Claude 绑卡与 IP 纯净度检测。"
+  },
+  {
+    title: "挑选适合 AI 绘图与开发的优质机场",
+    url: "/choose/ai/",
+    description: "对比 16 家支持 Discord/Midjourney 原生解锁的服务商。"
+  }
+];
+---
+
+<ArticleLayout
+  title="Midjourney 国内使用与 Discord 账号注册/绑卡完整避坑指南"
+  description="面向国内 AI 创作者与设计师的 Midjourney 完整实操教程，涵盖 Discord 注册防封环境、Stripe 海外绑卡、常用绘画指令与稳定节点推荐。"
+  category="use"
+  level="L3"
+  quickAnswer="在国内使用 Midjourney 需要准备三件事：1. 开启稳定海外节点（推荐美区/日区 IEPL 专线）；2. 注册并登录 Discord 账号，进入 Midjourney 官方服务器；3. 在对话框输入 /imagine 指令即可开始 AI 绘画。订阅会员需使用 Visa/MasterCard 双币信用卡或海外虚拟卡通过 Stripe 付款。"
+  pubDate="2026-08-17"
+  tags={["Midjourney", "Discord注册", "AI绘画", "海外绑卡", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="Midjourney 与海外 AI 工具链实操"
+  sourceText="waiwangzhinan.co AI 创作者工作流研究"
+>
+  <h2>一、国内使用 Midjourney 完整工作链路</h2>
+  <p>
+    Midjourney 与传统的独立绘图软件不同，它没有独立的 Windows 客户端，而是寄生在<strong>全球最大的社群聊天平台 Discord</strong> 之上。
+  </p>
+  <p>
+    因此，使用 Midjourney 的链路是：
+  </p>
+  <div class="card-surface-sub p-4 rounded-xl border border-brand-mint/30 bg-brand-mint/[0.02] text-xs text-content-secondary space-y-1 my-4">
+    <p class="font-bold text-content-primary">开启海外网络节点 → 注册 Discord 账号 → 搜索并加入 Midjourney 服务器 → 在聊天频道与 Midjourney Bot 对话绘图。</p>
+  </div>
+
+  <h2>二、Discord 注册与登录三大防封要点</h2>
+  <div class="space-y-3 my-6">
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-content-primary">1. 使用纯净稳定的固定节点</h3>
+      <p>尽量固定使用同一个地区（如美国或日本）的专线节点，切忌在 10 分钟内频繁切换香港、美国、欧洲等不同 IP，否则 Discord 安全系统会判定账号疑似被盗并要求手机短信/邮箱二次验证。</p>
+    </div>
+
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-content-primary">2. 优先使用海外主流邮箱</h3>
+      <p>注册时推荐使用 Gmail、Outlook 或 ProtonMail，避免使用部分国内小众邮箱导致无法收到 Discord 官方激活确认邮件。</p>
+    </div>
+
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1 text-xs text-content-secondary">
+      <h3 class="font-bold text-sm text-content-primary">3. 创建个人独立服务器（防刷屏技巧）</h3>
+      <p>在 Midjourney 官方频道的 <code>#newbies</code> 聊天室里，成千上万人在同时发图，几秒钟你的画就会被刷走。在 Discord 左侧点击「+」号创建一个你自己的个人服务器，然后将 <strong>Midjourney Bot</strong> 邀请进你的个人服务器，就能享受完全私密的清爽绘图环境！</p>
+    </div>
+  </div>
+
+  <h2>三、Midjourney 订阅付费与价格方案说明</h2>
+  <p class="text-xs text-content-secondary leading-relaxed mb-4">
+    Midjourney 目前不提供长期免费试用，需购买会员套餐：
+  </p>
+  <ul>
+    <li><strong>Basic Plan (10 美元/月)</strong>：每月约 200 张快速生图 (Fast GPU)，适合初学者与轻度体验。</li>
+    <li><strong>Standard Plan (30 美元/月)</strong>：15 小时快速生图 + <strong>无限量慢速排队生图 (Relax Mode)</strong>，性价比最高，适合设计师主力使用。</li>
+    <li><strong>Pro Plan (60 美元/月)</strong>：30 小时快速生图 + 开启隐身模式 (Stealth Mode，画作不在社区公开展示)。</li>
+  </ul>
+</ArticleLayout>

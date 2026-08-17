@@ -1,0 +1,52 @@
+---
+const questions = [
+  { text: '怎么访问国外网站？', url: '/start/how-to-access-overseas-websites/', hot: true, category: 'L0 入门' },
+  { text: '机场到底是什么？', url: '/airport/what-is-airport/', hot: true, category: 'L2 认知' },
+  { text: '代理和 VPN 有什么区别？', url: '/start/proxy-vs-vpn/', hot: false, category: 'L1 概念' },
+  { text: '节点是什么意思？', url: '/airport/what-is-node/', hot: false, category: 'L2 概念' },
+  { text: 'Clash Verge 怎么用？', url: '/clients/clash-verge/', hot: true, category: 'L3 客户端' },
+  { text: 'iPhone 小火箭怎么导入订阅？', url: '/clients/iphone/', hot: true, category: 'L3 客户端' },
+  { text: '机场订阅怎么用？', url: '/airport/what-is-subscription/', hot: false, category: 'L3 导入' },
+  { text: 'ChatGPT 国内怎么使用？', url: '/use/chatgpt/', hot: true, category: '场景' },
+  { text: '机场连不上全部超时怎么办？', url: '/fix/cannot-connect/', hot: true, category: 'L5 排错' },
+  { text: 'Clash 有节点但无法上网？', url: '/fix/no-internet/', hot: false, category: 'L5 排错' },
+  { text: '订阅更新失败怎么解决？', url: '/fix/subscription-error/', hot: false, category: 'L5 排错' },
+  { text: '小白该如何选择适合的机场？', url: '/choose/beginner/', hot: true, category: 'L4 选择' },
+  { text: 'GitHub 克隆太慢或打不开？', url: '/use/github/', hot: false, category: '场景' },
+  { text: 'v2rayN 怎么安装与配置？', url: '/clients/v2rayn/', hot: false, category: 'L3 客户端' },
+];
+---
+
+<div class="card-surface p-6 sm:p-8">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+    <div>
+      <div class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-mint mb-1">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>Question Cloud</span>
+      </div>
+      <h3 class="text-xl font-bold text-content-primary">新手最常搜索的热门问题</h3>
+    </div>
+    <span class="text-xs text-content-muted">点击任意问题，直达 30 秒快速解答</span>
+  </div>
+
+  <div class="flex flex-wrap gap-2.5">
+    {questions.map((q) => (
+      <a
+        href={q.url}
+        class={`group inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all duration-150 ${
+          q.hot
+            ? 'bg-bg-sub border border-white/10 hover:border-brand-mint/40 text-content-primary hover:text-brand-mint'
+            : 'bg-bg-main border border-white/5 hover:border-white/20 text-content-secondary hover:text-content-primary'
+        }`}
+      >
+        <span class="text-brand-mint/60 group-hover:text-brand-mint font-mono text-[10px]">#</span>
+        <span>{q.text}</span>
+        <span class="text-[10px] px-1.5 py-0.2 rounded bg-white/5 text-content-muted font-mono">{q.category}</span>
+      </a>
+    ))}
+  </div>
+</div>

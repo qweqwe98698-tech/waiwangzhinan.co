@@ -1,0 +1,57 @@
+{
+  "slug": "guangsu",
+  "name": "光速云",
+  "tagline": "老牌综合型 / IEPL 内网专线 / VLESS 协议 / AI 与流媒体全解锁",
+  "summary": "2020 年开业老牌综合型服务商，主打企业级 IEPL 内网专线与 VLESS 协议。支持常见主流流媒体及 AI 工具访问，提供自研客户端与全平台第三方订阅导入。",
+  "pricing": {
+    "startingPrice": 7.5,
+    "billingCycle": "月 (年付折算)",
+    "monthlyPrice": 17,
+    "traffic": "59GB - 110GB",
+    "currency": "CNY"
+  },
+  "protocols": [
+    "VLESS",
+    "IEPL 专线",
+    "Shadowsocks"
+  ],
+  "devices": [
+    "Windows",
+    "macOS",
+    "iOS",
+    "Android",
+    "Linux",
+    "Router"
+  ],
+  "features": [
+    "2020年稳定运营老牌",
+    "企业级IEPL内网专线",
+    "VLESS高抗封协议",
+    "ChatGPT/Claude原生支持",
+    "自研客户端+第三方订阅导入",
+    "支持支付宝/微信/USDT"
+  ],
+  "recommendFor": [
+    "综合日常使用",
+    "晚高峰稳定性优先",
+    "ChatGPT/Claude重度用户",
+    "4K影音流媒体"
+  ],
+  "aiSupport": "支持 (ChatGPT / Claude / Gemini 实测原生可用)",
+  "streaming": "支持 (Netflix / Disney+ / YouTube 4K / Spotify)",
+  "speedtestImage": "/images/speedtests/guangsu-speedtest.png",
+  "speedtestTestedAt": "2026-08-11T14:32:56+08:00",
+  "speedtestTool": "MAI-TEST-BOT 2.0.0-dev",
+  "officialUrl": "https://sahude.gsyvipaff.com/#/?code=keqgvT5Y",
+  "promoCode": "AMM",
+  "discount": "新人注册 8 折",
+  "estYear": 2020,
+  "paymentMethods": [
+    "支付宝",
+    "微信",
+    "USDT"
+  ],
+  "verificationStatus": "已核验 (2026-08-11实测)",
+  "lastVerified": "2026-08-11",
+  "notes": "运营年限长，线路抗抖动能力强。第三方客户端订阅导入支持需咨询客服获取专用转换。建议初次使用先选择月付测试。"
+}

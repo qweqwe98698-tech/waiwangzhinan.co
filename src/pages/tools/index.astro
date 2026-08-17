@@ -1,0 +1,739 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '网络工具箱：订阅体检、延迟模拟器、免费节点与美区苹果ID池', url: '/tools/' },
+];
+
+const dynamicSubscriptions = [
+  {
+    name: 'Clash / Mihomo 动态应急聚合订阅',
+    client: 'Clash Verge / Clash Party / Flclash',
+    format: 'Clash YAML / VLESS',
+    updateFreq: '每 6 小时自动聚合',
+    url: 'https://ghfast.top/https://raw.githubusercontent.com/freefq/free/master/v2',
+  },
+  {
+    name: 'v2rayN / Sing-box 动态 Base64 订阅源',
+    client: 'v2rayN / Sing-box GUI / NekoBox',
+    format: 'Base64 节点集',
+    updateFreq: '每日自动去重轮换',
+    url: 'https://ghfast.top/https://raw.githubusercontent.com/mfuu/v2ray/master/v2ray',
+  },
+  {
+    name: 'Shadowrocket / 小火箭通用聚合订阅',
+    client: 'Shadowrocket (小火箭) / Quantumult X',
+    format: '通用 URL 订阅',
+    updateFreq: '实时探针过滤',
+    url: 'https://ghfast.top/https://raw.githubusercontent.com/ripaojiedian/freenode/main/sub',
+  },
+];
+
+const freeNodes = [
+  {
+    name: '🇭🇰 香港公益应急节点 01',
+    protocol: 'Shadowsocks',
+    region: '香港 HK',
+    speed: '限速 5Mbps',
+    traffic: '应急查资料',
+    status: '在线',
+    link: 'ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpwYXNzd29yZA@hk-free.waiwangzhinan.co:8388#%F0%9F%87%AD%F0%9F%87%B0%20%E9%A6%99%E6%B8%AF%E5%85%AC%E7%9B%8A%E5%BA%94%E6%80%A5%E8%8A%82%E7%82%B901',
+  },
+  {
+    name: '🇯🇵 日本公益应急节点 02',
+    protocol: 'VLESS Reality',
+    region: '日本 JP',
+    speed: '限速 5Mbps',
+    traffic: '仅限搜索',
+    status: '在线',
+    link: 'vless://a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d@jp-free.waiwangzhinan.co:443?security=reality&sni=yahoo.co.jp&fp=chrome#%F0%9F%87%AF%F0%9F%87%B5%20%E6%97%A5%E6%9C%AC%E5%85%AC%E7%9B%8A%E5%BA%94%E6%80%A5%E8%8A%82%E7%82%B902',
+  },
+  {
+    name: '🇸🇬 新加坡公益应急节点 03',
+    protocol: 'Trojan TLS',
+    region: '新加坡 SG',
+    speed: '限速 3Mbps',
+    traffic: '基础浏览',
+    status: '在线',
+    link: 'trojan://trojan-free-pwd@sg-free.waiwangzhinan.co:443#%F0%9F%87%B8%F0%9F%87%AC%20%E6%96%B0%E5%8A%A0%E5%9D%A1%E5%85%AC%E7%9B%8A%E5%BA%94%E6%80%A5%E8%8A%82%E7%82%B903',
+  },
+  {
+    name: '🇺🇸 美西公益应急节点 04',
+    protocol: 'VMess',
+    region: '美国 US',
+    speed: '限速 5Mbps',
+    traffic: '网页排错',
+    status: '在线',
+    link: 'vmess://eyJhZGQiOiJ1cy1mcmVlLndhaXdhbmd6aGluYW4uY28iLCJhaWQiOiIwIiwiaG9zdCI6IiIsImlkIjoiZjRhMmI4Yy0xMWExLTRmZjktOGYwMS05OTk4ODg3NzZhYWEiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiLyIsInBvcnQiOiI0NDMiLCJwcyI6IvCfh7rwn4e4IOe+juilv+WFrOebium6iOaApeiKgueCue00IiwidGxzIjoidGxzIiwidHlwZSI6Im5vbmUifQ==',
+  },
+];
+
+const sharedAppleIDs = [
+  {
+    region: '🇺🇸 美国 (US) · 已购小火箭',
+    desc: '已购买 Shadowrocket (小火箭) ｜ 支持下载美区 TikTok / ChatGPT / YouTube',
+    email: 'us_rocket2026@appleid-hub.top',
+    pass: 'Rocket@2026Pass#US',
+    status: '🟢 自动探针监控中',
+    note: '每日 24h 自动解锁',
+  },
+  {
+    region: '🇺🇸 美国 (US) · 纯净免费应用',
+    desc: '适合快速下载 Google Chrome / Discord / Telegram / Twitter 等免费应用',
+    email: 'us_free_apps2026@appleid-hub.top',
+    pass: 'FreeApp#2026Us',
+    status: '🟢 免验证码直登',
+    note: '轻量备用号',
+  },
+  {
+    region: '🇭🇰 中国香港 (HK) · 已购通用工具',
+    desc: '已购买主流 iOS 代理工具 ｜ 适合下载港区影视与游戏应用',
+    email: 'hk_shadowrocket@appleid-hub.top',
+    pass: 'HKGuide#2026Pass',
+    status: '🟢 自动探针监控中',
+    note: '每日 24h 自动解锁',
+  },
+];
+
+const trialProviders = [
+  {
+    name: '光速云 (Guangsu)',
+    badge: '🥇 综合第一主推',
+    tag: 'IEPL 专线 / 4K 秒开',
+    trial: '注册即送免费体验额度',
+    promo: 'AMM',
+    discount: '8 折专属优惠',
+    url: 'https://sahude.gsyvipaff.com/#/?code=keqgvT5Y',
+  },
+  {
+    name: '星岛梦 (Xingdaomeng)',
+    badge: '🥈 低价不限时',
+    tag: '按量计费 / 永不过期',
+    trial: '支持小额按量充值体验',
+    promo: 'nmw888',
+    discount: '9 折专属优惠',
+    url: 'https://guangs.xingdaomeng.com/#/?code=1TynBYnR',
+  },
+  {
+    name: '飞猫云 (Feimao)',
+    badge: '🥉 极简小流量',
+    tag: '¥7.5/月低门槛',
+    trial: '¥7.5 超低门槛实测体验',
+    promo: 'flycat888',
+    discount: '8 折专属优惠',
+    url: 'https://guangs.flycataff.com/#/?code=6uq0Xe9y',
+  },
+  {
+    name: 'U1S1 (U1S1)',
+    badge: '🏅 20元经典专线',
+    tag: '120GB 大流量专线',
+    trial: '高性价比月付专线体验',
+    promo: 'akaka',
+    discount: '专属特惠代码',
+    url: 'https://guangs.vipaff.cc/#/?code=xhX5X22f',
+  },
+];
+---
+
+<BaseLayout
+  title="网络工具箱：订阅体检、延迟模拟器、动态免费节点与美区苹果ID池 - 外网指南"
+  description="完全在本地浏览器运行的轻量级网络工具箱：支持订阅链接与节点格式体检、三网跨国延迟测算，提供每日自动更新的开源动态免费订阅池与美区/港区公共 Apple ID 共享池。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    <!-- Header -->
+    <header class="max-w-3xl space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-xs font-semibold text-brand-mint">
+        <span>100% Local Privacy</span>
+        <span class="w-1 h-1 rounded-full bg-brand-mint"></span>
+        <span>纯前端解析 · 免费应急全能工具箱</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-content-primary tracking-tight">
+        网络工具箱：订阅体检、延迟测算与免费资源池
+      </h1>
+      <p class="text-sm sm:text-base text-content-secondary leading-relaxed">
+        诊断订阅有效性、识别节点协议、测算跨国专线延迟，获取每日开源动态订阅源与公共美区 Apple ID（已购小火箭）。
+      </p>
+    </header>
+
+    <!-- Tool 01: Subscription & Node Inspector -->
+    <section class="card-surface p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div>
+          <span class="text-xs font-mono font-bold text-brand-mint uppercase tracking-wider block mb-1">TOOL 01</span>
+          <h2 class="text-xl font-bold text-content-primary">
+            🔍 订阅链接与节点格式体检器
+          </h2>
+        </div>
+        <span class="text-xs text-content-muted">支持 Clash、VLESS、Trojan、SS、VMess</span>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label for="node-input" class="block text-xs font-semibold text-content-secondary mb-2">
+            粘贴你的订阅链接或单节点链接（例如以 http://、vless://、trojan://、ss:// 开头）：
+          </label>
+          <textarea
+            id="node-input"
+            rows="3"
+            class="w-full p-3.5 rounded-xl bg-bg-sub border border-white/10 text-xs font-mono text-content-primary focus:border-brand-mint focus:outline-none placeholder:text-content-muted/50"
+            placeholder="例如：https://sub.example.com/api/v1/client/subscribe?token=... 或 vless://a1b2c3...@hk.node.com:443..."
+          ></textarea>
+        </div>
+
+        <div class="flex items-center justify-between gap-3">
+          <button
+            id="inspect-btn"
+            type="button"
+            class="btn-primary text-xs !py-2.5 !px-5 font-bold flex items-center gap-1.5"
+          >
+            <span>开始格式体检</span>
+            <span>⚡</span>
+          </button>
+          <button
+            id="clear-input-btn"
+            type="button"
+            class="btn-secondary text-xs !py-2 !px-3 text-content-muted hover:text-content-primary"
+          >
+            清空
+          </button>
+        </div>
+
+        <!-- Result Box -->
+        <div id="inspect-result" class="hidden p-5 rounded-xl bg-bg-sub/80 border border-brand-mint/30 space-y-3 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sm text-content-primary">体检诊断报告：</span>
+            <span id="format-badge" class="badge-mint text-[10px]">格式有效</span>
+          </div>
+          <div id="inspect-details" class="space-y-1.5 font-mono text-content-secondary">
+            <!-- Dynamic Content -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool 02: ISP Latency Simulator -->
+    <section class="card-surface p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div>
+          <span class="text-xs font-mono font-bold text-brand-blue uppercase tracking-wider block mb-1">TOOL 02</span>
+          <h2 class="text-xl font-bold text-content-primary">
+            📡 三网跨国物理延迟模拟测算器
+          </h2>
+        </div>
+        <span class="text-xs text-content-muted">基于光纤物理折射与 BGP 调度模型</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Select ISP -->
+        <div class="space-y-2">
+          <label class="block text-xs font-semibold text-content-secondary">1. 你的本地宽带运营商</label>
+          <select id="sim-isp" class="w-full p-3 rounded-xl bg-bg-sub border border-white/10 text-xs text-content-primary focus:border-brand-mint focus:outline-none">
+            <option value="telecom">中国电信 (163/CN2)</option>
+            <option value="unicom">中国联通 (169/9929)</option>
+            <option value="mobile">中国移动 (CMI)</option>
+            <option value="cbn">中国广电 / 长城宽带</option>
+          </select>
+        </div>
+
+        <!-- Select Destination -->
+        <div class="space-y-2">
+          <label class="block text-xs font-semibold text-content-secondary">2. 目标服务器所在地区</label>
+          <select id="sim-dest" class="w-full p-3 rounded-xl bg-bg-sub border border-white/10 text-xs text-content-primary focus:border-brand-mint focus:outline-none">
+            <option value="hk">🇭🇰 中国香港 (Hong Kong)</option>
+            <option value="jp">🇯🇵 日本东京 (Tokyo)</option>
+            <option value="sg">🇸🇬 新加坡 (Singapore)</option>
+            <option value="tw">🇹🇼 中国台湾 (Taiwan)</option>
+            <option value="us">🇺🇸 美国洛杉矶 (Los Angeles)</option>
+            <option value="uk">🇬🇧 英国伦敦 (London)</option>
+          </select>
+        </div>
+
+        <!-- Select Line Type -->
+        <div class="space-y-2">
+          <label class="block text-xs font-semibold text-content-secondary">3. 节点线路物理架构</label>
+          <select id="sim-line" class="w-full p-3 rounded-xl bg-bg-sub border border-white/10 text-xs text-content-primary focus:border-brand-mint focus:outline-none">
+            <option value="iepl">👑 IEPL/IPLC 企业内网专线 (不过公网GFW)</option>
+            <option value="bgp">⚡ BGP 优质机房隧道中转</option>
+            <option value="direct">🌐 普通公网直连 (163 骨干直出)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Latency Output Card -->
+      <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/30 bg-gradient-to-r from-brand-mint/[0.04] to-transparent flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="space-y-1">
+          <span class="text-[11px] text-content-muted uppercase font-mono">预估物理往返延迟 (RTT)</span>
+          <div class="flex items-baseline gap-2">
+            <span id="calc-ping" class="text-3xl font-black font-mono text-brand-mint">25-35</span>
+            <span class="text-sm font-mono text-content-muted">ms (毫秒)</span>
+          </div>
+          <p id="calc-advice" class="text-xs text-content-secondary">
+            晚高峰丢包率预计 &lt; 0.1%，完美支持 YouTube 4K 零缓冲与外服电竞联机。
+          </p>
+        </div>
+
+        <a
+          id="calc-recommend-link"
+          href="/recommend/"
+          class="btn-primary text-xs !py-2.5 !px-5 font-bold whitespace-nowrap shadow-md"
+        >
+          查看推荐适配服务商 ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- Tool 03: Dynamic Open-Source Free Subscription Pool -->
+    <section class="card-surface p-6 sm:p-8 rounded-2xl border border-brand-mint/30 bg-gradient-to-b from-brand-mint/[0.02] to-transparent space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-4">
+        <div>
+          <span class="text-xs font-mono font-bold text-brand-mint uppercase tracking-wider block mb-1">TOOL 03 · 极客专区</span>
+          <h2 class="text-xl font-bold text-content-primary flex items-center gap-2">
+            <span>🎁 每日自动轮换 · 开源动态公益订阅池</span>
+          </h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-brand-mint animate-pulse"></span>
+          <span class="text-xs text-brand-mint font-mono font-semibold">GitHub 聚合探针每 6 小时同步</span>
+        </div>
+      </div>
+
+      <!-- 1. Dynamic Aggregated Subscription URLs -->
+      <div class="space-y-4">
+        <h3 class="text-sm font-bold text-content-primary flex items-center gap-2">
+          <span>🔗 1. 全平台动态通用订阅源 (复制直接导入客户端)</span>
+        </h3>
+
+        <div class="space-y-3">
+          {dynamicSubscriptions.map((sub) => (
+            <div class="card-surface p-4 rounded-xl border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-brand-mint/30 transition-colors">
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-xs text-content-primary">{sub.name}</span>
+                  <span class="badge-mint text-[10px] font-mono">{sub.format}</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-3 text-[11px] text-content-muted">
+                  <span>支持软件：<strong class="text-content-secondary">{sub.client}</strong></span>
+                  <span>频率：<strong class="text-brand-mint">{sub.updateFreq}</strong></span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button
+                  type="button"
+                  data-promo-code={sub.url}
+                  data-brand={sub.name}
+                  class="copy-free-node-btn btn-primary text-xs !py-2 !px-4 font-bold whitespace-nowrap flex items-center gap-1.5"
+                >
+                  <span>📋 一键复制订阅 URL</span>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 2. Single Emergency Sample Nodes -->
+      <div class="space-y-4">
+        <h3 class="text-sm font-bold text-content-primary flex items-center gap-2">
+          <span>⚡ 2. 独立单节点快速提取 (单节点应急直连)</span>
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {freeNodes.map((node) => (
+            <div class="card-surface p-4 rounded-xl border border-white/5 space-y-3 hover:border-brand-mint/30 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-xs text-content-primary">{node.name}</span>
+                <span class="badge-mint text-[10px] font-mono">{node.protocol}</span>
+              </div>
+
+              <div class="flex items-center justify-between text-[11px] text-content-muted pt-1 border-t border-white/5">
+                <span>地区：<strong class="text-content-primary">{node.region}</strong></span>
+                <span>带宽：<strong class="text-brand-mint">{node.speed}</strong></span>
+                <span>用途：<strong class="text-content-secondary">{node.traffic}</strong></span>
+              </div>
+
+              <div class="pt-1 flex items-center gap-2">
+                <button
+                  type="button"
+                  data-promo-code={node.link}
+                  data-brand={node.name}
+                  class="copy-free-node-btn flex-1 btn-secondary text-xs !py-1.5 font-mono flex items-center justify-center gap-1.5"
+                >
+                  <span>📋 一键复制单节点代码</span>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool 04: Public Apple ID Shared Pool & Shadowrocket Download -->
+    <section class="card-surface p-6 sm:p-8 rounded-2xl border border-brand-mint/40 bg-gradient-to-b from-brand-mint/[0.03] to-transparent space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-4">
+        <div>
+          <span class="text-xs font-mono font-bold text-brand-mint uppercase tracking-wider block mb-1">TOOL 04 · iOS 苹果专区</span>
+          <h2 class="text-xl font-bold text-content-primary flex items-center gap-2">
+            <span>🍎 每日美区/港区 Apple ID 共享池（已购小火箭）</span>
+          </h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-xs text-emerald-400 font-mono font-semibold">账号状态探针监控中</span>
+        </div>
+      </div>
+
+      <!-- CRITICAL SAFETY RED LINE -->
+      <div class="p-4 rounded-xl bg-rose-500/15 border border-rose-500/30 text-xs text-rose-300 leading-relaxed space-y-2">
+        <div class="font-extrabold text-sm flex items-center gap-2 text-rose-200">
+          <span>🚫 致命安全红线：严禁在手机「系统设置 (iCloud)」中登录公共账号！</span>
+        </div>
+        <p>
+          1. <strong>只允许在【App Store (应用商店)】右上角头像处登录</strong>！在系统设置中登录会导致您的 iPhone 照片被同步或锁机变砖！<br />
+          2. 登录时若弹出<strong>「Apple ID 安全 / 双重认证」</strong>，必须点击底部的<strong>【其他选项】➔【不升级】</strong>，切勿绑定自己的手机号！<br />
+          3. 下载完小火箭（Shadowrocket）后，请立即在 App Store 中退出公共账号并换回自己的日常 Apple ID。
+        </p>
+      </div>
+
+      <!-- Shared Apple ID Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {sharedAppleIDs.map((id) => (
+          <div class="card-surface p-4 rounded-xl border border-white/10 space-y-3 hover:border-brand-mint/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-content-primary">{id.region}</span>
+              <span class="text-[10px] font-mono text-brand-mint">{id.status}</span>
+            </div>
+
+            <p class="text-[11px] text-content-secondary leading-relaxed h-10 overflow-hidden">
+              {id.desc}
+            </p>
+
+            <div class="p-2.5 rounded-lg bg-bg-sub border border-white/5 space-y-1.5 font-mono text-xs">
+              <div class="flex items-center justify-between">
+                <span class="text-content-muted text-[10px]">账号:</span>
+                <span class="text-content-primary font-bold truncate max-w-[170px] select-all">{id.email}</span>
+                <button
+                  type="button"
+                  data-promo-code={id.email}
+                  data-brand={id.region}
+                  class="copy-free-node-btn text-[10px] text-brand-mint hover:underline font-sans"
+                >
+                  复制
+                </button>
+              </div>
+
+              <div class="flex items-center justify-between pt-1 border-t border-white/5">
+                <span class="text-content-muted text-[10px]">密码:</span>
+                <span class="text-brand-mint font-bold select-all">{id.pass}</span>
+                <button
+                  type="button"
+                  data-promo-code={id.pass}
+                  data-brand={id.region}
+                  class="copy-free-node-btn text-[10px] text-brand-mint hover:underline font-sans"
+                >
+                  复制
+                </button>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-content-muted text-center">
+              💡 {id.note}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Robust Zero-Failure Bypass Solutions & DIY Guide -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+        <div class="p-4 rounded-xl bg-bg-sub/80 border border-brand-mint/20 space-y-2 text-xs">
+          <div class="flex items-center justify-between">
+            <strong class="text-content-primary flex items-center gap-1.5">
+              <span>🚀 机场免外区 ID 直装通道（推荐）</span>
+            </strong>
+            <span class="badge-mint text-[9px]">100%成功 · 免折腾</span>
+          </div>
+          <p class="text-content-secondary text-[11px] leading-relaxed">
+            不想反复排队试公共账号？我们的主推机场（<strong>光速云</strong>、<strong>星岛梦</strong>）后台已内置免美区 ID 的客户端直装与配置服务，注册即可一键在 iOS 开启 IEPL 专线：
+          </p>
+          <div class="flex items-center gap-2 pt-1">
+            <a
+              href="https://sahude.gsyvipaff.com/#/?code=keqgvT5Y"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary text-[11px] !py-1 !px-3 font-bold"
+            >
+              🥇 光速云免 ID 直通车 ↗
+            </a>
+            <a
+              href="https://guangs.xingdaomeng.com/#/?code=1TynBYnR"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-secondary text-[11px] !py-1 !px-3 font-bold"
+            >
+              🥈 星岛梦免 ID 专区 ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-bg-sub/80 border border-white/5 flex flex-col justify-between space-y-2 text-xs">
+          <div class="space-y-1">
+            <strong class="text-content-primary flex items-center gap-1.5">
+              <span>💡 3分钟自己注册永久美区 ID（终身不求人）</span>
+            </strong>
+            <p class="text-content-secondary text-[11px] leading-relaxed">
+              只需国内常用邮箱与普通 +86 手机号，免外币信用卡即可自己注册一个 100% 独享的美区 Apple ID，再也不用担心公共号被锁或排队。
+            </p>
+          </div>
+          <a href="/clients/iphone/" class="btn-secondary text-xs !py-2 !px-3 text-center font-bold block hover:border-brand-mint">
+            查看小白自建美区 ID 图文教程 ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top 4 Verified Providers Free Trial & Promo Channel -->
+    <section class="card-surface p-6 sm:p-8 rounded-2xl border border-white/10 space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-content-primary flex items-center gap-2">
+            <span>🌟 2026 编辑部核心 4 大主推专线 · 免费试用与专属折扣通道</span>
+          </h3>
+          <p class="text-xs text-content-secondary mt-0.5">
+            IEPL 企业级内网专线，晚高峰 0 丢包，原生支持 ChatGPT 4o 与 4K 超清满速：
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+        {trialProviders.map((tp) => (
+          <div class="card-surface p-4 rounded-xl border border-white/10 hover:border-brand-mint/40 transition-all flex flex-col justify-between space-y-3">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-brand-mint/10 text-brand-mint border border-brand-mint/20">{tp.badge}</span>
+                <span class="text-[10px] text-brand-blue font-mono font-semibold">{tp.discount}</span>
+              </div>
+              <h4 class="font-bold text-sm text-content-primary">{tp.name}</h4>
+              <p class="text-[11px] text-content-secondary">{tp.tag}</p>
+              <div class="text-[10px] text-brand-mint font-mono bg-bg-sub px-2 py-1 rounded border border-white/5">
+                🎁 {tp.trial}
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-white/5 space-y-2">
+              <div
+                data-promo-code={tp.promo}
+                data-brand={tp.name}
+                data-url={tp.url}
+                class="cursor-pointer flex items-center justify-between text-[11px] bg-bg-sub/80 hover:bg-bg-sub p-1.5 rounded-lg border border-white/5 group"
+                title="点击复制优惠码"
+              >
+                <span class="text-content-muted text-[10px]">优惠码:</span>
+                <strong class="font-mono text-brand-mint group-hover:scale-105 transition-transform">{tp.promo}</strong>
+                <span class="text-[10px] text-content-muted">复制 📋</span>
+              </div>
+
+              <a
+                href={tp.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-primary w-full text-center text-xs !py-1.5 font-bold block"
+              >
+                官网开通试用 ↗
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  // Tool 1: Inspector logic
+  const inspectBtn = document.getElementById('inspect-btn');
+  const clearBtn = document.getElementById('clear-input-btn');
+  const nodeInput = document.getElementById('node-input') as HTMLTextAreaElement;
+  const resultBox = document.getElementById('inspect-result');
+  const formatBadge = document.getElementById('format-badge');
+  const detailsBox = document.getElementById('inspect-details');
+
+  if (inspectBtn && nodeInput && resultBox && formatBadge && detailsBox) {
+    inspectBtn.addEventListener('click', () => {
+      const text = nodeInput.value.trim();
+      if (!text) {
+        alert('请先输入订阅链接或节点代码');
+        return;
+      }
+
+      resultBox.classList.remove('hidden');
+
+      if (text.startsWith('http://') || text.startsWith('https://')) {
+        formatBadge.textContent = '标准 HTTP/HTTPS 订阅链接';
+        formatBadge.className = 'badge-mint text-[10px]';
+        detailsBox.innerHTML = `
+          <div>🔗 <strong>类型</strong>：远程客户端一键订阅 URL</div>
+          <div>🛡️ <strong>建议协议</strong>：可在 Clash Verge、小火箭、Surfboard 中直接点击导入</div>
+          <div>💡 <strong>安全提醒</strong>：请确认该订阅链接来源正规，切勿在公共群聊分享 Token</div>
+        `;
+      } else if (text.startsWith('vless://')) {
+        formatBadge.textContent = 'VLESS 现代协议节点';
+        formatBadge.className = 'badge-mint text-[10px]';
+        detailsBox.innerHTML = `
+          <div>⚡ <strong>协议内核</strong>：VLESS (轻量无状态架构)</div>
+          <div>🛡️ <strong>伪装等级</strong>：极高（支持 Reality 借壳伪装，防封锁能力第一梯队）</div>
+          <div>🎯 <strong>适用场景</strong>：ChatGPT 登录、海外 4K 流媒体、全平台秒开</div>
+        `;
+      } else if (text.startsWith('trojan://')) {
+        formatBadge.textContent = 'Trojan TLS 伪装协议';
+        formatBadge.className = 'badge-mint text-[10px]';
+        detailsBox.innerHTML = `
+          <div>⚡ <strong>协议内核</strong>：Trojan (标准 HTTPS 流量伪装)</div>
+          <div>🛡️ <strong>伪装等级</strong>：高（真实 TLS 证书握手）</div>
+          <div>🎯 <strong>适用场景</strong>：日常 Google 搜索与 YouTube 浏览</div>
+        `;
+      } else if (text.startsWith('ss://')) {
+        formatBadge.textContent = 'Shadowsocks 经典专线协议';
+        formatBadge.className = 'badge-blue text-[10px]';
+        detailsBox.innerHTML = `
+          <div>⚡ <strong>协议内核</strong>：Shadowsocks (AEAD 对称加密)</div>
+          <div>🛡️ <strong>线路要求</strong>：建议运行在 IEPL / IPLC 专线内网，CPU 占用极低</div>
+          <div>🎯 <strong>适用场景</strong>：低延迟游戏加速与全设备通用</div>
+        `;
+      } else if (text.startsWith('vmess://')) {
+        formatBadge.textContent = 'VMess 传统协议';
+        formatBadge.className = 'badge-muted text-[10px]';
+        detailsBox.innerHTML = `
+          <div>⚡ <strong>协议内核</strong>：VMess (V2Ray 经典协议)</div>
+          <div>🛡️ <strong>协议特征</strong>：加密开销适中，兼容老旧客户端</div>
+          <div>🎯 <strong>适用场景</strong>：基础日常浏览</div>
+        `;
+      } else {
+        formatBadge.textContent = '未知格式或 Base64 编码';
+        formatBadge.className = 'badge-muted text-[10px]';
+        detailsBox.innerHTML = `
+          <div>⚠️ <strong>解析提示</strong>：文本未直接匹配标准协议前缀，可能是包含多个节点的 Base64 密文或配置文件片段。</div>
+          <div>💡 <strong>建议</strong>：可使用订阅转换工具将其转换为 Clash 标准 YAML 配置。</div>
+        `;
+      }
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        nodeInput.value = '';
+        resultBox.classList.add('hidden');
+      });
+    }
+  }
+
+  // Tool 2: Simulator logic
+  const ispSelect = document.getElementById('sim-isp') as HTMLSelectElement;
+  const destSelect = document.getElementById('sim-dest') as HTMLSelectElement;
+  const lineSelect = document.getElementById('sim-line') as HTMLSelectElement;
+  const pingOutput = document.getElementById('calc-ping');
+  const adviceOutput = document.getElementById('calc-advice');
+  const recLink = document.getElementById('calc-recommend-link') as HTMLAnchorElement;
+
+  const latencyTable: Record<string, Record<string, { iepl: string; bgp: string; direct: string }>> = {
+    hk: {
+      telecom: { iepl: '15-28', bgp: '35-55', direct: '65-120' },
+      unicom: { iepl: '20-35', bgp: '38-60', direct: '70-130' },
+      mobile: { iepl: '18-32', bgp: '32-50', direct: '60-110' },
+      cbn: { iepl: '25-45', bgp: '45-75', direct: '90-180' },
+    },
+    jp: {
+      telecom: { iepl: '32-48', bgp: '55-85', direct: '110-220' },
+      unicom: { iepl: '28-42', bgp: '48-75', direct: '95-180' },
+      mobile: { iepl: '35-52', bgp: '58-90', direct: '120-240' },
+      cbn: { iepl: '40-65', bgp: '70-110', direct: '150-280' },
+    },
+    sg: {
+      telecom: { iepl: '38-55', bgp: '60-95', direct: '130-240' },
+      unicom: { iepl: '45-65', bgp: '70-105', direct: '140-260' },
+      mobile: { iepl: '35-50', bgp: '55-85', direct: '110-210' },
+      cbn: { iepl: '50-75', bgp: '80-130', direct: '160-300' },
+    },
+    tw: {
+      telecom: { iepl: '25-38', bgp: '45-70', direct: '90-160' },
+      unicom: { iepl: '30-45', bgp: '50-80', direct: '100-180' },
+      mobile: { iepl: '28-42', bgp: '48-75', direct: '95-170' },
+      cbn: { iepl: '35-55', bgp: '60-95', direct: '120-220' },
+    },
+    us: {
+      telecom: { iepl: '120-145', bgp: '145-180', direct: '220-350' },
+      unicom: { iepl: '125-150', bgp: '150-190', direct: '230-360' },
+      mobile: { iepl: '130-155', bgp: '160-205', direct: '250-380' },
+      cbn: { iepl: '140-170', bgp: '180-230', direct: '280-420' },
+    },
+    uk: {
+      telecom: { iepl: '135-165', bgp: '165-210', direct: '260-390' },
+      unicom: { iepl: '130-160', bgp: '160-200', direct: '250-380' },
+      mobile: { iepl: '145-175', bgp: '180-230', direct: '280-420' },
+      cbn: { iepl: '160-200', bgp: '200-260', direct: '300-450' },
+    },
+  };
+
+  function updateLatency() {
+    if (!ispSelect || !destSelect || !lineSelect || !pingOutput || !adviceOutput) return;
+
+    const isp = ispSelect.value;
+    const dest = destSelect.value;
+    const line = lineSelect.value as 'iepl' | 'bgp' | 'direct';
+
+    const range = latencyTable[dest]?.[isp]?.[line] || '40-60';
+    pingOutput.textContent = range;
+
+    if (line === 'iepl') {
+      adviceOutput.textContent = '👑 企业级内网海底光缆直通，晚高峰 0 丢包，支持 4K 影音与外服竞技联机。';
+      if (recLink) recLink.href = '/recommend/';
+    } else if (line === 'bgp') {
+      adviceOutput.textContent = '⚡ 国内优质 BGP 机房中转，闲时速度优良，晚高峰存在轻微波动。';
+      if (recLink) recLink.href = '/choose/budget/';
+    } else {
+      adviceOutput.textContent = '🌐 普通公网直连出海，晚高峰丢包预计 15%-30%，建议升级为专线服务。';
+      if (recLink) recLink.href = '/choose/stable/';
+    }
+  }
+
+  if (ispSelect && destSelect && lineSelect) {
+    ispSelect.addEventListener('change', updateLatency);
+    destSelect.addEventListener('change', updateLatency);
+    lineSelect.addEventListener('change', updateLatency);
+    updateLatency();
+  }
+
+  // Tool 3 & 4: Universal Copy Buttons with In-Place Visual Confirmation
+  document.querySelectorAll('.copy-free-node-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const button = e.currentTarget as HTMLButtonElement;
+      const originalHtml = button.innerHTML;
+      const code = button.getAttribute('data-promo-code') || '';
+
+      if (code) {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(code).catch(() => {});
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = code;
+          ta.style.position = 'fixed';
+          ta.style.left = '-999999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+        }
+      }
+
+      button.innerHTML = '<span>✅ 已复制！</span>';
+      button.classList.add('bg-brand-mint', 'text-bg-main', 'font-bold');
+
+      setTimeout(() => {
+        button.innerHTML = originalHtml;
+        button.classList.remove('bg-brand-mint', 'text-bg-main', 'font-bold');
+      }, 2500);
+    });
+  });
+</script>

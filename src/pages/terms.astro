@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '免责声明与服务条款', url: '/terms/' },
+];
+---
+
+<BaseLayout
+  title="免责声明与服务条款 - 外网指南"
+  description="外网指南网络知识科普与技术解析免责声明。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+    <header class="pb-6 border-b border-white/[0.08]">
+      <span class="badge-mint mb-2">法律合规 · Legal Terms</span>
+      <h1 class="text-3xl font-extrabold text-content-primary tracking-tight">
+        免责声明与使用条款
+      </h1>
+      <p class="text-sm text-content-secondary mt-2">
+        最后更新日期：2026 年 8 月 17 日
+      </p>
+    </header>
+
+    <div class="prose-guide space-y-6">
+      <h2>1. 科普与技术交流定位</h2>
+      <p>
+        外网指南（waiwangzhinan.co）所载的所有文章、教程、客户端配置与技术解析仅供<strong>计算机网络基础知识科普、跨国学术文献查阅、软件开发技术交流与教育研究</strong>之目的。
+      </p>
+
+      <h2>2. 用户行为规范与合规义务</h2>
+      <p>
+        本站坚决拥护国家网络安全法规。所有用户在参考本站内容时，必须严格遵守所在国家与地区的现行法律法规，严禁利用任何网络代理技术从事破坏网络安全、侵犯他人隐私或散布违法有害信息的行为。用户对其自身使用行为承担全部法律责任。
+      </p>
+
+      <h2>3. 第三方服务与链接声明</h2>
+      <p>
+        本站所提及的第三方软件（如 Clash Verge、Shadowrocket、v2rayN 等）均为独立的开源项目或商业软件；所涉及的服务商均为独立的第三方服务主体。本站与上述主体无任何归属或连带法律责任。用户在选购第三方虚拟商品时，应自行甄别风险并按月理性消费。
+      </p>
+
+      <h2>4. 知识产权与原创保护</h2>
+      <p>
+        本站所有原创架构设计、图文指南与交互组件版权均归外网指南所有。未经书面授权许可，严禁任何形式的自动化爬取、批量洗稿或恶意镜像。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

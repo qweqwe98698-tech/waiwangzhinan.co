@@ -1,0 +1,91 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "国内安卓手机（小米/华为/OPPO/vivo）安装客户端提示「危险应用」怎么办？",
+    answer: "这是国内手机系统的内置安全检测提示。只要你是在官方开源 GitHub Releases 或机场后台下载的正规 APK，选择「忽略风险并继续安装」或在系统设置中临时开启「允许安装未知来源应用」即可安全安装。"
+  },
+  {
+    question: "Surfboard 和 Clash Meta for Android 哪个更省电？",
+    answer: "Surfboard（冲浪板）针对 Android 原生 VPN 框架做了极其深入的底层优化，界面类似 iOS 的小火箭，常驻后台时耗电量与发热表现非常优秀；Clash Meta 则适合需要定制高级策略组的进阶用户。"
+  },
+  {
+    question: "安卓手机开启代理后锁屏就断连怎么办？",
+    answer: "这是因为手机系统的电池优化后台清理机制。解决方法：在手机「设置」→「应用管理」中找到代理软件，将「省电策略」设置为「无限制」，并在任务切换后台将该 App「加锁（锁定后台）」。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "了解 TUN 模式在安卓系统的接管机制",
+    url: "/clients/tun-mode-guide/",
+    description: "搞清安卓 VpnService 虚拟网卡如何分流手机所有 App 流量。"
+  },
+  {
+    title: "挑选支持安卓扫码一键导入的优质机场",
+    url: "/recommend/",
+    description: "客观对比 16 家已核验服务商在安卓手机上的适配表现。"
+  }
+];
+---
+
+<ArticleLayout
+  title="安卓 (Android) 手机怎么配置科学上网：Clash for Android 与 Surfboard、v2rayNG 实操"
+  description="针对安卓手机（小米 MIUI/HyperOS、华为 HarmonyOS、OPPO ColorOS、vivo OriginOS）的科学上网全流程指引，推荐 Surfboard、Clash Meta 与 v2rayNG 工具实操。"
+  category="clients"
+  level="L3"
+  quickAnswer="安卓手机推荐首选「Surfboard (冲浪板)」或「Clash Meta for Android」。安装 APK 后，从机场后台复制订阅链接或扫描二维码导入节点，开启「连接」并允许系统创建 VPN 隧道，即可实现全 App 智能规则分流，国内微信与海外 Google 同时秒开。"
+  pubDate="2026-08-17"
+  tags={["安卓翻墙", "Surfboard", "Clash Android", "v2rayNG", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="Android 平台客户端实操"
+  sourceText="waiwangzhinan.co 移动端系统评测"
+>
+  <h2>一、安卓主流客户端工具对比与推荐</h2>
+
+  <div class="space-y-4 my-6">
+    <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/40 bg-brand-mint/[0.02] space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-brand-mint">🥇 强烈推荐：Surfboard (冲浪板)</h3>
+        <span class="badge-mint text-[10px]">体验最佳 · 省电顺滑</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>核心优势</strong>：被称为“安卓版小火箭”，界面现代清爽；对 Surge 格式配置完美兼容；内存占用极低（仅 30-50MB），极少被系统杀后台。<br />
+        <strong>适用人群</strong>：追求省电、省心、开机自启的广大普通安卓用户。
+      </p>
+    </div>
+
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">🥈 经典全能：Clash Meta for Android (CMFA)</h3>
+        <span class="badge-blue text-[10px]">协议全 · 功能强</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>核心优势</strong>：基于新版 Mihomo 内核，原生支持 VLESS-Reality、Hysteria2、SSH 等几乎全部协议，策略组分流清晰。<br />
+        <strong>适用人群</strong>：使用复合协议专线节点或有分应用代理需求的用户。
+      </p>
+    </div>
+
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">🥉 极简兜底：v2rayNG</h3>
+        <span class="badge-muted text-[10px]">老牌通用工具</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>核心优势</strong>：单节点与单链接导入极其方便，兼容老旧低版本安卓系统。<br />
+        <strong>不足</strong>：界面较为原始，批量测速与规则切换不如前两者便捷。
+      </p>
+    </div>
+  </div>
+
+  <h2>二、安卓使用 Surfboard 三步极速配置教程</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-3">
+    <ol class="list-decimal pl-5 space-y-2.5 text-xs text-content-secondary">
+      <li><strong>下载与安装</strong>：在机场后台或 GitHub 下载最新的 <code>Surfboard.apk</code> 并安装。</li>
+      <li><strong>导入机场配置</strong>：打开 Surfboard，点击底部「配置 (Profile)」→ 点击右下角「+」号 → 选择「从 URL 导入」或「扫描二维码」，将机场提供的订阅链接导入进去并保存。</li>
+      <li><strong>选择节点并启动</strong>：点击底部「代理 (Proxies)」选择一个延迟较低的节点（如香港专线），然后切换到「仪表盘 (Dashboard)」点击右下角的大圆形「启动/连接」按钮，在系统弹出的「网络连接请求」中点击「确定」，即可顺利开启外网！</li>
+    </ol>
+  </div>
+</ArticleLayout>

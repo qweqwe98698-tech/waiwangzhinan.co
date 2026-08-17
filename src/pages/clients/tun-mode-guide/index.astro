@@ -1,0 +1,78 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "普通「系统代理」和「TUN 模式」到底有什么本质区别？",
+    answer: "系统代理（System Proxy）只是在操作系统网络设置里填了一个 HTTP 代理端口，只有自觉读取该设置的软件（如 Chrome 浏览器）才会走代理；而 TUN 模式是在系统底层创建一张虚拟网卡，强制接管电脑/手机发送的所有网络数据包（包括游戏、命令行终端、微信小程序、各种桌面软件），真正做到 100% 全局无死角分流。"
+  },
+  {
+    question: "开启 TUN 模式需要安装驱动或者管理员权限吗？",
+    answer: "需要。在 Windows 上首次开启 TUN 模式时，Clash Verge 会提示安装「服务模式 (Service Mode)」或虚拟网卡驱动（Wintun.dll），必须点击授权并允许管理员权限，成功安装后即可一键开关 TUN。"
+  },
+  {
+    question: "开了 TUN 模式后打外服游戏延迟会降低吗？",
+    answer: "会显著降低。因为 TUN 模式能够完整捕获并转发游戏的 UDP 数据包，配合低延迟 IEPL 游戏专线节点，可以代替昂贵的商业游戏加速器。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "了解外服游戏与 Steam 加速选型",
+    url: "/choose/gaming/",
+    description: "挑选支持 UDP 转发与低丢包的专线节点。"
+  },
+  {
+    title: "排查代理开启后微信慢与端口冲突",
+    url: "/fix/domestic-slow-bypass/",
+    description: "微调 TUN 模式下的局域网绕过与直连规则。"
+  }
+];
+---
+
+<ArticleLayout
+  title="什么是 TUN 模式（虚拟网卡）？解决游戏、终端和微信小程序不走代理的终极方案"
+  description="深度解析 TUN（虚拟网络适配器）工作原理，手把手教你在 Clash Verge、Sing-box 中开启 TUN 增强模式，解决各种顽固软件不走代理的痛点。"
+  category="clients"
+  level="L4"
+  quickAnswer="TUN 模式是通过在操作系统中创建一张「虚拟网卡」，直接在网络协议栈第三层（IP 层）全面接管设备的所有出站流量。它可以彻底解决普通系统代理无法加速「外服游戏、命令行终端 (git/curl)、微信内置浏览器/小程序、UWP 应用」等顽固软件的终极方案。"
+  pubDate="2026-08-17"
+  tags={["TUN模式", "虚拟网卡", "Clash Verge TUN", "游戏加速", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="TUN 虚拟网卡底层架构"
+  sourceText="waiwangzhinan.co 网络分流内核剖析"
+>
+  <h2>一、为什么很多软件开了代理依然无法连外网？</h2>
+  <p>
+    很多用户会遇到这种怪现象：
+  </p>
+  <ul>
+    <li>浏览器打开 YouTube 飞快，但在 Windows CMD / PowerShell 中运行 <code>git clone</code> 却一直超时报错；</li>
+    <li>玩 Steam / 暴雪外服游戏时，依然提示连接服务器失败；</li>
+    <li>微信内置的小程序或某些海外桌面客户端死活无法联网。</li>
+  </ul>
+  <p>
+    <strong>根本原因</strong>：传统的「系统代理」只是应用层的一种温和建议。很多软件在设计时根本不理睬系统的 HTTP 代理设置，或者使用了非 HTTP 的 UDP 协议，导致流量绕过了代理客户端。
+  </p>
+
+  <h2>二、一张图看懂 TUN 模式的霸道接管机制</h2>
+  <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/30 bg-brand-mint/[0.02] space-y-3 my-6">
+    <h3 class="text-sm font-bold text-brand-mint">⚡ TUN 虚拟网卡运作流程</h3>
+    <p class="text-xs text-content-secondary leading-relaxed">
+      操作系统发出任何网络数据包 → <strong>系统路由表强制重定向到 TUN 虚拟网卡</strong> → Clash 内核接管并解析数据包 → 根据分流规则（国内走直连 / 海外走加密节点）进行转发。
+    </p>
+    <p class="text-xs text-content-primary font-bold">
+      结论：只要开启了 TUN 模式，设备上的任何应用、任何协议都无法逃脱智能分流的掌心！
+    </p>
+  </div>
+
+  <h2>三、Windows / Mac 开启 TUN 模式具体步骤 (以 Clash Verge 为例)</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-3">
+    <ol class="list-decimal pl-5 space-y-2.5 text-xs text-content-secondary">
+      <li><strong>安装服务模式 (Service Mode)</strong>：打开 Clash Verge Rev，进入「设置 (Settings)」→ 找到「服务模式 (Service Mode)」并点击安装，允许管理员 UAC 权限，看到右侧图标变为绿色即可。</li>
+      <li><strong>开启 TUN 模式开关</strong>：在「设置」页面中，找到「TUN 模式 (Tun Mode)」开关并开启（此时右下角会提示网络适配器已创建）。</li>
+      <li><strong>关闭传统系统代理（可选）</strong>：开启 TUN 模式后，由于虚拟网卡已全面接管，你可以关闭「系统代理」开关，网络更清爽，完全杜绝关机系统代理残留导致的断网。</li>
+    </ol>
+  </div>
+</ArticleLayout>

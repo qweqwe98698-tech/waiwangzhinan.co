@@ -1,0 +1,119 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerSections = [
+  {
+    title: '知识认知体系',
+    links: [
+      { name: '第一次访问海外网站', href: '/start/' },
+      { name: '怎么访问国外网站', href: '/start/how-to-access-overseas-websites/' },
+      { name: '代理是什么', href: '/start/what-is-proxy/' },
+      { name: 'VPN 与代理的区别', href: '/start/proxy-vs-vpn/' },
+      { name: '机场与节点基础', href: '/airport/' },
+    ],
+  },
+  {
+    title: '客户端与系统',
+    links: [
+      { name: '全平台客户端总览', href: '/clients/' },
+      { name: 'Windows 使用教程', href: '/clients/windows/' },
+      { name: 'macOS 使用教程', href: '/clients/macos/' },
+      { name: 'iPhone (小火箭) 教程', href: '/clients/iphone/' },
+      { name: 'Android 客户端教程', href: '/clients/android/' },
+      { name: 'Clash Verge 配置指南', href: '/clients/clash-verge/' },
+    ],
+  },
+  {
+    title: '场景与排错',
+    links: [
+      { name: 'ChatGPT 访问与使用', href: '/use/chatgpt/' },
+      { name: 'Claude / Gemini 场景', href: '/use/claude/' },
+      { name: 'GitHub 打不开怎么办', href: '/use/github/' },
+      { name: '机场连不上与超时排查', href: '/fix/cannot-connect/' },
+      { name: '订阅更新失败解决', href: '/fix/subscription-error/' },
+      { name: '全站故障排查中枢', href: '/fix/' },
+    ],
+  },
+  {
+    title: '选型与规范',
+    links: [
+      { name: '新手选型指南', href: '/choose/beginner/' },
+      { name: '高性价比机场选择', href: '/choose/budget/' },
+      { name: 'AI 专用节点考量', href: '/choose/ai/' },
+      { name: '综合推荐与匹配器', href: '/recommend/' },
+      { name: '服务客观对比矩阵', href: '/compare/' },
+    ],
+  },
+];
+
+const legalLinks = [
+  { name: '关于本站', href: '/about/' },
+  { name: '编辑与核验规范', href: '/editorial/' },
+  { name: '免责声明', href: '/terms/' },
+  { name: '隐私政策', href: '/privacy/' },
+  { name: '联系与纠错', href: '/contact/' },
+  { name: '网站地图', href: '/sitemap/' },
+];
+---
+
+<footer class="border-t border-white/[0.06] bg-[#050709] text-content-secondary mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <!-- Top Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/[0.06]">
+      <!-- Brand & Mission -->
+      <div class="lg:col-span-1 space-y-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-bg-card border border-white/10 flex items-center justify-center">
+            <svg class="w-4 h-4 text-brand-mint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+            </svg>
+          </div>
+          <span class="font-bold text-lg text-content-primary">外网指南</span>
+        </div>
+        <p class="text-xs text-content-muted leading-relaxed">
+          面向国内第一次产生海外网络访问需求的新手用户，打造客观、循序渐进的交互式知识导航系统。
+        </p>
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-white/[0.03] border border-white/5 text-[11px] text-content-muted">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-mint animate-pulse"></span>
+          <span>内容持续核验更新中</span>
+        </div>
+      </div>
+
+      <!-- Nav Columns -->
+      {footerSections.map((section) => (
+        <div class="space-y-3">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-content-primary">
+            {section.title}
+          </h3>
+          <ul class="space-y-2 text-xs">
+            {section.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-content-secondary hover:text-brand-mint transition-colors inline-block py-0.5"
+                >
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Legal & E-E-A-T -->
+    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-content-muted">
+      <div class="flex flex-wrap items-center gap-4">
+        {legalLinks.map((item) => (
+          <a href={item.href} class="hover:text-content-primary transition-colors">
+            {item.name}
+          </a>
+        ))}
+      </div>
+      <p class="text-[11px]">
+        &copy; {currentYear} 外网指南 (waiwangzhinan.co). 保留所有权利。本站旨在进行网络基础知识科普与技术解析。
+      </p>
+    </div>
+  </div>
+</footer>

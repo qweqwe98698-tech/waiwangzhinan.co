@@ -1,0 +1,71 @@
+---
+import PillarLayout from '../../layouts/PillarLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGuides = await getCollection('guides', (entry) => entry.data.category === 'airport');
+const sortedGuides = allGuides.sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
+
+const staticClusters = [
+  {
+    title: "2026 机场节点倍率是什么意思？0.1倍率与3倍率有什么套路？",
+    url: "/airport/node-multiplier/",
+    description: "通俗解密机场节点倍率的扣量计算规则、高倍率专线与低倍率下载节点的合理搭配策略。",
+    quickAnswer: "节点倍率是扣费乘数，0.2x 适合下载大文件省流量，3.0x 原生专线适合注册防风控。",
+    level: "L2",
+    tags: ["节点倍率", "流量计算", "0.1倍率"],
+  },
+  {
+    title: "机场订阅链接泄漏了怎么办？重置订阅与安全防护指引",
+    url: "/airport/subscription-security/",
+    description: "指导机场订阅链接泄漏后的紧急补救措施、后台重置步骤与个人隐私防护策略。",
+    quickAnswer: "订阅泄漏后立即登录机场后台点击「重置 Token / 订阅」，旧链接瞬间失效作废。",
+    level: "L3",
+    tags: ["订阅安全", "重置订阅", "防盗刷"],
+  },
+  {
+    title: "免费节点与付费机场的本质差距：IP黑名单、隐私风险与限速真相",
+    url: "/airport/free-vs-paid/",
+    description: "客观对比公共免费代理与正规付费机场在物理带宽、IP 纯净度与 ChatGPT 解锁上的真实差距。",
+    quickAnswer: "免费节点极易导致 ChatGPT 封号与隐私泄漏，每月几元正规月付机场体验远超免费节点。",
+    level: "L2",
+    tags: ["免费节点", "付费机场", "节点风险"],
+  },
+];
+
+const clusters = [
+  ...sortedGuides.map((g) => ({
+    title: g.data.title,
+    url: `/airport/${g.id.replace(/^airport\//, '')}/`,
+    description: g.data.description,
+    quickAnswer: g.data.quickAnswer,
+    level: g.data.level,
+    tags: g.data.tags,
+  })),
+  ...staticClusters,
+];
+
+const pillarFaq = [
+  {
+    question: "为什么很多老用户把代理服务商叫做「机场」？",
+    answer: "早期主流翻墙软件 Shadowsocks 的图标是一架纸飞机，后来专门提供批量节点配置的服务商被大家幽默形象地称作「停机坪/机场」，这一行话一直沿用至今。"
+  },
+  {
+    question: "订阅链接可以给家里的多台电脑和手机同时使用吗？",
+    answer: "通常可以。正规机场通常允许 2-5 台设备同时在线使用，但严禁将链接公开分享给他人。"
+  }
+];
+---
+
+<PillarLayout
+  title="机场入门：服务商体系与节点中枢"
+  description="系统解读机场、节点、线路类型、订阅分发机制与购买避坑法则，教你建立理性的服务认知。"
+  levelBadge="Level 2–3"
+  leadText="所谓「机场」，就是将全球各地的优质海外服务器节点打包并以订阅链接形式交付给用户的服务商平台。掌握节点分布与订阅机制，是稳定使用外网的关键。"
+  clusters={clusters}
+  nextPillar={{
+    name: "多端客户端配置实战",
+    url: "/clients/",
+    desc: "学习 Windows、Mac、iPhone 和 Android 平台客户端的下载、导入与分流配置。"
+  }}
+  faq={pillarFaq}
+/>

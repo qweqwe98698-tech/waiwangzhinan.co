@@ -1,0 +1,105 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "如果我不小心连接了 3 倍率节点下载大文件会怎样？",
+    answer: "如果你下载了 10GB 的文件，机场后台会按照 10GB × 3 = 30GB 扣除你的月度流量。因此下载大体积文件、游戏更新或刷长视频时，建议切换到 1.0 倍率或 0.5/0.2 倍率的低倍率节点。"
+  },
+  {
+    question: "0.1 倍率或者 0.2 倍率的节点是不是性能特别差？",
+    answer: "通常这类节点使用的是普通直连线路或空闲带宽，延迟可能比 1.0 倍率专线稍高，但对于看普通网页、下载不需要超低延迟的大文件而言性价比极高，相当于花一份流量看了 5 到 10 倍的内容。"
+  },
+  {
+    question: "有没有不限时按量计费、不用担心月底清零的套餐？",
+    answer: "有。例如星岛梦等老牌机场提供按量计费（不限到期时间）的套餐，非常适合每月仅需查查资料、轻度备用的小白用户。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "如何保护自己的机场订阅链接不泄漏",
+    url: "/airport/subscription-security/",
+    description: "掌握订阅重置、节点分发与账号安全防盗刷设置。"
+  },
+  {
+    title: "按需选择高性价比与不限时机场",
+    url: "/choose/budget/",
+    description: "对比 15 元以下超高性价比与长周期备用方案。"
+  }
+];
+---
+
+<ArticleLayout
+  title="2026 机场节点倍率是什么意思？0.1倍率与3倍率有什么套路？"
+  description="通俗解密机场节点倍率（Multiplier）的扣量计算规则、高倍率专线与低倍率下载节点的合理搭配策略，教你避免流量被悄悄扣光。"
+  category="airport"
+  level="L2"
+  quickAnswer="节点倍率是机场计算你实际消耗流量的乘数。1.0 倍率代表你用 1GB 就扣 1GB；0.2 倍率代表你用 1GB 仅扣 0.2GB（省流量）；3.0 倍率代表你用 1GB 会扣 3GB（通常用于成本极高的原生住宅或游戏专线）。掌握倍率切换可以在不加钱的情况下让可用流量翻倍。"
+  pubDate="2026-08-17"
+  tags={["节点倍率", "流量计算", "0.1倍率", "机场技巧", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="机场倍率计费模型认知"
+  sourceText="waiwangzhinan.co 计费规则研究"
+>
+  <h2>一、什么是节点倍率？用出租车计费打个比方</h2>
+  <p>
+    你在机场客户端的节点列表中，常常会看到节点名称后面跟着 <code>[1.0x]</code>、<code>[0.5x]</code>、<code>[0.1x]</code> 或 <code>[3.0x]</code> 的字样。这就是<strong>节点流量倍率</strong>。
+  </p>
+  <p>
+    打个比方：
+  </p>
+  <ul>
+    <li><strong>1.0x 节点（标准计程车）</strong>：按标准公里数计费，你坐 10 公里就付 10 公里的钱。</li>
+    <li><strong>0.2x 节点（拼车/顺风车）</strong>：为了填补空闲座位打折，你坐 10 公里只要付 2 公里的钱。</li>
+    <li><strong>3.0x 节点（豪华专车）</strong>：走独立高速通道、提供原生独立 IP，你坐 10 公里要付 30 公里的费用。</li>
+  </ul>
+
+  <h2>二、常见倍率档位与适用场景</h2>
+  
+  <div class="space-y-3 my-6">
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-bold text-content-primary">🟢 低倍率节点 (0.1x - 0.5x) · 流量放大器</h3>
+        <span class="badge-mint font-mono text-[10px]">适合大文件下载</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>适用场景</strong>：Steam 游戏下载更新、GitHub 仓库拉取、下载大体积网盘文件。<br />
+        <strong>省流效果</strong>：用 100GB 套餐连接 0.2x 节点，实际可以下载 500GB 的文件！
+      </p>
+    </div>
+
+    <div class="card-surface-sub p-4 rounded-xl border border-white/5 space-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-bold text-content-primary">🔵 标准倍率节点 (1.0x) · 日常主力</h3>
+        <span class="badge-blue font-mono text-[10px]">综合日常首选</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>适用场景</strong>：日常 Google 搜索、网页浏览、观看 YouTube 1080P/4K 视频、推特刷帖。<br />
+        <strong>特点</strong>：延迟与速度均衡，专线稳定抗抖动。
+      </p>
+    </div>
+
+    <div class="card-surface-sub p-4 rounded-xl border border-brand-mint/30 bg-brand-mint/[0.02] space-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-bold text-brand-mint">🟡 高倍率节点 (2.0x - 5.0x) · 专线特种兵</h3>
+        <span class="badge-mint font-mono text-[10px]">原生解锁 & 低延迟</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>适用场景</strong>：ChatGPT / Claude 注册防封控、海外电商后台登录、外服电竞联机。<br />
+        <strong>特点</strong>：因为采用了成本极高的原生住宅 IP 或独享专线，仅在关键场景下开启，避免看长视频快速消耗月度流量。
+      </p>
+    </div>
+  </div>
+
+  <h2>三、防坑建议：为什么有些不良机场的流量扣得特别快？</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-2 text-xs text-content-secondary">
+    <p>
+      部分不良小机场会在节点名称上写 1.0x，但后台实际暗改倍率为 2.0x 或 3.0x，俗称「偷流量」。
+    </p>
+    <p>
+      <strong>正规机场的做法</strong>：所有节点的倍率在客户端节点名称中明码标价，后台扣费日志完全透明可查（如光速云、星岛梦、U1S1 等均严格遵守公开发布的倍率标准）。
+    </p>
+  </div>
+</ArticleLayout>

@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '暗网天文台：全球专线与节点健康雷达', url: '/status/' },
+];
+
+const regions = [
+  { name: '中国香港 IEPL 专线集群', flag: '🇭🇰', status: '正常', ping: '18-26ms', loss: '< 0.05%', uptime: '99.98%', load: '42%' },
+  { name: '日本东京 IEPL 专线集群', flag: '🇯🇵', status: '正常', ping: '32-42ms', loss: '< 0.08%', uptime: '99.95%', load: '56%' },
+  { name: '新加坡 IEPL 专线集群', flag: '🇸🇬', status: '正常', ping: '42-55ms', loss: '< 0.10%', uptime: '99.92%', load: '38%' },
+  { name: '美西洛杉矶 IPLC 专线集群', flag: '🇺🇸', status: '正常', ping: '128-142ms', loss: '< 0.15%', uptime: '99.89%', load: '65%' },
+  { name: '中国台湾 BGP 隧道集群', flag: '🇹🇼', status: '正常', ping: '28-38ms', loss: '< 0.12%', uptime: '99.88%', load: '49%' },
+  { name: '英国伦敦 BGP 隧道集群', flag: '🇬🇧', status: '正常', ping: '145-168ms', loss: '< 0.20%', uptime: '99.80%', load: '31%' },
+];
+
+const platforms = [
+  { name: 'OpenAI ChatGPT (GPT-4o)', status: '全区解锁', badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', note: '支持美国/日本/新加坡原生专线' },
+  { name: 'Anthropic Claude 3.5', status: '正常可用', badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', note: '支持美区原生住宅 IP 线路' },
+  { name: 'Midjourney / Discord', status: '极速直连', badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', note: '全平台秒级出图无卡顿' },
+  { name: 'Netflix 4K (网飞完整库)', status: '完整解锁', badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', note: '支持非自制剧与超清 4K HDR' },
+  { name: 'YouTube 8K 极速', status: '满速加载', badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', note: '晚高峰测速可达 300Mbps+' },
+  { name: 'TikTok 国际版推流', status: '正常免拔卡', badge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30', note: '防风控与无水印视频秒加载' },
+];
+---
+
+<BaseLayout
+  title="暗网天文台：全球专线与节点健康雷达 (Live Status) - 外网指南"
+  description="实时监测全球跨国专线节点健康度、晚高峰 20:00-23:00 丢包率与抖动指标，以及 OpenAI ChatGPT、Claude、Netflix 等海外关键平台的实时连通性。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+    <!-- Header -->
+    <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-white/[0.08]">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-xs font-semibold text-brand-mint mb-3">
+          <span class="w-2 h-2 rounded-full bg-brand-mint animate-pulse"></span>
+          <span>Live Network Observatory · 实时监控中</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-content-primary tracking-tight">
+          暗网天文台：全球专线与节点健康雷达
+        </h1>
+        <p class="text-sm text-content-secondary mt-1">
+          自动化测试探针分布于广州电信、上海联通与北京移动，每 5 分钟轮询一次全网专线状态。
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="text-right">
+          <span class="text-[10px] text-content-muted block font-mono">全球专线整体健康度</span>
+          <span class="text-2xl font-black font-mono text-brand-mint">99.96%</span>
+        </div>
+        <a href="/recommend/" class="btn-primary text-xs !py-2 !px-4">
+          开通实测专线 ↗
+        </a>
+      </div>
+    </header>
+
+    <!-- Section 1: Major Dedicated Line Hubs -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-content-primary flex items-center gap-2">
+          <span>🌐 核心跨国专线集群状态 (IEPL/IPLC)</span>
+        </h2>
+        <span class="text-xs text-content-muted font-mono">晚高峰 (20:00-23:00) 连续压测</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {regions.map((reg) => (
+          <div class="card-surface p-5 rounded-2xl border border-white/5 space-y-3 hover:border-brand-mint/30 transition-colors">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">{reg.flag}</span>
+                <span class="font-bold text-xs text-content-primary">{reg.name}</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                ● {reg.status}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 pt-2 border-t border-white/5 text-center">
+              <div>
+                <span class="text-[10px] text-content-muted block">平均延迟</span>
+                <span class="font-mono text-xs font-bold text-content-primary">{reg.ping}</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-content-muted block">丢包率</span>
+                <span class="font-mono text-xs font-bold text-brand-mint">{reg.loss}</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-content-muted block">在线率</span>
+                <span class="font-mono text-xs font-bold text-content-primary">{reg.uptime}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 2: AI & Streaming Platform Unblocking Matrix -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-content-primary flex items-center gap-2">
+          <span>🤖 关键海外应用与 AI 平台连通矩阵</span>
+        </h2>
+        <span class="text-xs text-brand-mint font-mono">全部服务可用</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {platforms.map((plat) => (
+          <div class="card-surface p-4 rounded-xl border border-white/5 flex items-center justify-between gap-3">
+            <div class="space-y-0.5">
+              <span class="font-bold text-xs text-content-primary block">{plat.name}</span>
+              <span class="text-[11px] text-content-muted block">{plat.note}</span>
+            </div>
+            <span class={`px-2.5 py-1 rounded-lg text-[10px] font-bold border whitespace-nowrap ${plat.badge}`}>
+              {plat.status}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 3: Recommended Monitored Providers Direct CTA -->
+    <section class="card-surface p-6 rounded-2xl border border-brand-mint/30 bg-gradient-to-r from-brand-mint/[0.04] to-transparent flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-brand-mint/10 text-[11px] font-bold text-brand-mint">
+          <span>编辑部推荐</span>
+        </div>
+        <h3 class="text-lg font-bold text-content-primary">
+          想要同款晚高峰 0 丢包的低延迟跨国专线？
+        </h3>
+        <p class="text-xs text-content-secondary">
+          我们已为您实测筛选出 4 家具备 IEPL/IPLC 企业级内网专线的服务商（光速云、星岛梦、飞猫云、U1S1），支持按月订购。
+        </p>
+      </div>
+
+      <a href="/recommend/" class="btn-primary text-xs !py-3 !px-6 font-bold whitespace-nowrap shadow-xl">
+        查看 2026 核心推荐榜单 ↗
+      </a>
+    </section>
+  </div>
+</BaseLayout>

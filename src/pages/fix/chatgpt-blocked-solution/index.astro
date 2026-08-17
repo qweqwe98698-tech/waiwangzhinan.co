@@ -1,0 +1,98 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "ChatGPT 提示「Access denied (Error 1020)」是什么意思？",
+    answer: "Error 1020 是 Cloudflare 的安全防火墙拦截报错。代表你当前连接的节点 IP 被 Cloudflare 识别为高风险数据中心代理、存在恶意爬虫行为或请求频率过高。解决方法：切换到同机场的其他纯净专线节点（推荐美国或新加坡原生节点），并开启浏览器无痕模式重新打开。"
+  },
+  {
+    question: "为什么我能打开 ChatGPT 首页，但一点登录就提示「Oops, an error occurred」？",
+    answer: "这是因为浏览器本地缓存记录了你此前的中国大陆地理位置或登录状态冲突。请按 `Ctrl + Shift + Delete`（Mac 为 `Cmd + Shift + Delete`）彻底清除最近 24 小时的 Cookie 和缓存数据，或者直接在 Chrome「无痕窗口 (Incognito Mode)」中重新登录。"
+  },
+  {
+    question: "ChatGPT App 手机版为什么一直提示「Something went wrong」？",
+    answer: "OpenAI 移动端 App 会调用底层系统的原生 TLS 握手。确保手机客户端（如小火箭或 Surfboard）开启了对 `openai.com` 与 `auth0.openai.com` 的完整域名解密分流，并避免连接已被 OpenAI 屏蔽的地区（如香港节点，ChatGPT 官方不对香港地区开放服务，必须连美国/日本/新加坡/台湾节点）。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "查看 ChatGPT 完整国内使用与防封指南",
+    url: "/use/chatgpt/",
+    description: "全面了解注册绑卡、原生住宅 IP 识别与 API 接入流程。"
+  },
+  {
+    title: "挑选 ChatGPT 官方原生支持的优质专线",
+    url: "/choose/ai/",
+    description: "对比 16 家具备 OpenAI / Claude 专线优化的高纯净度品牌。"
+  }
+];
+---
+
+<ArticleLayout
+  title="为什么开了代理还是打不开 ChatGPT？Access Denied、报错 1020 与 Cloudflare 拦截全解"
+  description="针对国内用户访问 OpenAI ChatGPT / Claude 经常遇到的 Access Denied、Error 1020、无法登录、频繁降智与验证码死循环的终极排查修复方案。"
+  category="fix"
+  level="L5"
+  quickAnswer="开了代理依然打不开 ChatGPT 的三大主要原因与解法：1. 节点选错了地区：ChatGPT 不支持香港节点，必须切换为【美国、日本、新加坡或台湾】专线节点；2. 浏览器 Cookie 缓存冲突：使用 Chrome【无痕模式 (Ctrl+Shift+N)】重新打开；3. 节点 IP 被拉黑：在客户端切换至具备【ChatGPT 解锁 / 原生 IP】的专属节点。"
+  pubDate="2026-08-17"
+  tags={["ChatGPT打不开", "Access Denied", "Error 1020", "Cloudflare拦截", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="OpenAI / Claude 网络封控排错"
+  sourceText="waiwangzhinan.co AI 访问可用性实验室"
+>
+  <h2>一、ChatGPT 五大常见报错全景速查表</h2>
+
+  <div class="card-surface overflow-hidden border border-white/10 rounded-xl my-6">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs border-collapse">
+        <thead>
+          <tr class="bg-bg-sub border-b border-white/10 text-content-primary font-semibold">
+            <th class="p-3.5">常见报错现象</th>
+            <th class="p-3.5">核心原因</th>
+            <th class="p-3.5 text-brand-mint">一分钟解决方案</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5 text-content-secondary">
+          <tr>
+            <td class="p-3.5 font-bold text-red-400">Access Denied (1020)</td>
+            <td class="p-3.5">Cloudflare 判定当前 IP 欺诈分过高</td>
+            <td class="p-3.5 text-brand-mint">更换美国/新加坡原生专线节点</td>
+          </tr>
+          <tr>
+            <td class="p-3.5 font-bold text-red-400">Unsupported Country</td>
+            <td class="p-3.5">连接了不支持的地区（如中国香港节点）</td>
+            <td class="p-3.5 text-brand-mint">切勿用香港，切换为美/日/新/台节点</td>
+          </tr>
+          <tr>
+            <td class="p-3.5 font-bold text-red-400">Oops, something went wrong</td>
+            <td class="p-3.5">本地浏览器 Cookie 污染与登录冲突</td>
+            <td class="p-3.5 text-brand-mint">开启 Chrome 无痕窗口或清空 Cookie</td>
+          </tr>
+          <tr>
+            <td class="p-3.5 font-bold text-red-400">频繁弹出 Cloudflare 验证码</td>
+            <td class="p-3.5">多人共用机房 IP，请求频次过高</td>
+            <td class="p-3.5 text-brand-mint">切换为独立专线或纯净住宅 IP 节点</td>
+          </tr>
+          <tr>
+            <td class="p-3.5 font-bold text-red-400">生成回答卡顿、降智为 GPT-3.5</td>
+            <td class="p-3.5">OpenAI 对低质量 IP 静默启用降级保护</td>
+            <td class="p-3.5 text-brand-mint">使用光速云等通过 IP 纯净度核验的专线</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>二、四步彻底排错实操流程</h2>
+  <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/30 bg-brand-mint/[0.02] space-y-3">
+    <ol class="list-decimal pl-5 space-y-2 text-xs text-content-secondary">
+      <li><strong>第一步：切换为美国 (US) 或新加坡 (SG) 专线节点</strong>，并在客户端中点击刷新延迟，确保延迟正常（非超时）。</li>
+      <li><strong>第二步：按 <code>Ctrl + Shift + N</code> 打开全新无痕浏览器窗口</strong>。</li>
+      <li><strong>第三步：在无痕窗口中访问 <code>https://chatgpt.com</code></strong>，点击「Log in」。</li>
+      <li><strong>第四步：输入邮箱与密码完成登录</strong>。此时即可彻底摆脱所有阻断报错！</li>
+    </ol>
+  </div>
+</ArticleLayout>

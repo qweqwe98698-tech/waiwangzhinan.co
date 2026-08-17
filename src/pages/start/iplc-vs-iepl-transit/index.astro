@@ -1,0 +1,102 @@
+---
+import ArticleLayout from '../../../layouts/ArticleLayout.astro';
+
+const faq = [
+  {
+    question: "普通直连节点和 IPLC/IEPL 专线最直观的体感差异是什么？",
+    answer: "白天闲时两者速度差距不明显，但在晚上 20:00 - 23:00 晚高峰期间，普通直连节点会因公网骨干网拥堵出现高达 30%-50% 的丢包，YouTube 4K 降画质或频繁缓冲；而 IPLC/IEPL 内网专线走企业私有光缆，晚高峰 0 丢包、延迟恒定在 30-50ms。"
+  },
+  {
+    question: "IPLC 和 IEPL 专线有什么区别？",
+    answer: "IPLC（国际私有租用线路）属于传统物理层私网专线；IEPL（国际以太网私有专线）是基于二层以太网技术的升级版专线，带宽调度更灵活、扩展性更强。两者对于终端用户的翻墙使用体验几乎完全相同，均属于不过公网审查的高端线路。"
+  },
+  {
+    question: "专线机场一定比普通中转机场贵吗？",
+    answer: "因为专线光缆的每 Gbps 租用成本较高，专线套餐通常在 15-25 元/月起步。市面上宣称几块钱就能买到 TB 级专线流量的大概率是虚标直连或假专线，需通过实际晚高峰测速验证。"
+  }
+];
+
+const nextSteps = [
+  {
+    title: "了解节点倍率的流量扣除规则",
+    url: "/airport/node-multiplier/",
+    description: "搞清为什么 3 倍率专线节点会加速消耗你的月度流量。"
+  },
+  {
+    title: "挑选真专线、抗抖动的优质机场",
+    url: "/choose/stable/",
+    description: "从网络架构、晚高峰丢包率和实测数据筛选靠谱专线。"
+  }
+];
+---
+
+<ArticleLayout
+  title="直连、中转与 IPLC/IEPL 专线有什么区别？为什么专线晚高峰不卡顿？"
+  description="深度揭秘机场线路三层架构：直连、隧道中转与 IPLC/IEPL 国际专线的物理链路差异、成本模型及晚高峰抗抖动机制。"
+  category="start"
+  level="L2"
+  quickAnswer="直连就像走拥挤的普通省道，逢年过节（晚高峰）必大塞车并受检查站审查；中转相当于在国内建了高速收费站把数据打包中转，但出境依然受公网影响；IPLC/IEPL 专线则是企业租用的直通海外的海底光缆高铁，完全不过公网防火墙，晚高峰 0 丢包、延迟极低、永不封锁。"
+  pubDate="2026-08-17"
+  tags={["IPLC专线", "IEPL专线", "中转节点", "晚高峰测速", "2026最新"]}
+  faq={faq}
+  nextSteps={nextSteps}
+  completedConcept="专线与中转网络架构认知"
+  sourceText="waiwangzhinan.co 物理网络架构调研"
+>
+  <h2>一、一张图看懂三代线路演进路线</h2>
+  <p>
+    科学上网的速度与稳定性，90% 取决于<strong>物理线路质量</strong>，而不仅仅是客户端设置。目前市面上的机场线路主要分为以下三档：
+  </p>
+
+  <div class="space-y-4 my-6">
+    <!-- 1. 直连 -->
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">第一代：普通公网直连 (Direct)</h3>
+        <span class="badge-muted font-mono text-[10px]">成本最低 · 波动最大</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>链路结构</strong>：你的电脑 → 国内电信/联通公网 → 国际出口公网 → 海外目标服务器。<br />
+        <strong>现实痛点</strong>：必须直接面对出入境防火墙的全面检测，晚高峰公网带宽严重拥挤，丢包率动辄 20%-40%，节点 IP 极易被墙。
+      </p>
+    </div>
+
+    <!-- 2. 中转 -->
+    <div class="card-surface-sub p-5 rounded-xl border border-white/5 space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-content-primary">第二代：国内 BGP 隧道中转 (Relay / Tunnel)</h3>
+        <span class="badge-blue font-mono text-[10px]">性价比适中</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>链路结构</strong>：你的电脑 → 国内优质 BGP 机房（如广州/上海）→ 国内机房通过加密隧道中转 → 海外落地机房。<br />
+        <strong>优势与不足</strong>：因为国内入口是 BGP 线路，不同运营商的接入延迟很低；但国内机房到海外机房之间如果走的仍是公网，特殊时期仍存在被干扰的风险。
+      </p>
+    </div>
+
+    <!-- 3. IPLC / IEPL 专线 -->
+    <div class="card-surface-sub p-5 rounded-xl border border-brand-mint/40 bg-brand-mint/[0.03] space-y-2">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-brand-mint">第三代：IPLC / IEPL 企业级内网专线 (Dedicated Line)</h3>
+        <span class="badge-mint font-mono text-[10px]">👑 顶级稳定 · 晚高峰 0 丢包</span>
+      </div>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        <strong>链路结构</strong>：你的电脑 → 国内专线入口机房 → <strong>跨境海底光缆内网直连（不过公网防火墙）</strong> → 海外落地节点。<br />
+        <strong>核心价值</strong>：
+      </p>
+      <ul class="list-disc pl-5 space-y-1 text-xs text-content-secondary">
+        <li><strong>完全免除 GFW 审查</strong>：内网私有协议传输，不会触发任何跨国阻断或封锁。</li>
+        <li><strong>晚高峰 0 丢包</strong>：独享物理带宽，无论晚上 9 点全网多么拥堵，YouTube 4K 秒开。</li>
+        <li><strong>毫秒级超低延迟</strong>：深圳到香港 5-10ms，上海到东京 25-30ms，外服游戏联机不跳 ping。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>二、如何识别机场是否是真专线？</h2>
+  <div class="card-surface p-5 rounded-xl border border-white/10 space-y-3">
+    <ol class="list-decimal pl-5 space-y-2 text-xs text-content-secondary">
+      <li><strong>看晚高峰测速曲线</strong>：晚上 21:00 进行 Ping 测试，如果连续 100 次 Ping 丢包率小于 1%，且延迟波动在 ±3ms 以内，说明是真专线。</li>
+      <li><strong>看节点入口域名与 IP</strong>：真专线通常在国内设有广州、深圳、上海或徐州等专属 BGP 节点入口。</li>
+      <li><strong>看价格与月付门槛</strong>：真专线由于光缆租金高昂，正规月付价格通常在 15–25 元之间（如光速云、U1S1 等品牌）。</li>
+    </ol>
+  </div>
+</ArticleLayout>

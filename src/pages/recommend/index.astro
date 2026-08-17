@@ -1,0 +1,377 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AirportMatcher from '../../components/AirportMatcher.astro';
+import { getCollection } from 'astro:content';
+
+const allProviders = await getCollection('providers');
+
+// Primary 4 promoted brands
+const primarySlugs = ['guangsu', 'xingdaomeng', 'feimao', 'u1s1'];
+const primaryProviders = primarySlugs
+  .map((s) => allProviders.find((p) => p.data.slug === s))
+  .filter(Boolean);
+
+// Categorized provider groupings
+const topOverall = allProviders.filter((p) => ['guangsu', 'lingmao', 'jilian', 'guangnianti'].includes(p.data.slug));
+const budgetTier = allProviders.filter((p) => ['feimao', 'xingdaomeng', 'weitu', 'yuzhou'].includes(p.data.slug));
+const value20Tier = allProviders.filter((p) => ['yifanyun', 'ermaoyun', 'u1s1', 'quanqiuyun'].includes(p.data.slug));
+const aiMediaTier = allProviders.filter((p) => ['sujie', 'sogoyun', 'kexinyun', 'kuaili'].includes(p.data.slug));
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '2026 机场推荐与服务商档案', url: '/recommend/' },
+];
+---
+
+<BaseLayout
+  title="2026 机场推荐与评测导航 (实测16家) - 外网指南"
+  description="2026 最新机场推荐导航与评测，重点推荐光速云、星岛梦、飞猫云、U1S1 等高品质服务商，按月付性价比、IEPL专线、大流量、ChatGPT/Claude AI 场景分类客观推荐。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    <!-- Header -->
+    <header class="max-w-3xl space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-xs font-semibold text-brand-mint">
+        <span>2026 Curated Navigation</span>
+        <span class="w-1 h-1 rounded-full bg-brand-mint"></span>
+        <span>16 家服务商客观推荐与测速档案</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-content-primary tracking-tight">
+        2026 机场推荐与客观实测导航
+      </h1>
+      <p class="text-sm sm:text-base text-content-secondary leading-relaxed">
+        坚守中立与客观，不收赞助刷榜。以下重点展示编辑部 2026 年度重点核验的主推服务商与全量 16 家测速档案。
+      </p>
+    </header>
+
+    <!-- ⭐ TOP 4 PRIMARY PROMOTED SPOTLIGHT ROW -->
+    <section class="card-surface p-6 sm:p-8 rounded-2xl border-2 border-brand-mint/30 bg-gradient-to-b from-brand-mint/[0.06] to-transparent space-y-6 shadow-2xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
+        <div>
+          <span class="text-xs font-bold font-mono text-brand-mint uppercase tracking-wider block mb-1">
+            🌟 2026 EDITORIAL PICKS
+          </span>
+          <h2 class="text-xl sm:text-2xl font-black text-content-primary tracking-tight">
+            2026 编辑部重点主推机场 (TOP 4 精选)
+          </h2>
+        </div>
+        <span class="text-xs text-content-muted">综合老牌首推 · 低价不限时 · 极简轻度 · 20元经典专线</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {primaryProviders.map((p) => {
+          const isTop1 = p.data.slug === 'guangsu';
+          return (
+            <div class={`card-surface-sub p-5 rounded-xl border flex flex-col justify-between space-y-4 relative transition-all ${
+              isTop1
+                ? 'border-brand-mint bg-brand-mint/[0.05] ring-1 ring-brand-mint/30 shadow-xl shadow-brand-mint/10'
+                : 'border-white/10 hover:border-brand-mint/40 bg-bg-card/90'
+            }`}>
+              {isTop1 && (
+                <div class="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-brand-mint text-bg-main text-[10px] font-black uppercase tracking-wider shadow-md">
+                  👑 综合第一主推
+                </div>
+              )}
+
+              <div class="space-y-3">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <h3 class="text-lg font-bold text-content-primary flex items-center gap-1.5">
+                      <a href={`/brands/${p.data.slug}/`} class="hover:text-brand-mint transition-colors">
+                        {p.data.name}
+                      </a>
+                    </h3>
+                    <span class="text-xs text-brand-mint font-medium block mt-0.5">{p.data.recommendFor[0]}</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-lg font-bold font-mono text-brand-mint block">
+                      ¥{p.data.pricing.startingPrice}
+                    </span>
+                    <span class="text-[10px] text-content-muted block">/{p.data.pricing.billingCycle.includes('月') ? '月' : '起'}</span>
+                  </div>
+                </div>
+
+                <p class="text-xs text-content-secondary line-clamp-2 leading-relaxed">
+                  {p.data.tagline}
+                </p>
+
+                {p.data.promoCode && (
+                  <div class="p-2 rounded bg-bg-sub border border-brand-mint/20 text-xs font-mono text-content-primary flex items-center justify-between">
+                    <span class="text-content-muted text-[11px]">优惠码:</span>
+                    <span class="font-bold text-brand-mint select-all">{p.data.promoCode}</span>
+                  </div>
+                )}
+              </div>
+
+              <div class="pt-3 border-t border-white/5 space-y-2">
+                {p.data.officialUrl && (
+                  <a
+                    href={p.data.officialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`w-full btn-primary text-xs !py-2.5 font-bold flex items-center justify-center gap-1.5 shadow-md ${
+                      isTop1 ? '!bg-brand-mint text-bg-main shadow-brand-mint/30' : ''
+                    }`}
+                  >
+                    <span>访问 {p.data.name} 官网开通 ↗</span>
+                  </a>
+                )}
+                <a
+                  href={`/brands/${p.data.slug}/`}
+                  class="w-full btn-secondary text-[11px] !py-1.5 flex items-center justify-center text-content-muted hover:text-content-primary"
+                >
+                  查看节点实测测速报告
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Interactive Matcher -->
+    <section>
+      <AirportMatcher />
+    </section>
+
+    <!-- Category 1: 综合稳定与老牌推荐 -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between gap-3 border-b border-white/5 pb-3">
+        <div>
+          <span class="text-xs font-mono text-brand-mint font-semibold">TIER 01</span>
+          <h2 class="text-xl font-bold text-content-primary">🏆 2026 综合稳定与老牌首选</h2>
+        </div>
+        <span class="text-xs text-content-muted">运营年限长 · 专线抗抖动 · 综合体验优</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {topOverall.map((p) => (
+          <div class="card-surface p-6 rounded-xl flex flex-col justify-between space-y-4 hover:border-brand-mint/30 transition-all">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-lg font-bold text-content-primary">{p.data.name}</h3>
+                    <span class="badge-mint text-[10px]">{p.data.verificationStatus}</span>
+                  </div>
+                  <span class="text-xs text-brand-mint font-medium">{p.data.tagline}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs text-content-muted block">起步价格</span>
+                  <span class="text-lg font-bold font-mono text-brand-mint">¥{p.data.pricing.startingPrice} <span class="text-[10px] text-content-muted">/{p.data.pricing.billingCycle}</span></span>
+                </div>
+              </div>
+
+              <p class="text-xs text-content-secondary leading-relaxed">
+                {p.data.summary}
+              </p>
+
+              <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
+                <div class="p-2 rounded bg-bg-sub text-content-muted">
+                  协议：<span class="text-content-primary font-mono">{p.data.protocols.join(', ')}</span>
+                </div>
+                <div class="p-2 rounded bg-bg-sub text-content-muted">
+                  流量：<span class="text-content-primary font-mono">{p.data.pricing.traffic || '充足规格'}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+              <a href={`/brands/${p.data.slug}/`} class="btn-secondary text-xs !py-2 !px-4">
+                查看实测报告与档案
+              </a>
+              {p.data.officialUrl && (
+                <a href={p.data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-xs !py-2 !px-4">
+                  官网开通 ↗
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Category 2: 15元以下超高性价比与学生党 -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between gap-3 border-b border-white/5 pb-3">
+        <div>
+          <span class="text-xs font-mono text-brand-blue font-semibold">TIER 02</span>
+          <h2 class="text-xl font-bold text-content-primary">💰 15 元以下高性价比与轻度首选</h2>
+        </div>
+        <span class="text-xs text-content-muted">月付低门槛 · 学生党首选 · 小流量备用</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {budgetTier.map((p) => (
+          <div class="card-surface p-6 rounded-xl flex flex-col justify-between space-y-4 hover:border-brand-blue/30 transition-all">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-lg font-bold text-content-primary">{p.data.name}</h3>
+                    <span class="badge-blue text-[10px]">{p.data.verificationStatus}</span>
+                  </div>
+                  <span class="text-xs text-brand-blue font-medium">{p.data.tagline}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs text-content-muted block">起步价格</span>
+                  <span class="text-lg font-bold font-mono text-brand-blue">¥{p.data.pricing.startingPrice} <span class="text-[10px] text-content-muted">/{p.data.pricing.billingCycle}</span></span>
+                </div>
+              </div>
+
+              <p class="text-xs text-content-secondary leading-relaxed">
+                {p.data.summary}
+              </p>
+
+              <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
+                <div class="p-2 rounded bg-bg-sub text-content-muted">
+                  协议：<span class="text-content-primary font-mono">{p.data.protocols.join(', ')}</span>
+                </div>
+                <div class="p-2 rounded bg-bg-sub text-content-muted">
+                  特点：<span class="text-content-primary">{p.data.recommendFor[0]}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+              <a href={`/brands/${p.data.slug}/`} class="btn-secondary text-xs !py-2 !px-4">
+                查看实测报告与档案
+              </a>
+              {p.data.officialUrl && (
+                <a href={p.data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-xs !py-2 !px-4">
+                  官网开通 ↗
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Category 3: 20元档大流量专线 -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between gap-3 border-b border-white/5 pb-3">
+        <div>
+          <span class="text-xs font-mono text-brand-mint font-semibold">TIER 03</span>
+          <h2 class="text-xl font-bold text-content-primary">⚡ 20 元档大流量专线首选</h2>
+        </div>
+        <span class="text-xs text-content-muted">120GB-150GB 巨量 · IEPL 内网专线 · 兼顾多端</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {value20Tier.map((p) => (
+          <div class="card-surface p-6 rounded-xl flex flex-col justify-between space-y-4 hover:border-brand-mint/30 transition-all">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-lg font-bold text-content-primary">{p.data.name}</h3>
+                    <span class="badge-mint text-[10px]">{p.data.verificationStatus}</span>
+                  </div>
+                  <span class="text-xs text-brand-mint font-medium">{p.data.tagline}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs text-content-muted block">月付价格</span>
+                  <span class="text-lg font-bold font-mono text-brand-mint">¥{p.data.pricing.startingPrice} <span class="text-[10px] text-content-muted">/月</span></span>
+                </div>
+              </div>
+
+              <p class="text-xs text-content-secondary leading-relaxed">
+                {p.data.summary}
+              </p>
+
+              <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
+                <div class="p-2 rounded bg-bg-sub text-content-muted">
+                  流量：<span class="text-content-primary font-mono">{p.data.pricing.traffic || '120GB+'}</span>
+                </div>
+                <div class="p-2 rounded bg-bg-sub text-content-muted">
+                  线路：<span class="text-content-primary font-mono">{p.data.protocols.join(', ')}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+              <a href={`/brands/${p.data.slug}/`} class="btn-secondary text-xs !py-2 !px-4">
+                查看实测报告与档案
+              </a>
+              {p.data.officialUrl && (
+                <a href={p.data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-xs !py-2 !px-4">
+                  官网开通 ↗
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Category 4: AI 与 4K 影音强力专精 -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between gap-3 border-b border-white/5 pb-3">
+        <div>
+          <span class="text-xs font-mono text-brand-mint font-semibold">TIER 04</span>
+          <h2 class="text-xl font-bold text-content-primary">🤖 AI 场景专精与 4K 高清影音</h2>
+        </div>
+        <span class="text-xs text-content-muted">ChatGPT / Claude 原生免降级 · Netflix 全区解锁</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {aiMediaTier.map((p) => (
+          <div class="card-surface p-6 rounded-xl flex flex-col justify-between space-y-4 hover:border-brand-mint/30 transition-all">
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-lg font-bold text-content-primary">{p.data.name}</h3>
+                    <span class="badge-mint text-[10px]">{p.data.verificationStatus}</span>
+                  </div>
+                  <span class="text-xs text-brand-mint font-medium">{p.data.tagline}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs text-content-muted block">月付价格</span>
+                  <span class="text-lg font-bold font-mono text-brand-mint">¥{p.data.pricing.startingPrice} <span class="text-[10px] text-content-muted">/月</span></span>
+                </div>
+              </div>
+
+              <p class="text-xs text-content-secondary leading-relaxed">
+                {p.data.summary}
+              </p>
+
+              <div class="grid grid-cols-2 gap-2 text-[11px] pt-1">
+                <div class="p-2 rounded bg-bg-sub text-content-muted">
+                  AI支持：<span class="text-content-primary">{p.data.aiSupport}</span>
+                </div>
+                <div class="p-2 rounded bg-bg-sub text-content-muted">
+                  流媒体：<span class="text-content-primary">{p.data.streaming}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+              <a href={`/brands/${p.data.slug}/`} class="btn-secondary text-xs !py-2 !px-4">
+                查看实测报告与档案
+              </a>
+              {p.data.officialUrl && (
+                <a href={p.data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-xs !py-2 !px-4">
+                  官网开通 ↗
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Bottom Link to Matrix -->
+    <div class="card-surface-sub p-6 rounded-xl border border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <h4 class="font-bold text-sm text-content-primary">想要查看 16 家品牌更详细的参数对比？</h4>
+        <p class="text-xs text-content-secondary mt-1">进入客观技术对比矩阵，一览全部协议、延迟、价格与节点指标</p>
+      </div>
+      <a href="/compare/" class="btn-primary text-xs !py-2.5 !px-5 whitespace-nowrap">
+        <span>打开 16 家机场横向对比表 →</span>
+      </a>
+    </div>
+  </div>
+</BaseLayout>

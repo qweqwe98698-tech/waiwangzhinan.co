@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allProviders = await getCollection('providers');
+
+// Sort by starting price ascending
+const sortedProviders = allProviders.sort((a, b) => {
+  const priceA = typeof a.data.pricing.startingPrice === 'number' ? a.data.pricing.startingPrice : parseFloat(a.data.pricing.startingPrice);
+  const priceB = typeof b.data.pricing.startingPrice === 'number' ? b.data.pricing.startingPrice : parseFloat(b.data.pricing.startingPrice);
+  return priceA - priceB;
+});
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '2026 机场客观技术对比矩阵', url: '/compare/' },
+];
+---
+
+<BaseLayout
+  title="2026 最新机场推荐与客观技术对比矩阵 - 外网指南"
+  description="客观横向对比 16 家已核验机场服务商的 IEPL 专线架构、起步价格门槛、月流量、支持协议、AI/流媒体解锁与实测报告。"
+  ogType="website"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+    <!-- Header -->
+    <header class="max-w-3xl space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-xs font-semibold text-brand-mint">
+        <span>2026 Matrix Dashboard</span>
+        <span class="w-1 h-1 rounded-full bg-brand-mint"></span>
+        <span>16 家服务商实测档案对比</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-content-primary tracking-tight">
+        2026 机场推荐与客观技术指标对比矩阵
+      </h1>
+      <p class="text-sm sm:text-base text-content-secondary leading-relaxed">
+        杜绝虚假跑分与单一品牌绑定。右侧已固定「官网开通」与「实测档案」按钮，支持横向滑动查阅全部 16 家详细参数。
+      </p>
+    </header>
+
+    <!-- Filter & Category Highlights -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div class="card-surface-sub p-3.5 rounded-xl border border-white/5 space-y-1">
+        <span class="text-[10px] text-content-muted uppercase font-mono block">15元以下超高性价比</span>
+        <span class="text-xs sm:text-sm font-bold text-content-primary">飞猫云 / 星岛梦 / 唯兔云 / 宇宙云</span>
+      </div>
+      <div class="card-surface-sub p-3.5 rounded-xl border border-white/5 space-y-1">
+        <span class="text-[10px] text-content-muted uppercase font-mono block">20元档专线大流量</span>
+        <span class="text-xs sm:text-sm font-bold text-content-primary">一翻云 / 二猫云 / U1S1 / 全球云</span>
+      </div>
+      <div class="card-surface-sub p-3.5 rounded-xl border border-white/5 space-y-1">
+        <span class="text-[10px] text-content-muted uppercase font-mono block">AI 专用与 4K 影音</span>
+        <span class="text-xs sm:text-sm font-bold text-content-primary">速界 / SOGO 云 / 快狸 / 可信云</span>
+      </div>
+      <div class="card-surface-sub p-3.5 rounded-xl border border-white/5 space-y-1">
+        <span class="text-[10px] text-content-muted uppercase font-mono block">老牌综合与稳定优先</span>
+        <span class="text-xs sm:text-sm font-bold text-content-primary">光速云 / 灵猫网络 / 光年梯 / 极连云</span>
+      </div>
+    </div>
+
+    <!-- Comparison Table (with Pinned Sticky Action Column) -->
+    <div class="card-surface overflow-hidden border border-white/10 rounded-xl shadow-2xl relative">
+      <div class="overflow-x-auto relative">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-bg-sub border-b border-white/10 text-content-primary font-semibold">
+              <th class="p-4 whitespace-nowrap min-w-[140px]">品牌名称</th>
+              <th class="p-4 whitespace-nowrap">起步门槛</th>
+              <th class="p-4 whitespace-nowrap">月流量</th>
+              <th class="p-4 whitespace-nowrap">通信协议 / 线路</th>
+              <th class="p-4 whitespace-nowrap">AI 场景支持</th>
+              <th class="p-4 whitespace-nowrap">流媒体解锁</th>
+              <th class="p-4 whitespace-nowrap">适合人群</th>
+              <th class="p-4 whitespace-nowrap">核验状态</th>
+              <!-- Sticky Pinned Action Header -->
+              <th class="p-4 whitespace-nowrap text-right sticky right-0 bg-bg-sub/95 backdrop-blur z-20 border-l border-white/10 shadow-[-8px_0_12px_rgba(0,0,0,0.5)]">
+                快速开通与档案
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5">
+            {sortedProviders.map((p) => (
+              <tr class="hover:bg-white/[0.03] transition-colors group">
+                <!-- Brand Cell -->
+                <td class="p-4 font-bold text-content-primary whitespace-nowrap">
+                  <div class="flex items-center gap-2">
+                    <a href={`/brands/${p.data.slug}/`} class="text-brand-mint hover:underline font-bold text-sm">
+                      {p.data.name}
+                    </a>
+                    {p.data.promoCode && (
+                      <span class="px-1.5 py-0.2 rounded text-[10px] font-mono bg-brand-mint/10 text-brand-mint border border-brand-mint/20">
+                        {p.data.promoCode}
+                      </span>
+                    )}
+                  </div>
+                  {p.data.estYear && <span class="text-[10px] font-mono text-content-muted block">{p.data.estYear}年开业</span>}
+                </td>
+
+                <!-- Price -->
+                <td class="p-4 font-mono font-bold text-content-primary whitespace-nowrap">
+                  ¥{p.data.pricing.startingPrice} <span class="text-[10px] text-content-muted">/{p.data.pricing.billingCycle}</span>
+                </td>
+
+                <!-- Traffic -->
+                <td class="p-4 font-mono text-content-secondary whitespace-nowrap">
+                  {p.data.pricing.traffic || '100GB+'}
+                </td>
+
+                <!-- Protocols -->
+                <td class="p-4 font-mono text-content-secondary whitespace-nowrap">
+                  {p.data.protocols.join(' / ')}
+                </td>
+
+                <!-- AI -->
+                <td class="p-4 text-content-secondary whitespace-nowrap max-w-[130px] truncate">
+                  {p.data.aiSupport}
+                </td>
+
+                <!-- Streaming -->
+                <td class="p-4 text-content-secondary whitespace-nowrap max-w-[130px] truncate">
+                  {p.data.streaming}
+                </td>
+
+                <!-- Target -->
+                <td class="p-4 text-content-muted whitespace-nowrap">
+                  {p.data.recommendFor[0]}
+                </td>
+
+                <!-- Status -->
+                <td class="p-4 whitespace-nowrap">
+                  <span class="badge-mint text-[10px]">{p.data.verificationStatus}</span>
+                </td>
+
+                <!-- Pinned Sticky Action Column -->
+                <td class="p-4 text-right whitespace-nowrap sticky right-0 bg-bg-card/95 backdrop-blur z-10 border-l border-white/10 shadow-[-8px_0_12px_rgba(0,0,0,0.5)]">
+                  <div class="flex items-center justify-end gap-2">
+                    <a
+                      href={`/brands/${p.data.slug}/`}
+                      class="btn-secondary text-[11px] !py-1.5 !px-3 inline-flex items-center"
+                    >
+                      测速报告
+                    </a>
+                    {p.data.officialUrl && (
+                      <a
+                        href={p.data.officialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-primary text-[11px] !py-1.5 !px-3.5 inline-flex items-center font-bold tracking-wide shadow-md shadow-brand-mint/20 hover:scale-105 transition-all"
+                      >
+                        官网注册 ↗
+                      </a>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Advice Notes -->
+    <div class="card-surface-sub p-6 rounded-xl border border-white/5 space-y-3">
+      <h3 class="font-bold text-sm text-content-primary">2026 选型与防坑客观建议：</h3>
+      <p class="text-xs text-content-secondary leading-relaxed">
+        1. <strong>拒绝超长年付诱惑</strong>：任何服务商均有网络波动周期，我们强烈建议新手无论选择哪家品牌，首次订购均按月付费进行测试。<br />
+        2. <strong>看清专线与直连区别</strong>：如果对晚高峰 4K 影音、ChatGPT/Claude 防封控有较高要求，优先选择标注 IEPL/IPLC 内网专线的服务；日常普通网页查资料则 15 元档高性价比方案足矣。
+      </p>
+      <div class="pt-2 flex items-center gap-4 text-xs">
+        <a href="/recommend/" class="text-brand-mint hover:underline">← 返回 2026 机场推荐中枢</a>
+        <a href="/choose/" class="text-brand-mint hover:underline">查看新手选型决策指南 →</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
