@@ -282,11 +282,11 @@ for (const file of htmlFiles) {
 
 // 5. IndexNow Protocol Key Check
 let indexNowPass = false;
-const indexNowKeyFile = path.join(DIST_DIR, '8fa729bc78e04e9c8fbe9066cb839bca.txt');
+const indexNowKeyFile = path.join(DIST_DIR, '3c5f894c44be4ac38d9e983149de18ca.txt');
 if (fs.existsSync(indexNowKeyFile)) {
   indexNowPass = true;
 } else {
-  warnings.push('indexnow: 8fa729bc78e04e9c8fbe9066cb839bca.txt key file not found in dist/');
+  warnings.push('indexnow: 3c5f894c44be4ac38d9e983149de18ca.txt key file not found in dist/');
 }
 
 // Summary Report Generation

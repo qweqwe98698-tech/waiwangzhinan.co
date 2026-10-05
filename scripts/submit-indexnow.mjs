@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const HOST = 'waiwangzhinan.co';
-const KEY = '8fa729bc78e04e9c8fbe9066cb839bca';
+const KEY = '3c5f894c44be4ac38d9e983149de18ca';
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 const SITEMAP_PATH = path.resolve('dist/sitemap-0.xml');
 
