@@ -1,6 +1,21 @@
 import type { APIRoute } from 'astro';
 
-const getRobotsTxt = (siteURL: string) => `User-agent: *
+const getRobotsTxt = (siteURL: string) => `User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: yisouspider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: *
 Allow: /
 
 Sitemap: ${siteURL}sitemap.xml

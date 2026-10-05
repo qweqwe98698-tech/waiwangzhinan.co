@@ -21,6 +21,12 @@ const breadcrumbs = [
   { name: '首页', url: '/' },
   { name: '2026 机场推荐与服务商档案', url: '/recommend/' },
 ];
+
+const providerItemList = allProviders.map((p, idx) => ({
+  name: `${p.data.name} (${p.data.tagline})`,
+  url: `/brands/${p.data.slug}/`,
+  position: idx + 1,
+}));
 ---
 
 <BaseLayout
@@ -28,6 +34,7 @@ const breadcrumbs = [
   description="2026 最新机场推荐导航与评测，重点推荐光速云、星岛梦、飞猫云、U1S1 等高品质服务商，按月付性价比、IEPL专线、大流量、ChatGPT/Claude AI 场景分类客观推荐。"
   ogType="website"
   breadcrumbs={breadcrumbs}
+  itemList={providerItemList}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
     <!-- Header -->
@@ -109,7 +116,7 @@ const breadcrumbs = [
                   <a
                     href={p.data.officialUrl}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="nofollow sponsored noopener"
                     class={`w-full btn-primary text-xs !py-2.5 font-bold flex items-center justify-center gap-1.5 shadow-md ${
                       isTop1 ? '!bg-brand-mint text-bg-main shadow-brand-mint/30' : ''
                     }`}
@@ -182,7 +189,7 @@ const breadcrumbs = [
                 查看实测报告与档案
               </a>
               {p.data.officialUrl && (
-                <a href={p.data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-xs !py-2 !px-4">
+                <a href={p.data.officialUrl} target="_blank" rel="nofollow sponsored noopener" class="btn-primary text-xs !py-2 !px-4">
                   官网开通 ↗
                 </a>
               )}
@@ -239,7 +246,7 @@ const breadcrumbs = [
                 查看实测报告与档案
               </a>
               {p.data.officialUrl && (
-                <a href={p.data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-xs !py-2 !px-4">
+                <a href={p.data.officialUrl} target="_blank" rel="nofollow sponsored noopener" class="btn-primary text-xs !py-2 !px-4">
                   官网开通 ↗
                 </a>
               )}
@@ -296,7 +303,7 @@ const breadcrumbs = [
                 查看实测报告与档案
               </a>
               {p.data.officialUrl && (
-                <a href={p.data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-xs !py-2 !px-4">
+                <a href={p.data.officialUrl} target="_blank" rel="nofollow sponsored noopener" class="btn-primary text-xs !py-2 !px-4">
                   官网开通 ↗
                 </a>
               )}
@@ -353,7 +360,7 @@ const breadcrumbs = [
                 查看实测报告与档案
               </a>
               {p.data.officialUrl && (
-                <a href={p.data.officialUrl} target="_blank" rel="noopener noreferrer" class="btn-primary text-xs !py-2 !px-4">
+                <a href={p.data.officialUrl} target="_blank" rel="nofollow sponsored noopener" class="btn-primary text-xs !py-2 !px-4">
                   官网开通 ↗
                 </a>
               )}

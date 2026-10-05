@@ -25,9 +25,12 @@ const priorityProviders = prioritySlugs
 <div class="my-8 card-surface p-6 rounded-2xl border border-brand-mint/30 bg-gradient-to-b from-brand-mint/[0.06] to-transparent shadow-2xl space-y-5">
   <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
     <div class="space-y-1">
-      <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-[11px] font-semibold text-brand-mint">
-        <span class="w-1.5 h-1.5 rounded-full bg-brand-mint animate-pulse"></span>
-        <span>2026 核心实测推荐</span>
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-brand-mint/10 border border-brand-mint/20 text-[11px] font-semibold text-brand-mint">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-mint animate-pulse"></span>
+          <span>2026 核心实测推荐</span>
+        </div>
+        <span class="text-[10px] text-content-muted bg-white/5 px-2 py-0.5 rounded border border-white/10" title="包含商业推广合作链接，点击支持本站运营，不影响您的最终付款价格">含推广合作声明</span>
       </div>
       <h3 class="text-base sm:text-lg font-bold text-content-primary">
         {title}
@@ -105,7 +108,7 @@ const priorityProviders = prioritySlugs
               <a
                 href={p.data.officialUrl}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow sponsored noopener"
                 class={`btn-primary text-[11px] !py-1.5 !px-3.5 font-bold shadow-md ${
                   isTop1 ? '!bg-brand-mint shadow-brand-mint/30' : ''
                 }`}

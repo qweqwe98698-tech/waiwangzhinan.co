@@ -78,6 +78,26 @@ const breadcrumbs = [
         {p.summary}
       </p>
 
+      <!-- E-E-A-T Review Team & Promotion Disclosure -->
+      <div class="mt-4 p-3.5 rounded-xl bg-bg-sub/60 border border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-brand-mint/20 border border-brand-mint/40 flex items-center justify-center text-sm font-bold text-brand-mint">
+            舟
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-content-primary">主笔评测：陈舟</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-brand-mint/10 text-brand-mint border border-brand-mint/20">资深网络协议工程师</span>
+            </div>
+            <span class="text-[11px] text-content-muted">复核编辑：莫白 · 测速数据经真实节点跑测核验</span>
+          </div>
+        </div>
+        <div class="text-[11px] text-content-muted flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span>独立实测 · 包含推广合作链接声明</span>
+        </div>
+      </div>
+
       <div class="pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
         <div class="text-xs text-content-muted space-x-2">
           <span>支付方式：{p.paymentMethods ? p.paymentMethods.join(' / ') : '支付宝 / 微信 / USDT'}</span>
@@ -86,7 +106,7 @@ const breadcrumbs = [
           <a
             href={p.officialUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="nofollow sponsored noopener"
             class="btn-primary text-xs !py-2.5 !px-6 font-bold shadow-lg"
           >
             <span>访问 {p.name} 官网与开通入口 ↗</span>
@@ -118,6 +138,8 @@ const breadcrumbs = [
           <img
             src={p.speedtestImage}
             alt={`${p.name} 节点测速实测报告`}
+            width="800"
+            height="450"
             class="w-full h-auto rounded-lg shadow-2xl mx-auto max-h-[600px] object-contain"
             loading="lazy"
           />

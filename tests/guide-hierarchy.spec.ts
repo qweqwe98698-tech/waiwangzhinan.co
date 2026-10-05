@@ -5,7 +5,7 @@ test.describe('Guide Page Hierarchy and Structure', () => {
     await page.goto('/start/what-is-proxy/');
 
     // H1
-    const h1 = page.locator('h1');
+    const h1 = page.locator('main h1');
     await expect(h1).toContainText('代理（Proxy）是什么？');
 
     // 30s Quick Answer Card
@@ -27,7 +27,7 @@ test.describe('Guide Page Hierarchy and Structure', () => {
   test('Pillar hub lists all cluster guides with direct links', async ({ page }) => {
     await page.goto('/airport/');
     
-    await expect(page.locator('h1')).toContainText('机场入门');
+    await expect(page.locator('main h1')).toContainText('机场入门');
     await expect(page.getByText('网络「机场」到底是什么？')).toBeVisible();
     await expect(page.getByText('代理「节点」是什么？')).toBeVisible();
     await expect(page.getByText('机场「订阅」是什么？')).toBeVisible();

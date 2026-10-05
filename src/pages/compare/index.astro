@@ -15,6 +15,12 @@ const breadcrumbs = [
   { name: '首页', url: '/' },
   { name: '2026 机场客观技术对比矩阵', url: '/compare/' },
 ];
+
+const compareItemList = sortedProviders.map((p, idx) => ({
+  name: `${p.data.name} (¥${p.data.pricing.startingPrice}/${p.data.pricing.billingCycle})`,
+  url: `/brands/${p.data.slug}/`,
+  position: idx + 1,
+}));
 ---
 
 <BaseLayout
@@ -22,6 +28,7 @@ const breadcrumbs = [
   description="客观横向对比 16 家已核验机场服务商的 IEPL 专线架构、起步价格门槛、月流量、支持协议、AI/流媒体解锁与实测报告。"
   ogType="website"
   breadcrumbs={breadcrumbs}
+  itemList={compareItemList}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
     <!-- Header -->
@@ -145,7 +152,7 @@ const breadcrumbs = [
                       <a
                         href={p.data.officialUrl}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="nofollow sponsored noopener"
                         class="btn-primary text-[11px] !py-1.5 !px-3.5 inline-flex items-center font-bold tracking-wide shadow-md shadow-brand-mint/20 hover:scale-105 transition-all"
                       >
                         官网注册 ↗

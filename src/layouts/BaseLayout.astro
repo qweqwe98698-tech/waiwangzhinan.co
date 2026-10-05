@@ -17,6 +17,8 @@ export interface Props {
   author?: string;
   faq?: Array<{ question: string; answer: string }>;
   breadcrumbs?: Array<{ name: string; url: string }>;
+  itemList?: Array<{ name: string; url: string; position?: number }>;
+  aboutPage?: boolean;
 }
 
 const {
@@ -29,6 +31,8 @@ const {
   author,
   faq,
   breadcrumbs,
+  itemList,
+  aboutPage,
 } = Astro.props;
 ---
 
@@ -45,6 +49,8 @@ const {
       author={author}
       faq={faq}
       breadcrumbs={breadcrumbs}
+      itemList={itemList}
+      aboutPage={aboutPage}
     />
   </head>
   <body class="min-h-screen bg-bg-main text-content-primary flex flex-col antialiased selection:bg-brand-mint/20 selection:text-white">

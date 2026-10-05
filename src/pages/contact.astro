@@ -25,25 +25,48 @@ const breadcrumbs = [
     </header>
 
     <div class="card-surface p-6 sm:p-8 space-y-6">
-      <h2 class="text-lg font-bold text-content-primary">你可以通过以下方式联系编辑部：</h2>
+      <h2 class="text-lg font-bold text-content-primary">你可以通过以下方式联系编辑部与技术团队：</h2>
       
       <div class="space-y-4 text-xs">
-        <div class="p-4 rounded-lg bg-bg-sub border border-white/5 space-y-1">
-          <span class="text-content-muted block font-semibold uppercase">官方电子邮件：</span>
+        <div class="p-4 rounded-lg bg-bg-sub border border-white/5 space-y-2">
+          <span class="text-content-muted block font-semibold uppercase">官方联络邮箱与响应时效：</span>
           <span class="text-brand-mint font-mono text-sm font-bold">contact@waiwangzhinan.co</span>
-          <p class="text-content-secondary text-[11px] mt-1">（来信请注明文章标题或错误链接，编辑部将在 24-48 小时内处理并回信）</p>
+          <p class="text-content-secondary leading-relaxed">
+            来信请在邮件主题中注明<strong>「具体文章标题」</strong>或<strong>「涉及页面链接」</strong>。编辑部采用工单制跟踪处理每一封来信，工作日通常在 <strong>24 至 48 小时内</strong> 完成核验并给出书面答复。
+          </p>
         </div>
 
-        <div class="p-4 rounded-lg bg-bg-sub border border-white/5 space-y-1">
-          <span class="text-content-muted block font-semibold uppercase">纠错与技术勘误：</span>
+        <div class="p-4 rounded-lg bg-bg-sub border border-white/5 space-y-2">
+          <span class="text-content-muted block font-semibold uppercase">读者纠错与技术勘误流程 (Editorial Corrections)：</span>
           <p class="text-content-secondary leading-relaxed">
-            如果你在按照教程操作时发现某客户端界面改版、某个报错有了新的解决方案，或者某服务商的技术参数发生变动，欢迎随信附上截图，我们将及时在文章中补全并致谢。
+            互联网技术与开源生态迭代迅速。如果你在跟随指南实操过程中，发现任何由于系统版本升级（如 iOS 18、macOS Sequoia、Windows 11 24H2）导致的客户端界面改版、规则失效，或服务商价格策略变动，请附带错误截图与复现步骤发送至我们的邮箱。经编辑团队真机复测确认后，我们将在 2 个工作日内更新页面，并在正文中保留勘误致谢。
           </p>
+        </div>
+
+        <div class="p-4 rounded-lg bg-bg-sub border border-white/5 space-y-2">
+          <span class="text-content-muted block font-semibold uppercase">服务商评测申请与核验标准 (Provider Inquiries)：</span>
+          <p class="text-content-secondary leading-relaxed">
+            外网指南坚持<strong>「先实测后收录、技术指标绝对独立」</strong>的红线。任何第三方服务商若希望纳入本站客观档案评测，必须满足以下强制准则：
+          </p>
+          <ul class="list-disc list-inside text-content-secondary space-y-1 pl-1">
+            <li>必须支持常规「月付」订阅机制，坚决拒绝仅支持年付的跑路风险平台；</li>
+            <li>必须接入真实的 IEPL / IPLC 专线或高质量 BGP 节点，并接受编辑部连续 7 天的晚高峰丢包与带宽监控；</li>
+            <li>必须提供公开透明的退款时效政策与可用客服支持渠道；</li>
+            <li>任何商业赞助<strong>绝不能干预或更改编辑部做出的真实跑分、优缺点分析及排名顺序</strong>。</li>
+          </ul>
         </div>
       </div>
 
-      <div class="pt-4 border-t border-white/5 text-xs text-content-muted">
-        注意：编辑部不提供任何一对一有偿搭建服务或非法的网络技术支持，请勿发送此类咨询。
+      <div class="p-4 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300 space-y-1">
+        <span class="font-bold block">⚠️ 特别提示与咨询边界声明：</span>
+        <p class="leading-relaxed text-[11px] text-amber-200/80">
+          外网指南为纯技术与网络知识科普站点，编辑部<strong>绝不提供任何一对一有偿代翻、非法的网络代理搭建部署服务，亦不销售任何境外服务器或翻墙工具</strong>。涉及此类违规内容的来信将直接被系统垃圾拦截并不予答复。
+        </p>
+      </div>
+
+      <div class="pt-4 border-t border-white/5 text-xs text-content-muted flex items-center justify-between">
+        <span>办公通信地址：Editorial Office, Remote / Distributed Workspace</span>
+        <span class="font-mono">PGP Key ID: 0x9D4E2A17</span>
       </div>
     </div>
   </div>

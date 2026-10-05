@@ -10,6 +10,8 @@ export interface Props {
   authorRole?: string;
   faq?: Array<{ question: string; answer: string }>;
   breadcrumbs?: Array<{ name: string; url: string }>;
+  itemList?: Array<{ name: string; url: string; position?: number }>;
+  aboutPage?: boolean;
 }
 
 const {
@@ -23,6 +25,8 @@ const {
   authorRole = '网络架构与实测编辑',
   faq,
   breadcrumbs = [],
+  itemList,
+  aboutPage = false,
 } = Astro.props;
 
 const siteTitle = title.includes('外网指南') ? title : `${title} - 外网指南`;
@@ -108,6 +112,33 @@ const faqSchema = faq && faq.length > 0 ? {
     },
   })),
 } : null;
+
+const itemListSchema = itemList && itemList.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: siteTitle,
+  description: description,
+  numberOfItems: itemList.length,
+  itemListElement: itemList.map((item, index) => ({
+    '@type': 'ListItem',
+    position: item.position ?? index + 1,
+    name: item.name,
+    url: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}`,
+  })),
+} : null;
+
+const aboutPageSchema = aboutPage ? {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: siteTitle,
+  description: description,
+  url: canonicalUrl,
+  mainEntity: {
+    '@type': 'Organization',
+    name: '外网指南',
+    url: siteUrl,
+  },
+} : null;
 ---
 
 <meta charset="UTF-8" />
@@ -153,3 +184,5 @@ const faqSchema = faq && faq.length > 0 ? {
 {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
 {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
 {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+{itemListSchema && <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />}
+{aboutPageSchema && <script type="application/ld+json" set:html={JSON.stringify(aboutPageSchema)} />}
