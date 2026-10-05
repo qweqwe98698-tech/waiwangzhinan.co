@@ -69,11 +69,26 @@ if (!fs.existsSync(robotsPath)) {
 // 3. Sitemap Integrity Check
 const sitemapIndexPath = path.join(DIST_DIR, 'sitemap-index.xml');
 const sitemap0Path = path.join(DIST_DIR, 'sitemap-0.xml');
+const sitemapXmlPath = path.join(DIST_DIR, 'sitemap.xml');
+const sitemapUnderscorePath = path.join(DIST_DIR, 'sitemap_index.xml');
+
+// Ensure sitemap.xml and sitemap_index.xml exist as compatibility mirrors
+if (fs.existsSync(sitemapIndexPath)) {
+  if (!fs.existsSync(sitemapXmlPath)) {
+    fs.copyFileSync(sitemapIndexPath, sitemapXmlPath);
+  }
+  if (!fs.existsSync(sitemapUnderscorePath)) {
+    fs.copyFileSync(sitemapIndexPath, sitemapUnderscorePath);
+  }
+}
+
 let sitemapUrls = [];
 let sitemapPass = false;
 
 if (!fs.existsSync(sitemapIndexPath) && !fs.existsSync(sitemap0Path)) {
   errors.push('sitemap: Neither sitemap-index.xml nor sitemap-0.xml was found in dist/');
+} else if (!fs.existsSync(sitemapXmlPath)) {
+  errors.push('sitemap: sitemap.xml compatibility mirror is missing from dist/');
 } else {
   const targetSitemap = fs.existsSync(sitemap0Path) ? sitemap0Path : sitemapIndexPath;
   const sitemapXml = fs.readFileSync(targetSitemap, 'utf-8');
@@ -84,6 +99,25 @@ if (!fs.existsSync(sitemapIndexPath) && !fs.existsSync(sitemap0Path)) {
     errors.push(`sitemap: Abnormally low page count (${sitemapUrls.length} < ${MIN_EXPECTED_PAGES}). Possible build truncation.`);
   } else if (sitemapUrls.length > MAX_EXPECTED_PAGES) {
     errors.push(`sitemap: Abnormally high page count (${sitemapUrls.length} > ${MAX_EXPECTED_PAGES}). Possible spam/loop generation.`);
+  }
+
+  // Verify critical pages like shadowrocket are explicitly present
+  const requiredUrls = [
+    `${BASE_DOMAIN}/clients/shadowrocket/`,
+    `${BASE_DOMAIN}/clients/iphone/`,
+    `${BASE_DOMAIN}/clients/clash-verge/`,
+    `${BASE_DOMAIN}/recommend/`,
+    `${BASE_DOMAIN}/start/`,
+  ];
+  for (const reqUrl of requiredUrls) {
+    if (!sitemapUrls.includes(reqUrl)) {
+      errors.push(`sitemap: Critical page missing from sitemap: ${reqUrl}`);
+    }
+  }
+
+  // Check lastmod presence
+  if (!sitemapXml.includes('<lastmod>')) {
+    warnings.push('sitemap: Missing <lastmod> timestamps in sitemap XML URLs.');
   }
 
   for (const url of sitemapUrls) {

@@ -75,7 +75,11 @@ test.describe('SEO, Canonical & Dead Link Audit', () => {
   for (const url of urlsToAudit) {
     test(`auditing SEO on ${url}`, async ({ page }) => {
       const response = await page.goto(url);
-      expect(response?.status()).toBe(200);
+      if (url === '/404/') {
+        expect(response?.status()).toBe(404);
+      } else {
+        expect(response?.status()).toBe(200);
+      }
 
       // Title
       const title = await page.title();

@@ -9,7 +9,7 @@ test.describe('Homepage - Knowledge Navigation System', () => {
     await expect(page).toHaveTitle(/外网指南/);
     
     // Hero verification
-    const heroHeading = page.locator('h1');
+    const heroHeading = page.locator('main h1').first();
     await expect(heroHeading).toContainText('第一次上外网？');
     await expect(heroHeading).toContainText('从这里开始。');
 
